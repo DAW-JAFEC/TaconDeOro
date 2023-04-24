@@ -2,15 +2,7 @@ CREATE DATABASE IF NOT EXISTS `TaconDeOro` DEFAULT CHARACTER SET utf8mb4 COLLATE
 USE `TaconDeOro`;
 
 # DROPS
-DROP TABLE IF EXISTS `incidencias`;
-DROP TABLE IF EXISTS `lineaspedido`;
-DROP TABLE IF EXISTS `articulos`;
-DROP TABLE IF EXISTS `campanias`;
-DROP TABLE IF EXISTS `pedidos`;
-DROP TABLE IF EXISTS `rutas`;
-DROP TABLE IF EXISTS `empresas`;
-DROP TABLE IF EXISTS `tarjetas`;
-DROP TABLE IF EXISTS `socios`;
+DROP TABLE IF EXISTS `incidencias`, `lineaspedido`, `articulos`, `campanias`, `pedidos`, `rutas`, `empresas`, `tarjetas`, `socios`;
 
 # SOCIOS
 CREATE TABLE `socios` (
