@@ -10,9 +10,13 @@ package tacondeoro;
  */
 public class Bolso extends Articulo{
     private String tipo;
-     
-    //Esto esta incompleto
 
+    public Bolso() {
+    }
+     
+    
+
+    
     public Bolso(String tipo) {
         this.tipo = tipo;
     }
@@ -37,7 +41,7 @@ public class Bolso extends Articulo{
 
     @Override
     public String toString() {
-        return "Bolso{" + "tipo=" + tipo + '}';
+        return "Bolso" + ", Nombre="+ super.getNombre()+", Descripcion="+ super.getDescripcion()+", Material="+ super.getMaterial()+", Precio="+ super.getPrecio()+", Stock="+ super.getStock()+", Fotografia="+ super.getFotografia()+"tipo=" + tipo + '}';
     }
     
 }

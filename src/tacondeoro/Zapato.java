@@ -12,6 +12,9 @@ public class Zapato extends Articulo{
     private float numero;
     private String tipo;
 
+    public Zapato() {
+    }
+    
     public Zapato(float numero, String tipo) {
         this.numero = numero;
         this.tipo = tipo;
@@ -47,7 +50,7 @@ public class Zapato extends Articulo{
 
     @Override
     public String toString() {
-        return "Zapato{" + "numero=" + numero + ", tipo=" + tipo + '}';
+        return "Zapato" + ", Nombre="+ super.getNombre()+", Descripcion="+ super.getDescripcion()+", Material="+ super.getMaterial()+", Precio="+ super.getPrecio()+", Stock="+ super.getStock()+", Fotografia="+ super.getFotografia()+", Nombre="+ super.getNombre()+ ", numero=" + numero + ", tipo=" + tipo + '}';
     }
     
     

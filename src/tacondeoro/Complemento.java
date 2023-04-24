@@ -11,6 +11,10 @@ package tacondeoro;
 public class Complemento extends Articulo{
     private String tallaComplemento;
 
+    public Complemento() {
+    }
+
+    
     public Complemento(String tallaComplemento) {
         this.tallaComplemento = tallaComplemento;
     }
@@ -35,7 +39,7 @@ public class Complemento extends Articulo{
 
     @Override
     public String toString() {
-        return "Complemento{" + "tallaComplemento=" + tallaComplemento + '}';
+        return "Complemento," + ", Nombre="+ super.getNombre()+", Descripcion="+ super.getDescripcion()+", Material="+ super.getMaterial()+", Precio="+ super.getPrecio()+", Stock="+ super.getStock()+", Fotografia="+ super.getFotografia()+"tallaComplemento=" + tallaComplemento + '}';
     }
     
 }
