@@ -89,9 +89,9 @@ CREATE TABLE `campanias` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `campanias` (`anio`, `temporada`) VALUES
-('2004', '3'),
-('2004', '3'),
-('2004', '3');
+('2004', 'Primavera Verano'),
+('2004', 'Otoño Invierno'),
+('2005', 'Primavera Verano');
 
 # ARTICULOS
 CREATE TABLE `articulos` (
@@ -113,9 +113,9 @@ CREATE TABLE `articulos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `articulos` (`nombre`, `precio`, `descripcion`, `material`, `stock`, `fotografia`, `tipo`, `tipozapato`, `numerozapato`, `tipobolso`, `tallacomplemento`, `idcampania`) VALUES
-('bota', '300', 'lorem ipsum', 'cuero', '30', 'foto', 'tipo', 'hight', '42', 'nose', '45', '1'),
-('bota', '300', 'lorem ipsum', 'cuero', '30', 'foto', 'tipo', 'hight', '42', 'nose', '45', '2'),
-('bota', '300', 'lorem ipsum', 'cuero', '30', 'foto', 'tipo', 'hight', '42', 'nose', '45', '3');
+('bota', '150', 'bota cr7', 'cuero', '200', 'foto', 'zapato', 'hight', '42', '', '0', '1'),
+('collar', '400', 'collar oro', 'oro', '250', 'foto', 'complemento', '', '0', '', '45', '2'),
+('Bolso Gucci', '200', 'Bolso pepo', 'piel piton', '300', 'foto', 'bolso', '', '0', 'bolsamen', '0', '3');
 
 # LINEASPEDIDO
 CREATE TABLE `lineaspedido` (
