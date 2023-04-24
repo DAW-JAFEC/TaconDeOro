@@ -4,13 +4,11 @@
  */
 package tacondeoro;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author felis
  */
-public class Articulos {
+public class Articulo {
     private int idArticulo;
     private String nombre;
     private String descripcion;
@@ -19,10 +17,10 @@ public class Articulos {
     private int stock;
     private String fotografia;
 
-    public Articulos() {
+    public Articulo() {
     }
 
-    public Articulos(int idArticulo, String nombre, String descripcion, String material, double precio, int stock, String fotografia) {
+    public Articulo(int idArticulo, String nombre, String descripcion, String material, double precio, int stock, String fotografia) {
         this.idArticulo = idArticulo;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -32,7 +30,7 @@ public class Articulos {
         this.fotografia = fotografia;
     }
 
-    public Articulos(String nombre, String descripcion, String material, double precio, int stock, String fotografia) {
+    public Articulo(String nombre, String descripcion, String material, double precio, int stock, String fotografia) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.material = material;
@@ -99,7 +97,7 @@ public class Articulos {
 
     @Override
     public String toString() {
-        return "Articulos{" + "idArticulo=" + idArticulo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", material=" + material + ", precio=" + precio + ", stock=" + stock + ", fotografia=" + fotografia + '}';
+        return "nombre= " + nombre + ", descripcion= " + descripcion + ", material= " + material + ", precio= " + precio + ", stock= " + stock + ", fotografia= " + fotografia;
     }
     
     

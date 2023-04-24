@@ -8,12 +8,12 @@ package tacondeoro;
  *
  * @author usutarde
  */
-public class RegistroUsuario extends javax.swing.JDialog {
+public class VentanaRegistro extends javax.swing.JDialog {
 
     /**
      * Creates new form RegistroUsuario
      */
-    public RegistroUsuario(java.awt.Frame parent, boolean modal) {
+    public VentanaRegistro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -155,8 +155,8 @@ public class RegistroUsuario extends javax.swing.JDialog {
     }//GEN-LAST:event_mn_MenuPrincipalActionPerformed
 
     private void mn_volverInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_volverInicioActionPerformed
-        Ventana1SeleccionRol b = new Ventana1SeleccionRol();
-        InicioRegistro a = new InicioRegistro(b, rootPaneCheckingEnabled);
+        VentanaPrincipal b = new VentanaPrincipal();
+        VentanaInicioSesion a = new VentanaInicioSesion(b, rootPaneCheckingEnabled);
         this.dispose();
         a.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_mn_volverInicioActionPerformed
@@ -182,20 +182,21 @@ public class RegistroUsuario extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                RegistroUsuario dialog = new RegistroUsuario(new javax.swing.JFrame(), true);
+                VentanaRegistro dialog = new VentanaRegistro(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

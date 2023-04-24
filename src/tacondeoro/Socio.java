@@ -16,7 +16,7 @@ public class Socio {
     private String correoe;
     private String direccion;
     private String poblacion;
-    private String contraseña;
+    private String contrasenia;
     private ArrayList<TarjetaBancaria> tarjetasSocio;
     private ArrayList<Pedido> pedidosSocio;
 
@@ -33,12 +33,12 @@ public class Socio {
         this.pedidosSocio = pedidosSocio;
     }
 
-    public Socio(String nombre, String correoe, String direccion, String poblacion, String contraseña, ArrayList<TarjetaBancaria> tarjetasSocio, ArrayList<Pedido> pedidosSocio) {
+    public Socio(String nombre, String correoe, String direccion, String poblacion, String contrasenia, ArrayList<TarjetaBancaria> tarjetasSocio, ArrayList<Pedido> pedidosSocio) {
         this.nombre = nombre;
         this.correoe = correoe;
         this.direccion = direccion;
         this.poblacion = poblacion;
-        this.contraseña = contraseña;
+        this.contrasenia = contrasenia;
         this.tarjetasSocio = tarjetasSocio;
         this.pedidosSocio = pedidosSocio;
     }

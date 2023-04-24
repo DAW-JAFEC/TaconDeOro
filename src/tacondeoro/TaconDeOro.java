@@ -14,13 +14,8 @@ public class TaconDeOro {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Ventana1SeleccionRol a = new Ventana1SeleccionRol();
+        VentanaPrincipal a = new VentanaPrincipal();
         a.setVisible(true);
-        VentanaCliente b = new VentanaCliente();
-        b.setVisible(true);
-        
-        
-       
     }
     
 }

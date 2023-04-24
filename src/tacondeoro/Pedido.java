@@ -15,19 +15,19 @@ public class Pedido {
     private int idPedido;
     private Date fecha;
     private double totalPedido;
-    private ArrayList<LineasPedido> nLineas;
+    private ArrayList<LineaPedido> nLineas;
     
     
     public Pedido() {
     }
 
-    public Pedido( Date fecha, double totalPedido, ArrayList<LineasPedido> nLineas) {
+    public Pedido( Date fecha, double totalPedido, ArrayList<LineaPedido> nLineas) {
         this.fecha = fecha;
         this.totalPedido = totalPedido;
         this.nLineas = nLineas;
     }
 
-    public Pedido(int idPedido, Date fecha, double totalPedido, ArrayList<LineasPedido> nLineas) {
+    public Pedido(int idPedido, Date fecha, double totalPedido, ArrayList<LineaPedido> nLineas) {
         this.idPedido = idPedido;
         this.fecha = fecha;
         this.totalPedido = totalPedido;
@@ -57,11 +57,11 @@ public class Pedido {
         this.totalPedido = totalPedido;
     }
 
-    public ArrayList<LineasPedido> getnLineas() {
+    public ArrayList<LineaPedido> getnLineas() {
         return nLineas;
     }
 
-    public void setnLineas(ArrayList<LineasPedido> nLineas) {
+    public void setnLineas(ArrayList<LineaPedido> nLineas) {
         this.nLineas = nLineas;
     }
 }

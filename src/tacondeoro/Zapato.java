@@ -8,7 +8,7 @@ package tacondeoro;
  *
  * @author felis
  */
-public class Zapato extends Articulos{
+public class Zapato extends Articulo{
     private float numero;
     private String tipo;
 

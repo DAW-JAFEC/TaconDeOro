@@ -8,18 +8,18 @@ package tacondeoro;
  *
  * @author felis
  */
-public class LineasPedido {
-    private Articulos articuloLinea;
+public class LineaPedido {
+    private Articulo articuloLinea;
     private int cantidad;
 
-    public LineasPedido() {
+    public LineaPedido() {
     }
 
-    public LineasPedido(int cantidad) {
+    public LineaPedido(int cantidad) {
         this.cantidad = cantidad;
     }
 
-    public LineasPedido(Articulos articuloLinea, int cantidad) {
+    public LineaPedido(Articulo articuloLinea, int cantidad) {
         this.articuloLinea = articuloLinea;
         this.cantidad = cantidad;
     }

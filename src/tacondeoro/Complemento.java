@@ -8,7 +8,7 @@ package tacondeoro;
  *
  * @author felis
  */
-public class Complemento extends Articulos{
+public class Complemento extends Articulo{
     private String tallaComplemento;
 
     public Complemento(String tallaComplemento) {

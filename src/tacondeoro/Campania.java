@@ -14,7 +14,7 @@ public class Campania {
     private int idCampania;
     private int anio;
     private String temporada;
-    private ArrayList<Articulos> articulosCampania;
+    private ArrayList<Articulo> articulosCampania;
 
     public Campania() {
     }
@@ -49,11 +49,11 @@ public class Campania {
         this.temporada = temporada;
     }
 
-    public ArrayList<Articulos> getArticulosCampania() {
+    public ArrayList<Articulo> getArticulosCampania() {
         return articulosCampania;
     }
 
-    public void setArticulosCampania(ArrayList<Articulos> articulosCampania) {
+    public void setArticulosCampania(ArrayList<Articulo> articulosCampania) {
         this.articulosCampania = articulosCampania;
     }
     

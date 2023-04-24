@@ -8,14 +8,14 @@ package tacondeoro;
  *
  * @author usutarde
  */
-public class InicioRegistro extends javax.swing.JDialog {
-private Ventana1SeleccionRol padre;
+public class VentanaInicioSesion extends javax.swing.JDialog {
+private VentanaPrincipal padre;
     /**
      * Creates new form InicioRegistro
      */
-    public InicioRegistro(java.awt.Frame parent, boolean modal) {
+    public VentanaInicioSesion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        padre=(Ventana1SeleccionRol) parent;
+        padre=(VentanaPrincipal) parent;
         initComponents();
     }
 
@@ -198,7 +198,7 @@ private Ventana1SeleccionRol padre;
 
     private void btt_iniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_iniciarSesionActionPerformed
         // TODO add your handling code here:
-        VentanaClienteBuena c = new VentanaClienteBuena();
+        VentanaClientes c = new VentanaClientes();
         this.dispose();
         c.setVisible(true);
     }//GEN-LAST:event_btt_iniciarSesionActionPerformed
@@ -212,8 +212,8 @@ private Ventana1SeleccionRol padre;
     }//GEN-LAST:event_tf_contraseñaActionPerformed
 
     private void btt_AbrirVentanaRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_AbrirVentanaRegistroActionPerformed
-        Ventana1SeleccionRol b = new Ventana1SeleccionRol();
-        RegistroUsuario a = new RegistroUsuario(b, rootPaneCheckingEnabled);
+        VentanaPrincipal b = new VentanaPrincipal();
+        VentanaRegistro a = new VentanaRegistro(b, rootPaneCheckingEnabled);
         this.dispose();
         a.setVisible(true);
     }//GEN-LAST:event_btt_AbrirVentanaRegistroActionPerformed
@@ -251,20 +251,23 @@ private Ventana1SeleccionRol padre;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InicioRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InicioRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InicioRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InicioRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                InicioRegistro dialog = new InicioRegistro(new javax.swing.JFrame(), true);
+                VentanaInicioSesion dialog = new VentanaInicioSesion(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

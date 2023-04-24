@@ -8,7 +8,7 @@ package tacondeoro;
  *
  * @author felis
  */
-public class Bolso extends Articulos{
+public class Bolso extends Articulo{
     private String tipo;
      
     //Esto esta incompleto
