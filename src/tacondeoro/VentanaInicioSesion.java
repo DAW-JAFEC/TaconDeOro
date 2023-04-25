@@ -4,6 +4,8 @@
  */
 package tacondeoro;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author usutarde
@@ -197,12 +199,23 @@ private VentanaPrincipal padre;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btt_iniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_iniciarSesionActionPerformed
-        // TODO add your handling code here:
-        VentanaClientes c = new VentanaClientes();
-        this.dispose();
-        c.setVisible(true);
+        boolean activar;
+        DatabaseConnection a = new DatabaseConnection();
+        activar = a.iniciarSesion(tf_nombreUsuario.getText(), tf_contraseña.getText());
+        if(activar){
+            VentanaClientes c = new VentanaClientes();
+            c.setVisible(activar);
+            this.dispose();
+        }else{
+             JOptionPane.showMessageDialog(null, "Las credenciales son incorrectas, intentelo de nuevo");
+             limpiar();
+        }  
     }//GEN-LAST:event_btt_iniciarSesionActionPerformed
 
+    public void limpiar(){
+        tf_nombreUsuario.setText("");
+        tf_contraseña.setText("");
+    }
     private void tf_nombreUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nombreUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_nombreUsuarioActionPerformed

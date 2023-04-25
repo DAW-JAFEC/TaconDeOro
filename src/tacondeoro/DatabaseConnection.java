@@ -9,7 +9,9 @@ package tacondeoro;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -60,12 +62,27 @@ public class DatabaseConnection implements IFunciones{
     }
 
     @Override
-    public void iniciarSesion() {
-        
+    public boolean iniciarSesion(String correo, String contrasenia) {
+        boolean r = false;
+        try {
+            
+            conexion = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement s = conexion.createStatement();
+            ResultSet rs = s.executeQuery("SELECT * FROM SOCIOS");
+            while(rs.next()){
+                if(rs.getString(3).equals(correo) && rs.getString(6).equals(contrasenia))
+                    r=true;
+            }
+            
+            
+        } catch (SQLException ex) {
+            System.err.println("Credenciales invalidas: "+ex.getMessage());
+        }
+        return r;
     }
 
     @Override
     public void modificarUsuario(Socio socio) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       
     }
 }

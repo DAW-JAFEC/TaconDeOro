@@ -3,25 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/Ruta.java</file>
-            <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/Incidencia.java</file>
-            <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/Complemento.java</file>
-            <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/VentanaInicioSesion.java</file>
-            <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/DatabaseConnection.java</file>
-            <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/Campania.java</file>
-            <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/Socio.java</file>
-            <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/Pedido.java</file>
-            <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/LineaPedido.java</file>
-            <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/Articulo.java</file>
-            <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/IFunciones.java</file>
-            <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/TaconDeOro.java</file>
-            <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/Bolso.java</file>
-            <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/VentanaPrincipal.java</file>
             <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/VentanaClientes.java</file>
             <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/VentanaRegistro.java</file>
-            <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/EmpresaTransporte.java</file>
-            <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/Zapato.java</file>
-            <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/TarjetaBancaria.java</file>
+            <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/VentanaInicioSesion.java</file>
+            <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/DatabaseConnection.java</file>
+            <file>file:/F:/TaconDeOro/TaconDeOro/src/tacondeoro/IFunciones.java</file>
         </group>
     </open-files>
 </project-private>

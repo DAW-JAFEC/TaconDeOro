@@ -217,8 +217,16 @@ public class VentanaRegistro extends javax.swing.JDialog {
         Socio a = new Socio(tf_nombre.getText(), tf_correo.getText(), tf_direccion.getText(), tf_poblacion.getText(), tf_contraseña.getText(), tipo);
         DatabaseConnection b = new DatabaseConnection();
         b.registrarUsuario(a);
+        limpiar();
     }//GEN-LAST:event_btt_registrarActionPerformed
 
+    public void limpiar(){
+        tf_contraseña.setText("");
+        tf_nombre.setText("");
+        tf_correo.setText("");
+        tf_direccion.setText("");
+        tf_poblacion.setText("");
+    }
     /**
      * @param args the command line arguments
      */

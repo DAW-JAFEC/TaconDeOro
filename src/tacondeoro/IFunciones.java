@@ -10,6 +10,6 @@ package tacondeoro;
  */
 public interface IFunciones {
     public void registrarUsuario(Socio socio);
-    public void iniciarSesion();
+    public boolean iniciarSesion(String correo, String contrasenia);
     public void modificarUsuario(Socio socio);
 }
