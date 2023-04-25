@@ -8,25 +8,25 @@ package tacondeoro;
  *
  * @author felis
  */
-public class Zapato extends Articulo{
+public class Zapato extends Articulo {
     private float numero;
     private String tipo;
 
     public Zapato() {
     }
-    
+
     public Zapato(float numero, String tipo) {
         this.numero = numero;
         this.tipo = tipo;
     }
 
-    public Zapato(float numero, String tipo, int idArticulo, String nombre, String descripcion, String material, double precio, int stock, String fotografia) {
+    public Zapato(float numero, String tipo, int idArticulo, String nombre, String descripcion, String material, float precio, int stock, String fotografia) {
         super(idArticulo, nombre, descripcion, material, precio, stock, fotografia);
         this.numero = numero;
         this.tipo = tipo;
     }
 
-    public Zapato(float numero, String tipo, String nombre, String descripcion, String material, double precio, int stock, String fotografia) {
+    public Zapato(float numero, String tipo, String nombre, String descripcion, String material, float precio, int stock, String fotografia) {
         super(nombre, descripcion, material, precio, stock, fotografia);
         this.numero = numero;
         this.tipo = tipo;
@@ -50,7 +50,7 @@ public class Zapato extends Articulo{
 
     @Override
     public String toString() {
-        return "Zapato" + ", Nombre="+ super.getNombre()+", Descripcion="+ super.getDescripcion()+", Material="+ super.getMaterial()+", Precio="+ super.getPrecio()+", Stock="+ super.getStock()+", Fotografia="+ super.getFotografia()+", Nombre="+ super.getNombre()+ ", numero=" + numero + ", tipo=" + tipo + '}';
+        return "Zapato" + ", Nombre="+ super.getNombre()+", Descripcion="+ super.getDescripcion()+", Material="+ super.getMaterial()+", Precio="+ super.getPrecio()+", Stock="+ super.getStock()+", Fotografia="+ super.getFotografia()+", Numero=" + numero + ", Tipo=" + tipo;
     }
     
     

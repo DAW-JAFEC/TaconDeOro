@@ -117,12 +117,12 @@
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="cb_Complementos" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cb_Bolsos" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cb_Zapatos" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="cb_Complementos" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="cb_Bolsos" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="cb_Zapatos" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -212,9 +212,9 @@
                               <Component id="cb_CampanaOtoñoInvierno" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                               <Component id="cb_Zapatos" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="cb_Bolsos" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="cb_Complementos" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -321,41 +321,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btt_tramitarPedidoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="cb_Zapatos">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Zapatos"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_ZapatosActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JCheckBox" name="cb_Complementos">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Complementos"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_ComplementosActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JCheckBox" name="cb_Bolsos">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Bolsos"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_BolsosActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JButton" name="btt_borrarDelCarrito">
               <Properties>
                 <Property name="text" type="java.lang.String" value="ELIMINAR DEL CARRITO"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btt_borrarDelCarritoActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="tf_Talla">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_TallaActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
@@ -376,6 +347,32 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="TOTAL DE PEDIDO"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="cb_Bolsos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Bolsos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_BolsosActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="cb_Complementos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Complementos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_ComplementosActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="cb_Zapatos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Zapatos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_ZapatosActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tf_Talla">
             </Component>
           </SubComponents>
         </Container>

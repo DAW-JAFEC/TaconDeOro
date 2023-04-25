@@ -13,14 +13,14 @@ public class Articulo {
     private String nombre;
     private String descripcion;
     private String material;
-    private double precio;
+    private float precio;
     private int stock;
     private String fotografia;
 
     public Articulo() {
     }
 
-    public Articulo(int idArticulo, String nombre, String descripcion, String material, double precio, int stock, String fotografia) {
+    public Articulo(int idArticulo, String nombre, String descripcion, String material, float precio, int stock, String fotografia) {
         this.idArticulo = idArticulo;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -30,7 +30,7 @@ public class Articulo {
         this.fotografia = fotografia;
     }
 
-    public Articulo(String nombre, String descripcion, String material, double precio, int stock, String fotografia) {
+    public Articulo(String nombre, String descripcion, String material, float precio, int stock, String fotografia) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.material = material;
@@ -75,7 +75,7 @@ public class Articulo {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(float precio) {
         this.precio = precio;
     }
 

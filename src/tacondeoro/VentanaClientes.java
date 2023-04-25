@@ -33,53 +33,10 @@ public class VentanaClientes extends javax.swing.JFrame {
         
         DatabaseConnection db = new DatabaseConnection();
         c = db.getConexion();
-        
-        Statement s = null;
-        ResultSet rs = null;
 
-        try {
-            s = c.createStatement();
-            rs = s.executeQuery("select * from articulos;");
-            while (rs.next()) {
-                if(rs.getString(8).equalsIgnoreCase("zapato")){
-                    Zapato ar = new Zapato();
-                    ar.setIdArticulo(rs.getInt(1));
-                    ar.setNombre(rs.getString(2));
-                    ar.setDescripcion(rs.getString(4));
-                    ar.setMaterial(rs.getString(5));
-                    ar.setPrecio(rs.getFloat(3));
-                    ar.setStock(rs.getInt(6));
-                    ar.setFotografia(rs.getString(7));
-                    ar.setTipo(rs.getString(9));
-                    ar.setNumero(rs.getFloat(10));
-                    dlmArticulos.addElement(ar);
-                }else if(rs.getString(8).equalsIgnoreCase("complemento")){
-                   Complemento ar = new Complemento();
-                    ar.setIdArticulo(rs.getInt(1));
-                    ar.setNombre(rs.getString(2));
-                    ar.setDescripcion(rs.getString(4));
-                    ar.setMaterial(rs.getString(5));
-                    ar.setPrecio(rs.getFloat(3));
-                    ar.setStock(rs.getInt(6));
-                    ar.setFotografia(rs.getString(7));
-                    ar.setTallaComplemento(String.valueOf(rs.getInt(12)));
-                    dlmArticulos.addElement(ar); 
-                }else if(rs.getString(8).equalsIgnoreCase("bolso")){
-                    Bolso ar = new Bolso();
-                    ar.setIdArticulo(rs.getInt(1));
-                    ar.setNombre(rs.getString(2));
-                    ar.setDescripcion(rs.getString(4));
-                    ar.setMaterial(rs.getString(5));
-                    ar.setPrecio(rs.getFloat(3));
-                    ar.setStock(rs.getInt(6));
-                    ar.setFotografia(rs.getString(7));
-                    ar.setTipo(String.valueOf(rs.getString(11)));
-                    dlmArticulos.addElement(ar);
-                }
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error: " + ex.getMessage());
-        }
+        mostrarZapatos();
+        mostrarBolsos();
+        mostrarComplementos();
     }
 
     /**
@@ -103,16 +60,16 @@ public class VentanaClientes extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         lst_lineasPedido = new javax.swing.JList<>();
         btt_tramitarPedido = new javax.swing.JButton();
-        cb_Zapatos = new javax.swing.JCheckBox();
-        cb_Complementos = new javax.swing.JCheckBox();
-        cb_Bolsos = new javax.swing.JCheckBox();
         btt_borrarDelCarrito = new javax.swing.JButton();
-        tf_Talla = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         tf_Cantidad = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         tf_total = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        cb_Bolsos = new javax.swing.JCheckBox();
+        cb_Complementos = new javax.swing.JCheckBox();
+        cb_Zapatos = new javax.swing.JCheckBox();
+        tf_Talla = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         mb_Pedidos = new javax.swing.JMenu();
         mi_gestionarPedidos = new javax.swing.JMenuItem();
@@ -167,10 +124,23 @@ public class VentanaClientes extends javax.swing.JFrame {
             }
         });
 
-        cb_Zapatos.setText("Zapatos");
-        cb_Zapatos.addActionListener(new java.awt.event.ActionListener() {
+        btt_borrarDelCarrito.setText("ELIMINAR DEL CARRITO");
+        btt_borrarDelCarrito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_ZapatosActionPerformed(evt);
+                btt_borrarDelCarritoActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("TALLA");
+
+        jLabel2.setText("CARRITO");
+
+        jLabel3.setText("TOTAL DE PEDIDO");
+
+        cb_Bolsos.setText("Bolsos");
+        cb_Bolsos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_BolsosActionPerformed(evt);
             }
         });
 
@@ -181,31 +151,12 @@ public class VentanaClientes extends javax.swing.JFrame {
             }
         });
 
-        cb_Bolsos.setText("Bolsos");
-        cb_Bolsos.addActionListener(new java.awt.event.ActionListener() {
+        cb_Zapatos.setText("Zapatos");
+        cb_Zapatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_BolsosActionPerformed(evt);
+                cb_ZapatosActionPerformed(evt);
             }
         });
-
-        btt_borrarDelCarrito.setText("ELIMINAR DEL CARRITO");
-        btt_borrarDelCarrito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btt_borrarDelCarritoActionPerformed(evt);
-            }
-        });
-
-        tf_Talla.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_TallaActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setText("TALLA");
-
-        jLabel2.setText("CARRITO");
-
-        jLabel3.setText("TOTAL DE PEDIDO");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -227,11 +178,11 @@ public class VentanaClientes extends javax.swing.JFrame {
                                 .addGap(68, 68, 68))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cb_Complementos)
-                                    .addComponent(cb_Bolsos, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cb_Zapatos, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(28, 28, 28)))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cb_Complementos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cb_Bolsos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cb_Zapatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(41, 41, 41)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane2)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE))
@@ -296,9 +247,9 @@ public class VentanaClientes extends javax.swing.JFrame {
                         .addComponent(cb_CampanaOtoñoInvierno)
                         .addGap(49, 49, 49)
                         .addComponent(cb_Zapatos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cb_Bolsos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cb_Complementos)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -362,18 +313,6 @@ public class VentanaClientes extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btt_borrarDelCarritoActionPerformed
 
-    private void cb_BolsosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_BolsosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb_BolsosActionPerformed
-
-    private void cb_ComplementosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_ComplementosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb_ComplementosActionPerformed
-
-    private void cb_ZapatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_ZapatosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb_ZapatosActionPerformed
-
     private void btt_tramitarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_tramitarPedidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btt_tramitarPedidoActionPerformed
@@ -397,10 +336,157 @@ public class VentanaClientes extends javax.swing.JFrame {
         tf_total.setText(String.valueOf(total));
     }//GEN-LAST:event_btt_añadirAlCarritoActionPerformed
 
-    private void tf_TallaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_TallaActionPerformed
+    private void cb_ZapatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_ZapatosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_TallaActionPerformed
+        comprobarCheckboxes();
+    }//GEN-LAST:event_cb_ZapatosActionPerformed
 
+    private void cb_BolsosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_BolsosActionPerformed
+        // TODO add your handling code here:
+        comprobarCheckboxes();
+    }//GEN-LAST:event_cb_BolsosActionPerformed
+
+    private void cb_ComplementosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_ComplementosActionPerformed
+        // TODO add your handling code here:
+        comprobarCheckboxes();
+    }//GEN-LAST:event_cb_ComplementosActionPerformed
+
+    private void comprobarCheckboxes() {
+        if (!cb_Zapatos.isSelected() && !cb_Bolsos.isSelected() && !cb_Complementos.isSelected()) {
+            dlmArticulos.clear();
+            mostrarZapatos();
+            mostrarBolsos();
+            mostrarComplementos();
+            lst_Articulos.updateUI();
+        }
+
+        if (cb_Zapatos.isSelected() && cb_Bolsos.isSelected() && cb_Complementos.isSelected()) {
+            dlmArticulos.clear();
+            mostrarZapatos();
+            mostrarBolsos();
+            mostrarComplementos();
+            lst_Articulos.updateUI();
+        }
+        
+        if (cb_Zapatos.isSelected() && cb_Bolsos.isSelected() && !cb_Complementos.isSelected()) {
+            dlmArticulos.clear();
+            mostrarZapatos();
+            mostrarBolsos();
+            lst_Articulos.updateUI();
+        }
+        
+        if (cb_Zapatos.isSelected() && cb_Complementos.isSelected() && !cb_Bolsos.isSelected()) {
+            dlmArticulos.clear();
+            mostrarZapatos();
+            mostrarComplementos();
+            lst_Articulos.updateUI();
+        }
+        
+        if (cb_Bolsos.isSelected() && cb_Complementos.isSelected() && !cb_Zapatos.isSelected()) {
+            dlmArticulos.clear();
+            mostrarBolsos();
+            mostrarComplementos();
+            lst_Articulos.updateUI();
+        }
+
+        if (cb_Zapatos.isSelected() && !cb_Bolsos.isSelected() && !cb_Complementos.isSelected()) {
+            dlmArticulos.clear();
+            mostrarZapatos();
+            lst_Articulos.updateUI();
+        }
+
+        if (cb_Bolsos.isSelected() && !cb_Zapatos.isSelected() && !cb_Complementos.isSelected()) {
+            dlmArticulos.clear();
+            mostrarBolsos();
+            lst_Articulos.updateUI();
+        }
+
+        if (cb_Complementos.isSelected() && !cb_Zapatos.isSelected() && !cb_Bolsos.isSelected()) {
+            dlmArticulos.clear();
+            mostrarComplementos();
+            lst_Articulos.updateUI();
+        }
+    }
+
+    private void mostrarBolsos() {
+        Statement s = null;
+        ResultSet rs = null;
+
+        try {
+            s = c.createStatement();
+            rs = s.executeQuery("select * from articulos;");
+            while (rs.next()) {
+                if (rs.getString(8).equalsIgnoreCase("bolso")) {
+                    Bolso bo = new Bolso();
+                    bo.setIdArticulo(rs.getInt(1));
+                    bo.setNombre(rs.getString(2));
+                    bo.setDescripcion(rs.getString(4));
+                    bo.setMaterial(rs.getString(5));
+                    bo.setPrecio(rs.getFloat(3));
+                    bo.setStock(rs.getInt(6));
+                    bo.setFotografia(rs.getString(7));
+                    bo.setTipo(rs.getString(11));
+                    dlmArticulos.addElement(bo);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }
+    
+    private void mostrarZapatos() {
+        Statement s = null;
+        ResultSet rs = null;
+
+        try {
+            s = c.createStatement();
+            rs = s.executeQuery("select * from articulos;");
+            while (rs.next()) {
+                if (rs.getString(8).equalsIgnoreCase("zapato")) {
+                    Zapato za = new Zapato();
+                    za.setIdArticulo(rs.getInt(1));
+                    za.setNombre(rs.getString(2));
+                    za.setDescripcion(rs.getString(4));
+                    za.setMaterial(rs.getString(5));
+                    za.setPrecio(rs.getFloat(3));
+                    za.setStock(rs.getInt(6));
+                    za.setFotografia(rs.getString(7));
+                    za.setNumero(rs.getFloat(10));
+                    za.setTipo(rs.getString(9));
+                    dlmArticulos.addElement(za);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }
+    
+    private void mostrarComplementos() {
+        Statement s = null;
+        ResultSet rs = null;
+
+        try {
+            s = c.createStatement();
+            rs = s.executeQuery("select * from articulos;");
+            while (rs.next()) {
+                if (rs.getString(8).equalsIgnoreCase("complemento")) {
+                    Complemento co = new Complemento();
+                    co.setIdArticulo(rs.getInt(1));
+                    co.setNombre(rs.getString(2));
+                    co.setDescripcion(rs.getString(4));
+                    co.setMaterial(rs.getString(5));
+                    co.setPrecio(rs.getFloat(3));
+                    co.setStock(rs.getInt(6));
+                    co.setFotografia(rs.getString(7));
+                    co.setTallaComplemento(rs.getInt(12));
+                    dlmArticulos.addElement(co);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
