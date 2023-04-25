@@ -103,19 +103,19 @@ CREATE TABLE `articulos` (
  `stock` int(15) NOT NULL,
  `fotografia` varchar(50) NOT NULL,
  `tipo` varchar(50) NOT NULL,
- `tipozapato` varchar(50) NOT NULL,
- `numerozapato` float NOT NULL,
- `tipobolso` varchar(50) NOT NULL,
- `tallacomplemento` int(15) NOT NULL,
+ `tipozapato` varchar(50),
+ `numerozapato` float,
+ `tipobolso` varchar(50),
+ `tallacomplemento` int(15),
  `idcampania` int(15) NOT NULL,
   PRIMARY KEY (`idarticulo`),
   CONSTRAINT FK_IDCAMPANIA_ARTICULOS FOREIGN KEY (`idcampania`) REFERENCES campanias(`idcampania`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `articulos` (`nombre`, `precio`, `descripcion`, `material`, `stock`, `fotografia`, `tipo`, `tipozapato`, `numerozapato`, `tipobolso`, `tallacomplemento`, `idcampania`) VALUES
-('bota', '150', 'bota cr7', 'cuero', '200', 'foto', 'zapato', 'hight', '42', '', '0', '1'),
-('collar', '400', 'collar oro', 'oro', '250', 'foto', 'complemento', '', '0', '', '45', '2'),
-('Bolso Gucci', '200', 'Bolso pepo', 'piel piton', '300', 'foto', 'bolso', '', '0', 'bolsamen', '0', '3');
+('bota', '150', 'bota cr7', 'cuero', '200', 'foto', 'zapato', 'hight', '42', NULL, NULL, '1'),
+('collar', '400', 'collar oro', 'oro', '250', 'foto', 'complemento', NULL, NULL, NULL, '45', '2'),
+('Bolso Gucci', '200', 'Bolso pepo', 'piel piton', '300', 'foto', 'bolso', NULL, NULL, 'bolsamen', NULL, '3');
 
 # LINEASPEDIDO
 CREATE TABLE `lineaspedido` (
