@@ -206,7 +206,17 @@ public class VentanaRegistro extends javax.swing.JDialog {
     }//GEN-LAST:event_mn_volverInicioActionPerformed
 
     private void btt_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_registrarActionPerformed
-        // TODO add your handling code here:
+        String tipo="";
+        if(rbtn_admin.isSelected()){
+            tipo="Administrador";
+        }else if(rbtn_cliente.isSelected()){
+            tipo="Cliente";
+        }else{
+            tipo="Mozo";
+        }
+        Socio a = new Socio(tf_nombre.getText(), tf_correo.getText(), tf_direccion.getText(), tf_poblacion.getText(), tf_contraseña.getText(), tipo);
+        DatabaseConnection b = new DatabaseConnection();
+        b.registrarUsuario(a);
     }//GEN-LAST:event_btt_registrarActionPerformed
 
     /**

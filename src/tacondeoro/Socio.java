@@ -17,20 +17,39 @@ public class Socio {
     private String direccion;
     private String poblacion;
     private String contrasenia;
+    private String tipo;
     private ArrayList<TarjetaBancaria> tarjetasSocio;
     private ArrayList<Pedido> pedidosSocio;
 
     public Socio() {
     }
 
-    public Socio(int idSocio, String nombre, String correoe, String direccion, String poblacion, ArrayList<TarjetaBancaria> tarjetasSocio, ArrayList<Pedido> pedidosSocio) {
+    public Socio(int idSocio, String nombre, String correoe, String direccion, String poblacion, String contrasenia, ArrayList<TarjetaBancaria> tarjetasSocio, ArrayList<Pedido> pedidosSocio) {
         this.idSocio = idSocio;
         this.nombre = nombre;
         this.correoe = correoe;
         this.direccion = direccion;
         this.poblacion = poblacion;
+        this.contrasenia = contrasenia;
         this.tarjetasSocio = tarjetasSocio;
         this.pedidosSocio = pedidosSocio;
+    }
+
+    public Socio(String nombre, String correoe, String direccion, String poblacion, String contrasenia, String tipo) {
+        this.nombre = nombre;
+        this.correoe = correoe;
+        this.direccion = direccion;
+        this.poblacion = poblacion;
+        this.contrasenia = contrasenia;
+        this.tipo = tipo;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 
     public Socio(String nombre, String correoe, String direccion, String poblacion, String contrasenia, ArrayList<TarjetaBancaria> tarjetasSocio, ArrayList<Pedido> pedidosSocio) {
@@ -41,6 +60,14 @@ public class Socio {
         this.contrasenia = contrasenia;
         this.tarjetasSocio = tarjetasSocio;
         this.pedidosSocio = pedidosSocio;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     
