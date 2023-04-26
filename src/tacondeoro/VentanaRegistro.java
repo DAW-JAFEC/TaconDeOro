@@ -4,18 +4,21 @@
  */
 package tacondeoro;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author usutarde
  */
 public class VentanaRegistro extends javax.swing.JDialog {
-
+    private VentanaPrincipal padre = null;
     /**
      * Creates new form RegistroUsuario
      */
     public VentanaRegistro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        padre=(VentanaPrincipal) parent;
     }
 
     /**
@@ -199,8 +202,7 @@ public class VentanaRegistro extends javax.swing.JDialog {
     }//GEN-LAST:event_mn_MenuPrincipalActionPerformed
 
     private void mn_volverInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_volverInicioActionPerformed
-        VentanaPrincipal b = new VentanaPrincipal();
-        VentanaInicioSesion a = new VentanaInicioSesion(b, rootPaneCheckingEnabled);
+        VentanaInicioSesion a = new VentanaInicioSesion(padre, rootPaneCheckingEnabled);
         this.dispose();
         a.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_mn_volverInicioActionPerformed
@@ -216,8 +218,16 @@ public class VentanaRegistro extends javax.swing.JDialog {
         }
         Socio a = new Socio(tf_nombre.getText(), tf_correo.getText(), tf_direccion.getText(), tf_poblacion.getText(), tf_contraseña.getText(), tipo);
         DatabaseConnection b = new DatabaseConnection();
-        b.registrarUsuario(a);
-        limpiar();
+        if(b.comprobarCorreoExistente(a.getCorreoe())){
+            b.registrarUsuario(a);
+            VentanaInicioSesion x = new VentanaInicioSesion(padre, rootPaneCheckingEnabled);
+            this.dispose();
+            x.setVisible(rootPaneCheckingEnabled);
+        }else{
+            JOptionPane.showMessageDialog(null, "El correo ya esta registrado, porfavor inicie sesion o registrese con otro correo");
+            tf_correo.setText("");
+        }
+        
     }//GEN-LAST:event_btt_registrarActionPerformed
 
     public void limpiar(){

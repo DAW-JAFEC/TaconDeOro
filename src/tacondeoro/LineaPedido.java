@@ -32,6 +32,15 @@ public class LineaPedido {
         this.cantidad = cantidad;
     }
 
+    public Articulo getArticuloLinea() {
+        return articuloLinea;
+    }
+
+    public void setArticuloLinea(Articulo articuloLinea) {
+        this.articuloLinea = articuloLinea;
+    }
+
+    
     @Override
     public String toString() {
         return "LineasPedido{" + "Nombre de articulo=" + articuloLinea.getNombre() + ", cantidad=" + cantidad + '}';

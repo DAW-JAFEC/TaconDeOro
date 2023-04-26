@@ -85,4 +85,24 @@ public class DatabaseConnection implements IFunciones{
     public void modificarUsuario(Socio socio) {
        
     }
+    
+    @Override
+    public boolean comprobarCorreoExistente(String correo){
+        boolean r = true;
+        try {
+            
+            conexion = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Statement s = conexion.createStatement();
+            ResultSet rs = s.executeQuery("SELECT * FROM SOCIOS");
+            while(rs.next()){
+                if(rs.getString(3).equals(correo))
+                    r=false;
+            }
+            
+            
+        } catch (SQLException ex) {
+            System.err.println("Credenciales invalidas: "+ex.getMessage());
+        }
+        return r;
+    }
 }

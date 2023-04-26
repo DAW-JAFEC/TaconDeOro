@@ -8,7 +8,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -314,7 +317,21 @@ public class VentanaClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btt_borrarDelCarritoActionPerformed
 
     private void btt_tramitarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_tramitarPedidoActionPerformed
-        // TODO add your handling code here:
+        Date fecha = new Date();
+        if(lst_lineasPedido.getLastVisibleIndex()==-1){
+            JOptionPane.showMessageDialog(null, "Para tramitar pedido tiene que añadir articulos en la cesta");
+        }else if(lst_lineasPedido.getLastVisibleIndex()>-1){
+            
+            ArrayList <LineaPedido> lineasDePedido = null;
+            for (int i = 0; i < dlmLineasPedido.getSize(); i++) {
+                lineasDePedido.add(i,(LineaPedido) dlmLineasPedido.getElementAt(i));
+            }
+            System.out.println(lineasDePedido);
+            Pedido a = new Pedido(fecha, Double.parseDouble(tf_total.getText()), lineasDePedido);
+            //Esto peta ns porq
+            //Esto peta ns porq
+            //Esto peta ns porq
+        }
     }//GEN-LAST:event_btt_tramitarPedidoActionPerformed
 
     private void cb_CampanaPrimaveraVeranoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_CampanaPrimaveraVeranoActionPerformed
@@ -326,14 +343,7 @@ public class VentanaClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_CampanaOtoñoInviernoActionPerformed
 
     private void btt_añadirAlCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_añadirAlCarritoActionPerformed
-        int indice=lst_Articulos.getSelectedIndex();
-        double total = 0;
-        LineaPedido a = new LineaPedido((Articulo) dlmArticulos.get(indice), Integer.parseInt(tf_Cantidad.getText()));
-        Articulo b = (Articulo) dlmArticulos.get(indice);
-        dlmLineasPedido.addElement(a);
-        //esto esta mal
-        total = total+b.getPrecio()*Integer.parseInt(tf_Cantidad.getText());
-        tf_total.setText(String.valueOf(total));
+        
     }//GEN-LAST:event_btt_añadirAlCarritoActionPerformed
 
     private void cb_ZapatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_ZapatosActionPerformed
