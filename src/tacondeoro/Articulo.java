@@ -71,7 +71,7 @@ public class Articulo {
         this.material = material;
     }
 
-    public double getPrecio() {
+    public float getPrecio() {
         return precio;
     }
 
