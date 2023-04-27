@@ -89,9 +89,10 @@ CREATE TABLE `campanias` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `campanias` (`anio`, `temporada`) VALUES
-('2004', 'Primavera Verano'),
-('2004', 'Otoño Invierno'),
-('2005', 'Primavera Verano');
+('2021', 'Primavera / Verano'),
+('2021', 'Otoño / Invierno'),
+('2022', 'Primavera / Verano'),
+('2022', 'Otoño / Invierno');
 
 # ARTICULOS
 CREATE TABLE `articulos` (
