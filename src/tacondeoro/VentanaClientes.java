@@ -5,9 +5,6 @@
 package tacondeoro;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultListModel;
@@ -37,9 +34,14 @@ public class VentanaClientes extends javax.swing.JFrame {
         DatabaseConnection db = new DatabaseConnection();
         c = db.getConexion();
 
-        mostrarZapatos();
-        mostrarBolsos();
-        mostrarComplementos();
+        ArrayList<Zapato> z = Zapato.obtenerZapatos();
+        ArrayList<Bolso> b = Bolso.obtenerBolsos();
+        ArrayList<Complemento> c = Complemento.obtenerComplementos();
+
+        dlmArticulos.addAll(z);
+        dlmArticulos.addAll(b);
+        dlmArticulos.addAll(c);
+
     }
 
     /**
@@ -97,6 +99,7 @@ public class VentanaClientes extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        lst_Articulos.setAutoscrolls(false);
         jScrollPane2.setViewportView(lst_Articulos);
 
         jLabel1.setText("ARTICULOS");
@@ -242,7 +245,7 @@ public class VentanaClientes extends javax.swing.JFrame {
                         .addComponent(cb_CampanaPrimaveraVerano)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cb_CampanaOtoñoInvierno)
-                        .addGap(49, 49, 49)
+                        .addGap(137, 137, 137)
                         .addComponent(cb_Zapatos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cb_Bolsos)
@@ -377,138 +380,63 @@ public class VentanaClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_ZapatosActionPerformed
 
     private void comprobarCheckboxes() {
+        ArrayList<Zapato> z = Zapato.obtenerZapatos();
+        ArrayList<Bolso> b = Bolso.obtenerBolsos();
+        ArrayList<Complemento> c = Complemento.obtenerComplementos();
+
         if (!cb_Zapatos.isSelected() && !cb_Bolsos.isSelected() && !cb_Complementos.isSelected()) {
             dlmArticulos.clear();
-            mostrarZapatos();
-            mostrarBolsos();
-            mostrarComplementos();
+            dlmArticulos.addAll(z);
+            dlmArticulos.addAll(b);
+            dlmArticulos.addAll(c);
             lst_Articulos.updateUI();
         }
 
         if (cb_Zapatos.isSelected() && cb_Bolsos.isSelected() && cb_Complementos.isSelected()) {
             dlmArticulos.clear();
-            mostrarZapatos();
-            mostrarBolsos();
-            mostrarComplementos();
+            dlmArticulos.addAll(z);
+            dlmArticulos.addAll(b);
+            dlmArticulos.addAll(c);
             lst_Articulos.updateUI();
         }
         
         if (cb_Zapatos.isSelected() && cb_Bolsos.isSelected() && !cb_Complementos.isSelected()) {
             dlmArticulos.clear();
-            mostrarZapatos();
-            mostrarBolsos();
+            dlmArticulos.addAll(z);
+            dlmArticulos.addAll(b);
             lst_Articulos.updateUI();
         }
         
         if (cb_Zapatos.isSelected() && cb_Complementos.isSelected() && !cb_Bolsos.isSelected()) {
             dlmArticulos.clear();
-            mostrarZapatos();
-            mostrarComplementos();
+            dlmArticulos.addAll(z);
+            dlmArticulos.addAll(c);
             lst_Articulos.updateUI();
         }
         
         if (cb_Bolsos.isSelected() && cb_Complementos.isSelected() && !cb_Zapatos.isSelected()) {
             dlmArticulos.clear();
-            mostrarBolsos();
-            mostrarComplementos();
+            dlmArticulos.addAll(b);
+            dlmArticulos.addAll(c);
             lst_Articulos.updateUI();
         }
 
         if (cb_Zapatos.isSelected() && !cb_Bolsos.isSelected() && !cb_Complementos.isSelected()) {
             dlmArticulos.clear();
-            mostrarZapatos();
+            dlmArticulos.addAll(z);
             lst_Articulos.updateUI();
         }
 
         if (cb_Bolsos.isSelected() && !cb_Zapatos.isSelected() && !cb_Complementos.isSelected()) {
             dlmArticulos.clear();
-            mostrarBolsos();
+            dlmArticulos.addAll(b);
             lst_Articulos.updateUI();
         }
 
         if (cb_Complementos.isSelected() && !cb_Zapatos.isSelected() && !cb_Bolsos.isSelected()) {
             dlmArticulos.clear();
-            mostrarComplementos();
+            dlmArticulos.addAll(c);
             lst_Articulos.updateUI();
-        }
-    }
-
-    private void mostrarBolsos() {
-        Statement s = null;
-        ResultSet rs = null;
-
-        try {
-            s = c.createStatement();
-            rs = s.executeQuery("select * from articulos;");
-            while (rs.next()) {
-                if (rs.getString(8).equalsIgnoreCase("bolso")) {
-                    Bolso bo = new Bolso();
-                    bo.setIdArticulo(rs.getInt(1));
-                    bo.setNombre(rs.getString(2));
-                    bo.setDescripcion(rs.getString(4));
-                    bo.setMaterial(rs.getString(5));
-                    bo.setPrecio(rs.getFloat(3));
-                    bo.setStock(rs.getInt(6));
-                    bo.setFotografia(rs.getString(7));
-                    bo.setTipo(rs.getString(11));
-                    dlmArticulos.addElement(bo);
-                }
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error: " + ex.getMessage());
-        }
-    }
-    
-    private void mostrarZapatos() {
-        Statement s = null;
-        ResultSet rs = null;
-
-        try {
-            s = c.createStatement();
-            rs = s.executeQuery("select * from articulos;");
-            while (rs.next()) {
-                if (rs.getString(8).equalsIgnoreCase("zapato")) {
-                    Zapato za = new Zapato();
-                    za.setIdArticulo(rs.getInt(1));
-                    za.setNombre(rs.getString(2));
-                    za.setDescripcion(rs.getString(4));
-                    za.setMaterial(rs.getString(5));
-                    za.setPrecio(rs.getFloat(3));
-                    za.setStock(rs.getInt(6));
-                    za.setFotografia(rs.getString(7));
-                    za.setNumero(rs.getFloat(10));
-                    za.setTipo(rs.getString(9));
-                    dlmArticulos.addElement(za);
-                }
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error: " + ex.getMessage());
-        }
-    }
-    
-    private void mostrarComplementos() {
-        Statement s = null;
-        ResultSet rs = null;
-
-        try {
-            s = c.createStatement();
-            rs = s.executeQuery("select * from articulos;");
-            while (rs.next()) {
-                if (rs.getString(8).equalsIgnoreCase("complemento")) {
-                    Complemento co = new Complemento();
-                    co.setIdArticulo(rs.getInt(1));
-                    co.setNombre(rs.getString(2));
-                    co.setDescripcion(rs.getString(4));
-                    co.setMaterial(rs.getString(5));
-                    co.setPrecio(rs.getFloat(3));
-                    co.setStock(rs.getInt(6));
-                    co.setFotografia(rs.getString(7));
-                    co.setTallaComplemento(rs.getInt(12));
-                    dlmArticulos.addElement(co);
-                }
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error: " + ex.getMessage());
         }
     }
 

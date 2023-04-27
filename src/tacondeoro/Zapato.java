@@ -4,6 +4,12 @@
  */
 package tacondeoro;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
 /**
  *
  * @author felis
@@ -46,6 +52,36 @@ public class Zapato extends Articulo {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public static ArrayList<Zapato> obtenerZapatos() {
+        Statement s = null;
+        ResultSet rs = null;
+        DatabaseConnection db = new DatabaseConnection();
+        Connection c = db.getConexion();
+        ArrayList<Zapato> r = new ArrayList<>();
+
+        try {
+            s = c.createStatement();
+            rs = s.executeQuery("select * from articulos where tipo = 'zapato';");
+            while (rs.next()) {
+                Zapato za = new Zapato();
+                za.setIdArticulo(rs.getInt(1));
+                za.setNombre(rs.getString(2));
+                za.setDescripcion(rs.getString(4));
+                za.setMaterial(rs.getString(5));
+                za.setPrecio(rs.getFloat(3));
+                za.setStock(rs.getInt(6));
+                za.setFotografia(rs.getString(7));
+                za.setNumero(rs.getFloat(10));
+                za.setTipo(rs.getString(9));
+                r.add(za);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+
+        return r;
     }
 
     @Override
