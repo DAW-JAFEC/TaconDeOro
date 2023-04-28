@@ -22,18 +22,21 @@ public class VentanaClientes extends javax.swing.JFrame {
 
     DefaultListModel dlmArticulos;
     DefaultListModel dlmLineasPedido;
+    private Socio usuario; 
 
     /**
      * Creates new form VentanaClientes
      */
-    public VentanaClientes() {
+    public VentanaClientes(Socio socio) {
         initComponents();
 
         dlmArticulos = new DefaultListModel();
         dlmLineasPedido = new DefaultListModel();
         lst_Articulos.setModel(dlmArticulos);
         lst_lineasPedido.setModel(dlmLineasPedido);
-
+        usuario = socio;
+        tf_socioCliente.setText(usuario.getNombre());
+        System.out.println(socio.getNombre());
         DatabaseConnection db = new DatabaseConnection();
         c = db.getConexion();
 
@@ -46,6 +49,8 @@ public class VentanaClientes extends javax.swing.JFrame {
         dlmArticulos.addAll(c);
 
     }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,6 +85,8 @@ public class VentanaClientes extends javax.swing.JFrame {
         cbb_añoTemporada = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        tf_socioCliente = new javax.swing.JTextField();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -180,6 +187,14 @@ public class VentanaClientes extends javax.swing.JFrame {
 
         jLabel7.setText("Temporadas:");
 
+        jLabel8.setText("Usuario:");
+
+        tf_socioCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_socioClienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -203,6 +218,11 @@ public class VentanaClientes extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(27, 27, 27)
+                        .addComponent(tf_total, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btt_tramitarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btt_borrarDelCarrito, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -216,15 +236,15 @@ public class VentanaClientes extends javax.swing.JFrame {
                                         .addComponent(tf_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(tf_Talla, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(27, 27, 27)
-                        .addComponent(tf_total, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btt_tramitarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(tf_socioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jLabel7)
@@ -233,8 +253,15 @@ public class VentanaClientes extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel7)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(tf_socioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -296,15 +323,11 @@ public class VentanaClientes extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 918, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -364,15 +387,15 @@ public class VentanaClientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Para tramitar pedido tiene que añadir articulos en la cesta");
         }else if(lst_lineasPedido.getLastVisibleIndex()>-1){
 
-            ArrayList <LineaPedido> lineasDePedido = null;
+            ArrayList <LineaPedido> lineasDePedido = new ArrayList<>();
             for (int i = 0; i < dlmLineasPedido.getSize(); i++) {
                 lineasDePedido.add(i,(LineaPedido) dlmLineasPedido.getElementAt(i));
             }
-            System.out.println(lineasDePedido);
-            Pedido a = new Pedido(fecha, Double.parseDouble(tf_total.getText()), lineasDePedido);
-            //Esto peta ns porq
-            //Esto peta ns porq
-            //Esto peta ns porq
+            //Hacer metodo para comprobar el pueblo del socio con el q nos hemos registrado con el array de areaDeInfluencia de todas las rutas. 
+            //Cuando este coincida se eligira esa ruta y se le pasara el idRuta al pedido nuevo para posteriormente hacer un insert
+            Pedido pedido = new Pedido(fecha, Float.parseFloat(tf_total.getText()), lineasDePedido, usuario.getIdSocio(), 1);
+            DatabaseConnection d = new DatabaseConnection();
+            d.añadirPedidoBBDD(pedido);
         }
     }//GEN-LAST:event_btt_tramitarPedidoActionPerformed
 
@@ -410,6 +433,10 @@ public class VentanaClientes extends javax.swing.JFrame {
     private void cbb_añoTemporadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbb_añoTemporadaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbb_añoTemporadaActionPerformed
+
+    private void tf_socioClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_socioClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_socioClienteActionPerformed
 
     private void comprobarCheckboxes() {
         ArrayList<Zapato> z = Zapato.obtenerZapatos();
@@ -500,6 +527,9 @@ public class VentanaClientes extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    private VentanaClientes() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -550,6 +580,7 @@ public class VentanaClientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar2;
@@ -560,6 +591,7 @@ public class VentanaClientes extends javax.swing.JFrame {
     private javax.swing.JList<String> lst_lineasPedido;
     private javax.swing.JTextField tf_Cantidad;
     private javax.swing.JTextField tf_Talla;
+    private javax.swing.JTextField tf_socioCliente;
     private javax.swing.JTextField tf_total;
     // End of variables declaration//GEN-END:variables
 }

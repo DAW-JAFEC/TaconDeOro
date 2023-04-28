@@ -8,6 +8,7 @@ package tacondeoro;
 
 import java.sql.PreparedStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -62,21 +63,26 @@ public class DatabaseConnection implements IFunciones{
     }
 
     @Override
-    public boolean iniciarSesion(String correo, String contrasenia) {
-        boolean r = false;
+    public Socio iniciarSesion(String correo, String contrasenia) {
+        Socio r = new Socio(0, "", "", "", "", "", null, null);
         try {
-            
             conexion = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            Statement s = conexion.createStatement();
-            ResultSet rs = s.executeQuery("SELECT * FROM SOCIOS");
-            while(rs.next()){
-                if(rs.getString(3).equals(correo) && rs.getString(6).equals(contrasenia))
-                    r=true;
-            }
-            
-            
+            PreparedStatement pstmt = conexion.prepareStatement("SELECT * FROM Socios WHERE correo =? and contrasenia= ? LIMIT 1");
+            pstmt.setString(1, correo);
+            pstmt.setString(2, contrasenia);
+            ResultSet rs = pstmt.executeQuery();
+                while(rs.next()){
+                    r.setIdSocio(rs.getInt("idsocio"));
+                    r.setNombre(rs.getString("nombre"));
+                    r.setCorreoe(rs.getString("correo"));
+                    r.setDireccion(rs.getString("direccion"));
+                    r.setPoblacion(rs.getString("poblacion"));
+                    r.setContrasenia(rs.getString("contrasenia"));
+                    JOptionPane.showMessageDialog(null, "Has iniciado sesion ");
+                }
+
         } catch (SQLException ex) {
-            System.err.println("Credenciales invalidas: "+ex.getMessage());
+            System.err.println(""+ex.getMessage());
         }
         return r;
     }
@@ -105,4 +111,22 @@ public class DatabaseConnection implements IFunciones{
         }
         return r;
     }
+
+    @Override
+    public void añadirPedidoBBDD(Pedido pedido) {
+        try {
+            conexion = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            PreparedStatement ps = conexion.prepareStatement("INSERT INTO PEDIDOS (fecha, total, idsocio, idruta) VALUES (?,?,?,?)");
+            ps.setDate(1, (Date) pedido.getFecha());
+            ps.setFloat(2, pedido.getTotalPedido());
+            ps.setInt(3, pedido.getIdSocio());
+            ps.setInt(4, pedido.getIdRuta());
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Tu pedido se ha añadido correctamente a la cesta");
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    
 }

@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
  */
 public class VentanaInicioSesion extends javax.swing.JDialog {
 private VentanaPrincipal padre;
+private Socio socio;
+
     /**
      * Creates new form InicioRegistro
      */
@@ -199,17 +201,18 @@ private VentanaPrincipal padre;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btt_iniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_iniciarSesionActionPerformed
-        boolean activar;
         DatabaseConnection a = new DatabaseConnection();
-        activar = a.iniciarSesion(tf_nombreUsuario.getText(), tf_contraseña.getText());
-        if(activar){
-            VentanaClientes c = new VentanaClientes();
-            c.setVisible(activar);
+       
+        socio = a.iniciarSesion(tf_nombreUsuario.getText(), tf_contraseña.getText());
+        System.out.println(socio.getNombre());
+        if(socio.getCorreoe().equalsIgnoreCase(tf_nombreUsuario.getText())){
+            VentanaClientes c = new VentanaClientes(socio);
+            c.setVisible(true);
             this.dispose();
+            
         }else{
-             JOptionPane.showMessageDialog(null, "Las credenciales son incorrectas, intentelo de nuevo");
-             limpiar();
-        }  
+            JOptionPane.showMessageDialog(null, "El correo o la contraseña son incorrectos.");
+        }
     }//GEN-LAST:event_btt_iniciarSesionActionPerformed
 
     public void limpiar(){

@@ -4,7 +4,12 @@
  */
 package tacondeoro;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+
 
 /**
  *
@@ -15,6 +20,8 @@ public class Ruta {
     private ArrayList<String> areaInfluencia;
     private ArrayList<String> diasReparto;
     private ArrayList<Pedido> pedidosDeRuta;
+    private int idEmpresa;
+    
     
 
     public Ruta() {
@@ -26,11 +33,12 @@ public class Ruta {
         this.pedidosDeRuta = pedidosDeRuta;
     }
 
-    public Ruta(int idRuta, ArrayList<String> areaInfluencia, ArrayList<String> diasReparto, ArrayList<Pedido> pedidosDeRuta) {
+    public Ruta(int idRuta, ArrayList<String> areaInfluencia, ArrayList<String> diasReparto, ArrayList<Pedido> pedidosDeRuta, int idEmpresa) {
         this.idRuta = idRuta;
         this.areaInfluencia = areaInfluencia;
         this.diasReparto = diasReparto;
         this.pedidosDeRuta = pedidosDeRuta;
+        this.idEmpresa = idEmpresa;
     }
 
     
@@ -53,6 +61,62 @@ public class Ruta {
 
     public void setDiasReparto(ArrayList<String> diasReparto) {
         this.diasReparto = diasReparto;
+    }
+
+    public ArrayList<Pedido> getPedidosDeRuta() {
+        return pedidosDeRuta;
+    }
+
+    public void setPedidosDeRuta(ArrayList<Pedido> pedidosDeRuta) {
+        this.pedidosDeRuta = pedidosDeRuta;
+    }
+
+    public int getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(int idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+
+    public void setIdRuta(int idRuta) {
+        this.idRuta = idRuta;
+    }
+    
+    
+    public static ArrayList<Ruta> obtenerRutas() {
+        Statement s = null;
+        ResultSet rs = null;
+        DatabaseConnection db = new DatabaseConnection();
+        Connection c = db.getConexion();
+        ArrayList<Ruta> r = new ArrayList<>();
+        
+        try {
+            s = c.createStatement();
+            rs = s.executeQuery("select * from rutas;");
+            while (rs.next()) {
+                Ruta bo = new Ruta();
+                bo.setIdRuta(rs.getInt(1));
+                bo.setAreaInfluencia(Ruta.formato(rs.getString(2)));
+                bo.setDiasReparto(Ruta.formato(rs.getString(3)));
+                bo.setIdEmpresa(rs.getInt(4));
+                
+                
+                r.add(bo);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+
+        return r;
+    }
+    private static ArrayList<String> formato(String string){
+        ArrayList<String> r = new ArrayList<>();
+        String[] trozos = string.split(", ");
+        for (int i = 0; i < trozos.length; i++) {
+            r.add(i, trozos[i]);
+        }
+        return r;
     }
 
     @Override

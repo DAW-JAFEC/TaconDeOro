@@ -14,24 +14,34 @@ import java.util.Date;
 public class Pedido {
     private int idPedido;
     private Date fecha;
-    private double totalPedido;
+    private float totalPedido;
     private ArrayList<LineaPedido> nLineas;
+    private int idSocio;
+    private int idRuta;
     
     
     public Pedido() {
     }
 
-    public Pedido( Date fecha, double totalPedido, ArrayList<LineaPedido> nLineas) {
+    public Pedido( Date fecha, float totalPedido, ArrayList<LineaPedido> nLineas) {
         this.fecha = fecha;
         this.totalPedido = totalPedido;
         this.nLineas = nLineas;
     }
 
-    public Pedido(int idPedido, Date fecha, double totalPedido, ArrayList<LineaPedido> nLineas) {
+    public Pedido(int idPedido, Date fecha, float totalPedido, ArrayList<LineaPedido> nLineas) {
         this.idPedido = idPedido;
         this.fecha = fecha;
         this.totalPedido = totalPedido;
         this.nLineas = nLineas;
+    }
+
+    public Pedido(Date fecha, float totalPedido, ArrayList<LineaPedido> nLineas, int idSocio, int idRuta) {
+        this.fecha = fecha;
+        this.totalPedido = totalPedido;
+        this.nLineas = nLineas;
+        this.idSocio = idSocio;
+        this.idRuta = idRuta;
     }
 
     
@@ -49,11 +59,11 @@ public class Pedido {
         this.fecha = fecha;
     }
 
-    public double getTotalPedido() {
+    public float getTotalPedido() {
         return totalPedido;
     }
 
-    public void setTotalPedido(double totalPedido) {
+    public void setTotalPedido(float totalPedido) {
         this.totalPedido = totalPedido;
     }
 
@@ -64,4 +74,28 @@ public class Pedido {
     public void setnLineas(ArrayList<LineaPedido> nLineas) {
         this.nLineas = nLineas;
     }
+
+    public int getIdSocio() {
+        return idSocio;
+    }
+
+    public void setIdSocio(int idSocio) {
+        this.idSocio = idSocio;
+    }
+
+    public int getIdRuta() {
+        return idRuta;
+    }
+
+    public void setIdRuta(int idRuta) {
+        this.idRuta = idRuta;
+    }
+    
+
+    
+    @Override
+    public String toString() {
+        return "Pedido{" + "idPedido=" + idPedido + ", fecha=" + fecha + ", totalPedido=" + totalPedido + ", nLineas=" + nLineas.toString() + '}';
+    }
+    
 }

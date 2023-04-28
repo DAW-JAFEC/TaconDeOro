@@ -124,6 +124,10 @@ public class Socio {
     public void setPedidosSocio(ArrayList<Pedido> pedidosSocio) {
         this.pedidosSocio = pedidosSocio;
     }
+
+    public void setIdSocio(int idSocio) {
+        this.idSocio = idSocio;
+    }
     
     
 }
