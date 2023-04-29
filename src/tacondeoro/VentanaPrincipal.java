@@ -95,11 +95,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btt_inicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_inicioSesionActionPerformed
+        this.dispose();
         VentanaInicioSesion a = new VentanaInicioSesion(this, rootPaneCheckingEnabled);
         a.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_btt_inicioSesionActionPerformed
 
     private void btt_registroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_registroActionPerformed
+        this.dispose();
         VentanaRegistro a = new VentanaRegistro(this, rootPaneCheckingEnabled);
         a.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_btt_registroActionPerformed

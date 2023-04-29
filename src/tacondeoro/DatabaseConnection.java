@@ -10,6 +10,9 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -120,6 +123,6 @@ public class DatabaseConnection implements IFunciones {
             System.err.println("" + ex.getMessage());
         }
     }
-
+    
     
 }

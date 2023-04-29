@@ -29,6 +29,11 @@ public class Complemento extends Articulo {
         this.tallaComplemento = tallaComplemento;
     }
 
+    public Complemento(int tallaComplemento, int idArticulo, String nombre, String descripcion, String material, int stock, String fotografia, int idCampania) {
+        super(idArticulo, nombre, descripcion, material, stock, fotografia, idCampania);
+        this.tallaComplemento = tallaComplemento;
+    }
+    
     public Complemento(int tallaComplemento, String nombre, String descripcion, String material, float precio, int stock, String fotografia) {
         super(nombre, descripcion, material, precio, stock, fotografia);
         this.tallaComplemento = tallaComplemento;
@@ -64,6 +69,7 @@ public class Complemento extends Articulo {
                 co.setStock(rs.getInt(6));
                 co.setFotografia(rs.getString(7));
                 co.setTallaComplemento(rs.getInt(12));
+                co.setIdCampania(rs.getInt(13));
                 r.add(co);
             }
         } catch (SQLException ex) {

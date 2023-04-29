@@ -19,18 +19,18 @@ import java.util.logging.Logger;
  * @author felis
  */
 public class Pedido {
+
     private int idPedido;
     private Date fecha;
     private float totalPedido;
     private ArrayList<LineaPedido> nLineas;
     private int idSocio;
     private int idRuta;
-    
-    
+
     public Pedido() {
     }
 
-    public Pedido( Date fecha, float totalPedido, ArrayList<LineaPedido> nLineas) {
+    public Pedido(Date fecha, float totalPedido, ArrayList<LineaPedido> nLineas) {
         this.fecha = fecha;
         this.totalPedido = totalPedido;
         this.nLineas = nLineas;
@@ -60,12 +60,9 @@ public class Pedido {
         this.idRuta = idRuta;
     }
 
-    
-
     public int getIdPedido() {
         return idPedido;
     }
-
 
     public Date getFecha() {
         return fecha;
@@ -110,47 +107,23 @@ public class Pedido {
     public void setIdPedido(int idPedido) {
         this.idPedido = idPedido;
     }
-    
-    
-    
+
     @Override
     public String toString() {
         return "Pedido{" + "idPedido=" + idPedido + ", fecha=" + fecha + ", totalPedido=" + totalPedido + ", nLineas=" + nLineas.toString() + '}';
     }
 
-      public static ArrayList<Pedido> obtenerPedidos() {
-        Statement s = null;
-        Statement ss = null;
+    public static int obtenerUltimoPedido() {
         ResultSet rs = null;
-        ResultSet rss = null;
         PreparedStatement ps = null;
         DatabaseConnection db = new DatabaseConnection();
         Connection c = db.getConexion();
-        ArrayList<Pedido> r = new ArrayList<>();
-        ArrayList<LineaPedido> arrayLP = new ArrayList<>();
-        LineaPedido lp = new LineaPedido();
-        
+        int r = 0;
         try {
-            s = c.createStatement();
-            rs = s.executeQuery("select * from pedidos;");
-            while (rs.next()) {
-                Pedido pe = new Pedido();
-                pe.setIdPedido(rs.getInt(1));
-                pe.setFecha(rs.getDate(2));
-                pe.setTotalPedido(rs.getFloat(3));
-                pe.setIdSocio(rs.getInt(4));
-                pe.setIdRuta(rs.getInt(5));
-                ps =  c.prepareStatement("select * from lineaspedido where idpedido=?;");
-                ps.setInt(1, pe.getIdPedido());
-                rss = ps.executeQuery();
-                while (rss.next()) {
-                    //lp.setArticuloLinea(); //Como coño saco esto
-                    lp.setCantidad(rss.getInt(3));
-                    arrayLP.add(lp);
-                }
-                pe.setnLineas(arrayLP);
-                r.add(pe);
-            }
+            ps = c.prepareStatement("select * from pedidos order by idpedido desc limit 1;");
+            rs = ps.executeQuery();
+            rs.next();
+            r=rs.getInt(1);
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
         }

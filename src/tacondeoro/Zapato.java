@@ -26,6 +26,12 @@ public class Zapato extends Articulo {
         this.tipo = tipo;
     }
 
+    public Zapato(float numero, String tipo, int idArticulo, String nombre, String descripcion, String material, int stock, String fotografia, int idCampania) {
+        super(idArticulo, nombre, descripcion, material, stock, fotografia, idCampania);
+        this.numero = numero;
+        this.tipo = tipo;
+    }
+    
     public Zapato(float numero, String tipo, int idArticulo, String nombre, String descripcion, String material, float precio, int stock, String fotografia) {
         super(idArticulo, nombre, descripcion, material, precio, stock, fotografia);
         this.numero = numero;
@@ -77,6 +83,7 @@ public class Zapato extends Articulo {
                 za.setFotografia(rs.getString(7));
                 za.setNumero(rs.getFloat(10));
                 za.setTipo(rs.getString(9));
+                za.setIdCampania(rs.getInt(13));
                 r.add(za);
             }
         } catch (SQLException ex) {

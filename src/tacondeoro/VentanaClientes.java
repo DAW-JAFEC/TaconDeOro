@@ -38,15 +38,8 @@ public class VentanaClientes extends javax.swing.JFrame {
         tf_socioCliente.setText(usuario.getNombre());
         DatabaseConnection db = new DatabaseConnection();
         c = db.getConexion();
-
-        ArrayList<Zapato> za = Zapato.obtenerZapatos();
-        ArrayList<Bolso> bo = Bolso.obtenerBolsos();
-        ArrayList<Complemento> co = Complemento.obtenerComplementos();
-
-        dlmArticulos.addAll(za);
-        dlmArticulos.addAll(bo);
-        dlmArticulos.addAll(co);
-
+        ArrayList<Articulo> ar = Articulo.obtenerArticulos();
+        dlmArticulos.addAll(ar);
         tf_total.setEditable(false);
     }
 
@@ -389,7 +382,6 @@ public class VentanaClientes extends javax.swing.JFrame {
         if(lst_lineasPedido.getLastVisibleIndex()==-1){
             JOptionPane.showMessageDialog(null, "Para tramitar pedido tiene que añadir artículos en la cesta");
         }else if(lst_lineasPedido.getLastVisibleIndex()>-1){
-            System.out.println(usuario.getDireccion());
             ArrayList <LineaPedido> lineasDePedido = new ArrayList<>();
             for (int i = 0; i < dlmLineasPedido.getSize(); i++) {
                 lineasDePedido.add(i,(LineaPedido) dlmLineasPedido.getElementAt(i));
@@ -399,8 +391,15 @@ public class VentanaClientes extends javax.swing.JFrame {
             numRuta = ventana.obtenerIdRutaSocio(rutas, usuario);
             DatabaseConnection db = new DatabaseConnection();
             Pedido pedido = new Pedido(fecha, Float.parseFloat(tf_total.getText()), lineasDePedido, usuario.getIdSocio(), numRuta);
+            Pedido m = new Pedido();
+            
             if(!(pedido.getIdRuta()==0)){
                 db.añadirPedidoBBDD(pedido);
+                System.out.println(Pedido.obtenerUltimoPedido());
+                pedido.setIdPedido(Pedido.obtenerUltimoPedido());
+                LineaPedido.añadirLineasDelPedido(pedido);
+            }else{
+                JOptionPane.showMessageDialog(null, "No podemos tramitar su pedido por cuestiones de transporte.");
             }
             
         }
@@ -466,6 +465,7 @@ public class VentanaClientes extends javax.swing.JFrame {
         ArrayList<Complemento> co = Complemento.obtenerComplementos();
 
         if (!cb_Zapatos.isSelected() && !cb_Bolsos.isSelected() && !cb_Complementos.isSelected()) {
+            
             dlmArticulos.clear();
             dlmArticulos.addAll(za);
             dlmArticulos.addAll(bo);
@@ -560,7 +560,7 @@ public class VentanaClientes extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     private VentanaClientes() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
 
     public static void main(String args[]) {

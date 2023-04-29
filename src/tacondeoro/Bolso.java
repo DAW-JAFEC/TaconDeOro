@@ -29,6 +29,11 @@ public class Bolso extends Articulo {
         this.tipo = tipo;
     }
 
+    public Bolso(String tipo, int idArticulo, String nombre, String descripcion, String material, int stock, String fotografia, int idCampania) {
+        super(idArticulo, nombre, descripcion, material, stock, fotografia, idCampania);
+        this.tipo = tipo;
+    }
+    
     public Bolso(String tipo, String nombre, String descripcion, String material, float precio, int stock, String fotografia) {
         super(nombre, descripcion, material, precio, stock, fotografia);
         this.tipo = tipo;
@@ -64,6 +69,7 @@ public class Bolso extends Articulo {
                 bo.setStock(rs.getInt(6));
                 bo.setFotografia(rs.getString(7));
                 bo.setTipo(rs.getString(11));
+                bo.setIdCampania(rs.getInt(13));
                 r.add(bo);
             }
         } catch (SQLException ex) {

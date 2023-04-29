@@ -4,6 +4,8 @@
  */
 package tacondeoro;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author felis
@@ -16,6 +18,7 @@ public class Articulo {
     private float precio;
     private int stock;
     private String fotografia;
+    private int idCampania;
 
     public Articulo() {
     }
@@ -30,6 +33,16 @@ public class Articulo {
         this.fotografia = fotografia;
     }
 
+    public Articulo(int idArticulo, String nombre, String descripcion, String material, int stock, String fotografia, int idCampania) {
+        this.idArticulo = idArticulo;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.material = material;
+        this.stock = stock;
+        this.fotografia = fotografia;
+        this.idCampania = idCampania;
+    }
+    
     public Articulo(String nombre, String descripcion, String material, float precio, int stock, String fotografia) {
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -95,10 +108,25 @@ public class Articulo {
         this.fotografia = fotografia;
     }
 
+    public int getIdCampania() {
+        return idCampania;
+    }
+
+    public void setIdCampania(int idCampania) {
+        this.idCampania = idCampania;
+    }
+    
+
     @Override
     public String toString() {
         return "nombre= " + nombre + ", descripcion= " + descripcion + ", material= " + material + ", precio= " + precio + ", stock= " + stock + ", fotografia= " + fotografia;
     }
     
-    
+    public static ArrayList<Articulo> obtenerArticulos(){
+        ArrayList<Articulo> r = new ArrayList<>();
+        r.addAll(Bolso.obtenerBolsos());
+        r.addAll(Complemento.obtenerComplementos());
+        r.addAll(Zapato.obtenerZapatos());
+        return r;
+    }
 }
