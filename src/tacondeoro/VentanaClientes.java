@@ -19,10 +19,13 @@ public class VentanaClientes extends javax.swing.JFrame {
 
     DefaultListModel dlmArticulos;
     DefaultListModel dlmLineasPedido;
-    private Socio usuario;
-
+    private Socio usuario; 
+    private Ruta ruta;
+    
+    
     /**
      * Creates new form VentanaClientes
+     * @param 
      */
     public VentanaClientes(Socio socio) {
         initComponents();
@@ -381,22 +384,46 @@ public class VentanaClientes extends javax.swing.JFrame {
     private void btt_tramitarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_tramitarPedidoActionPerformed
         // TODO add your handling code here:
         Date fecha = new Date();
+        VentanaClientes ventana = new VentanaClientes();
+        int numRuta = 0;
         if(lst_lineasPedido.getLastVisibleIndex()==-1){
             JOptionPane.showMessageDialog(null, "Para tramitar pedido tiene que añadir artículos en la cesta");
         }else if(lst_lineasPedido.getLastVisibleIndex()>-1){
-
+            System.out.println(usuario.getDireccion());
             ArrayList <LineaPedido> lineasDePedido = new ArrayList<>();
             for (int i = 0; i < dlmLineasPedido.getSize(); i++) {
                 lineasDePedido.add(i,(LineaPedido) dlmLineasPedido.getElementAt(i));
             }
-            //Hacer metodo para comprobar el pueblo del socio con el q nos hemos registrado con el array de areaDeInfluencia de todas las rutas. 
-            //Cuando este coincida se eligira esa ruta y se le pasara el idRuta al pedido nuevo para posteriormente hacer un insert
-            Pedido pedido = new Pedido(fecha, Float.parseFloat(tf_total.getText()), lineasDePedido, usuario.getIdSocio(), 1);
-            DatabaseConnection d = new DatabaseConnection();
-            d.añadirPedidoBBDD(pedido);
+            
+            ArrayList<Ruta> rutas = Ruta.obtenerRutas();
+            numRuta = ventana.obtenerIdRutaSocio(rutas, usuario);
+            DatabaseConnection db = new DatabaseConnection();
+            Pedido pedido = new Pedido(fecha, Float.parseFloat(tf_total.getText()), lineasDePedido, usuario.getIdSocio(), numRuta);
+            if(!(pedido.getIdRuta()==0)){
+                db.añadirPedidoBBDD(pedido);
+            }
+            
         }
     }//GEN-LAST:event_btt_tramitarPedidoActionPerformed
-
+    
+    private int obtenerIdRutaSocio(ArrayList<Ruta> rutas, Socio usuario){
+        int r=0;
+        Ruta ru = new Ruta();
+        String area = "";
+        for (int i = 0; i < rutas.size(); i++) {
+            ru=rutas.get(i);
+            for (int j = 0; j < ru.getAreaInfluencia().size(); j++) {
+                area = ru.getAreaInfluencia().get(j);
+                if(area.equalsIgnoreCase(usuario.getPoblacion())){  
+                    r = ru.getIdRuta();
+                }
+            }
+        }
+        if(r==0)
+            JOptionPane.showMessageDialog(this, "Lo sentimos, nuestra empresa no podrá repartir tu pedido por temas de transporte");
+        return r;
+    }
+    
     private void btt_borrarDelCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_borrarDelCarritoActionPerformed
         // TODO add your handling code here:
         int indice = lst_lineasPedido.getSelectedIndex();

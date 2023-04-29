@@ -107,9 +107,10 @@ public class DatabaseConnection implements IFunciones {
     @Override
     public void añadirPedidoBBDD(Pedido pedido) {
         try {
-            conexion = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            PreparedStatement ps = conexion.prepareStatement("INSERT INTO PEDIDOS (fecha, total, idsocio, idruta) VALUES (?,?,?,?);");
-            ps.setDate(1, (Date) pedido.getFecha());
+            DatabaseConnection db = new DatabaseConnection();
+            Connection c = db.getConexion();
+            PreparedStatement ps = c.prepareStatement("INSERT INTO PEDIDOS (fecha, total, idsocio, idruta) VALUES (?,?,?,?);");
+            ps.setDate(1, new java.sql.Date(pedido.getFecha().getTime()));
             ps.setFloat(2, pedido.getTotalPedido());
             ps.setInt(3, pedido.getIdSocio());
             ps.setInt(4, pedido.getIdRuta());
