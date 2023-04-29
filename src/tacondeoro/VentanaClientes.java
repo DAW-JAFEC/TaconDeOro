@@ -5,9 +5,6 @@
 package tacondeoro;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultListModel;
@@ -22,7 +19,7 @@ public class VentanaClientes extends javax.swing.JFrame {
 
     DefaultListModel dlmArticulos;
     DefaultListModel dlmLineasPedido;
-    private Socio usuario; 
+    private Socio usuario;
 
     /**
      * Creates new form VentanaClientes
@@ -36,21 +33,19 @@ public class VentanaClientes extends javax.swing.JFrame {
         lst_lineasPedido.setModel(dlmLineasPedido);
         usuario = socio;
         tf_socioCliente.setText(usuario.getNombre());
-        System.out.println(socio.getNombre());
         DatabaseConnection db = new DatabaseConnection();
         c = db.getConexion();
 
-        ArrayList<Zapato> z = Zapato.obtenerZapatos();
-        ArrayList<Bolso> b = Bolso.obtenerBolsos();
-        ArrayList<Complemento> c = Complemento.obtenerComplementos();
+        ArrayList<Zapato> za = Zapato.obtenerZapatos();
+        ArrayList<Bolso> bo = Bolso.obtenerBolsos();
+        ArrayList<Complemento> co = Complemento.obtenerComplementos();
 
-        dlmArticulos.addAll(z);
-        dlmArticulos.addAll(b);
-        dlmArticulos.addAll(c);
+        dlmArticulos.addAll(za);
+        dlmArticulos.addAll(bo);
+        dlmArticulos.addAll(co);
 
+        tf_total.setEditable(false);
     }
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,15 +57,15 @@ public class VentanaClientes extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        cb_CampanaOtoñoInvierno = new javax.swing.JCheckBox();
-        cb_CampanaPrimaveraVerano = new javax.swing.JCheckBox();
+        cb_CampaniaOtonioInvierno = new javax.swing.JCheckBox();
+        cb_CampaniaPrimaveraVerano = new javax.swing.JCheckBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         lst_Articulos = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         lst_lineasPedido = new javax.swing.JList<>();
-        btt_añadirAlCarrito = new javax.swing.JButton();
+        btt_aniadirAlCarrito = new javax.swing.JButton();
         btt_tramitarPedido = new javax.swing.JButton();
         btt_borrarDelCarrito = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -82,28 +77,29 @@ public class VentanaClientes extends javax.swing.JFrame {
         cb_Complementos = new javax.swing.JCheckBox();
         cb_Zapatos = new javax.swing.JCheckBox();
         tf_Talla = new javax.swing.JTextField();
-        cbb_añoTemporada = new javax.swing.JComboBox<>();
+        cbb_anioTemporada = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         tf_socioCliente = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        cb_CampanaOtoñoInvierno.setText("Otoño/Invierno");
-        cb_CampanaOtoñoInvierno.addActionListener(new java.awt.event.ActionListener() {
+        cb_CampaniaOtonioInvierno.setText("Otoño / Invierno");
+        cb_CampaniaOtonioInvierno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_CampanaOtoñoInviernoActionPerformed(evt);
+                cb_CampaniaOtonioInviernoActionPerformed(evt);
             }
         });
 
-        cb_CampanaPrimaveraVerano.setText("Primavera/Verano");
-        cb_CampanaPrimaveraVerano.addActionListener(new java.awt.event.ActionListener() {
+        cb_CampaniaPrimaveraVerano.setText("Primavera / Verano");
+        cb_CampaniaPrimaveraVerano.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_CampanaPrimaveraVeranoActionPerformed(evt);
+                cb_CampaniaPrimaveraVeranoActionPerformed(evt);
             }
         });
 
@@ -115,7 +111,7 @@ public class VentanaClientes extends javax.swing.JFrame {
         lst_Articulos.setAutoscrolls(false);
         jScrollPane2.setViewportView(lst_Articulos);
 
-        jLabel1.setText("ARTICULOS");
+        jLabel1.setText("ARTÍCULOS");
 
         jLabel5.setText("CANTIDAD");
 
@@ -126,10 +122,10 @@ public class VentanaClientes extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(lst_lineasPedido);
 
-        btt_añadirAlCarrito.setText("AÑADIR AL CARRITO");
-        btt_añadirAlCarrito.addActionListener(new java.awt.event.ActionListener() {
+        btt_aniadirAlCarrito.setText("AÑADIR AL CARRITO");
+        btt_aniadirAlCarrito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btt_añadirAlCarritoActionPerformed(evt);
+                btt_aniadirAlCarritoActionPerformed(evt);
             }
         });
 
@@ -176,10 +172,10 @@ public class VentanaClientes extends javax.swing.JFrame {
             }
         });
 
-        cbb_añoTemporada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2021", "2022", "2023" }));
-        cbb_añoTemporada.addActionListener(new java.awt.event.ActionListener() {
+        cbb_anioTemporada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "2021", "2022", "2023" }));
+        cbb_anioTemporada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbb_añoTemporadaActionPerformed(evt);
+                cbb_anioTemporadaActionPerformed(evt);
             }
         });
 
@@ -187,92 +183,90 @@ public class VentanaClientes extends javax.swing.JFrame {
 
         jLabel7.setText("Temporadas:");
 
-        jLabel8.setText("Usuario:");
+        jLabel8.setText("Tipo de artículo:");
 
-        tf_socioCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_socioClienteActionPerformed(evt);
-            }
-        });
+        jLabel9.setText("Usuario:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
+                .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(cb_Complementos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cb_Bolsos, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cb_Zapatos, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cb_CampanaOtoñoInvierno)
-                    .addComponent(cb_CampanaPrimaveraVerano)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(cbb_añoTemporada, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(27, 27, 27)
-                        .addComponent(tf_total, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btt_tramitarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tf_socioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btt_borrarDelCarrito, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btt_añadirAlCarrito, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(tf_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(tf_Talla, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(cb_Complementos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cb_Bolsos, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                                .addComponent(cb_Zapatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(cb_CampaniaOtonioInvierno)
+                            .addComponent(cb_CampaniaPrimaveraVerano)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(cbb_anioTemporada, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel8))
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(18, 18, 18)
-                                .addComponent(tf_socioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(12, 12, 12)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btt_borrarDelCarrito, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(btt_aniadirAlCarrito, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGap(18, 18, 18)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(tf_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(tf_Talla, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(20, 20, 20))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tf_total)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                            .addComponent(btt_tramitarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(42, 42, 42))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
+                        .addGap(6, 6, 6)
                         .addComponent(jLabel7))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(tf_socioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tf_socioCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cb_CampanaPrimaveraVerano)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cb_CampanaOtoñoInvierno)
+                        .addComponent(cb_CampaniaPrimaveraVerano)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cb_CampaniaOtonioInvierno)
+                        .addGap(16, 16, 16)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbb_añoTemporada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(98, 98, 98)
+                        .addGap(12, 12, 12)
+                        .addComponent(cbb_anioTemporada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81)
+                        .addComponent(jLabel8)
+                        .addGap(12, 12, 12)
                         .addComponent(cb_Zapatos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cb_Bolsos)
@@ -297,11 +291,11 @@ public class VentanaClientes extends javax.swing.JFrame {
                                             .addComponent(jLabel6)
                                             .addComponent(tf_Talla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18)
-                                        .addComponent(btt_añadirAlCarrito)
+                                        .addComponent(btt_aniadirAlCarrito)
                                         .addGap(18, 18, 18)
                                         .addComponent(btt_borrarDelCarrito)
                                         .addGap(125, 125, 125))
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(tf_total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -323,33 +317,37 @@ public class VentanaClientes extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 992, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 433, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cb_CampanaOtoñoInviernoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_CampanaOtoñoInviernoActionPerformed
+    private void cb_CampaniaOtonioInviernoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_CampaniaOtonioInviernoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cb_CampanaOtoñoInviernoActionPerformed
+        comprobarFiltros();
+    }//GEN-LAST:event_cb_CampaniaOtonioInviernoActionPerformed
 
-    private void cb_CampanaPrimaveraVeranoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_CampanaPrimaveraVeranoActionPerformed
+    private void cb_CampaniaPrimaveraVeranoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_CampaniaPrimaveraVeranoActionPerformed
         // TODO add your handling code here:
-        
-        
-    }//GEN-LAST:event_cb_CampanaPrimaveraVeranoActionPerformed
+        comprobarFiltros();
+    }//GEN-LAST:event_cb_CampaniaPrimaveraVeranoActionPerformed
 
-    private void btt_añadirAlCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_añadirAlCarritoActionPerformed
+    private void btt_aniadirAlCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_aniadirAlCarritoActionPerformed
         // TODO add your handling code here:
         int indice = lst_Articulos.getSelectedIndex();
         float total = 0;
 
         if (indice == -1 && tf_Cantidad.getText().equalsIgnoreCase("") || indice == -1 || tf_Cantidad.getText().equalsIgnoreCase("") || tf_Cantidad.getText().equalsIgnoreCase("0")) {
-            JOptionPane.showMessageDialog(this, "Para añadir un producto al carrito debes seleccionarlo y escribir la cantidad deseada (mayor que 0)");
+            JOptionPane.showMessageDialog(this, "Para añadir un artículo al carrito debes seleccionarlo y escribir la cantidad deseada (mayor que 0)");
         } else {
             LineaPedido a = new LineaPedido((Articulo) dlmArticulos.get(indice), Integer.parseInt(tf_Cantidad.getText()));
             Articulo b = (Articulo) dlmArticulos.get(indice);
@@ -378,13 +376,13 @@ public class VentanaClientes extends javax.swing.JFrame {
 
             tf_total.setText(String.valueOf(total));
         }
-    }//GEN-LAST:event_btt_añadirAlCarritoActionPerformed
+    }//GEN-LAST:event_btt_aniadirAlCarritoActionPerformed
 
     private void btt_tramitarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_tramitarPedidoActionPerformed
         // TODO add your handling code here:
         Date fecha = new Date();
         if(lst_lineasPedido.getLastVisibleIndex()==-1){
-            JOptionPane.showMessageDialog(null, "Para tramitar pedido tiene que añadir articulos en la cesta");
+            JOptionPane.showMessageDialog(null, "Para tramitar pedido tiene que añadir artículos en la cesta");
         }else if(lst_lineasPedido.getLastVisibleIndex()>-1){
 
             ArrayList <LineaPedido> lineasDePedido = new ArrayList<>();
@@ -417,111 +415,118 @@ public class VentanaClientes extends javax.swing.JFrame {
 
     private void cb_BolsosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_BolsosActionPerformed
         // TODO add your handling code here:
-        comprobarCheckboxes();
+        comprobarFiltros();
     }//GEN-LAST:event_cb_BolsosActionPerformed
 
     private void cb_ComplementosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_ComplementosActionPerformed
         // TODO add your handling code here:
-        comprobarCheckboxes();
+        comprobarFiltros();
     }//GEN-LAST:event_cb_ComplementosActionPerformed
 
     private void cb_ZapatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_ZapatosActionPerformed
         // TODO add your handling code here:
-        comprobarCheckboxes();
+        comprobarFiltros();
     }//GEN-LAST:event_cb_ZapatosActionPerformed
 
-    private void cbb_añoTemporadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbb_añoTemporadaActionPerformed
+    private void cbb_anioTemporadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbb_anioTemporadaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbb_añoTemporadaActionPerformed
+        comprobarFiltros();
+    }//GEN-LAST:event_cbb_anioTemporadaActionPerformed
 
-    private void tf_socioClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_socioClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_socioClienteActionPerformed
-
-    private void comprobarCheckboxes() {
-        ArrayList<Zapato> z = Zapato.obtenerZapatos();
-        ArrayList<Bolso> b = Bolso.obtenerBolsos();
-        ArrayList<Complemento> c = Complemento.obtenerComplementos();
+    private void comprobarFiltros() {
+        ArrayList<Zapato> za = Zapato.obtenerZapatos();
+        ArrayList<Bolso> bo = Bolso.obtenerBolsos();
+        ArrayList<Complemento> co = Complemento.obtenerComplementos();
 
         if (!cb_Zapatos.isSelected() && !cb_Bolsos.isSelected() && !cb_Complementos.isSelected()) {
             dlmArticulos.clear();
-            dlmArticulos.addAll(z);
-            dlmArticulos.addAll(b);
-            dlmArticulos.addAll(c);
+            dlmArticulos.addAll(za);
+            dlmArticulos.addAll(bo);
+            dlmArticulos.addAll(co);
             lst_Articulos.updateUI();
         }
 
         if (cb_Zapatos.isSelected() && cb_Bolsos.isSelected() && cb_Complementos.isSelected()) {
             dlmArticulos.clear();
-            dlmArticulos.addAll(z);
-            dlmArticulos.addAll(b);
-            dlmArticulos.addAll(c);
+            dlmArticulos.addAll(za);
+            dlmArticulos.addAll(bo);
+            dlmArticulos.addAll(co);
             lst_Articulos.updateUI();
         }
         
         if (cb_Zapatos.isSelected() && cb_Bolsos.isSelected() && !cb_Complementos.isSelected()) {
             dlmArticulos.clear();
-            dlmArticulos.addAll(z);
-            dlmArticulos.addAll(b);
+            dlmArticulos.addAll(za);
+            dlmArticulos.addAll(bo);
             lst_Articulos.updateUI();
         }
         
         if (cb_Zapatos.isSelected() && cb_Complementos.isSelected() && !cb_Bolsos.isSelected()) {
             dlmArticulos.clear();
-            dlmArticulos.addAll(z);
-            dlmArticulos.addAll(c);
+            dlmArticulos.addAll(za);
+            dlmArticulos.addAll(co);
             lst_Articulos.updateUI();
         }
         
         if (cb_Bolsos.isSelected() && cb_Complementos.isSelected() && !cb_Zapatos.isSelected()) {
             dlmArticulos.clear();
-            dlmArticulos.addAll(b);
-            dlmArticulos.addAll(c);
+            dlmArticulos.addAll(bo);
+            dlmArticulos.addAll(co);
             lst_Articulos.updateUI();
         }
 
         if (cb_Zapatos.isSelected() && !cb_Bolsos.isSelected() && !cb_Complementos.isSelected()) {
             dlmArticulos.clear();
-            dlmArticulos.addAll(z);
+            dlmArticulos.addAll(za);
             lst_Articulos.updateUI();
         }
 
         if (cb_Bolsos.isSelected() && !cb_Zapatos.isSelected() && !cb_Complementos.isSelected()) {
             dlmArticulos.clear();
-            dlmArticulos.addAll(b);
+            dlmArticulos.addAll(bo);
             lst_Articulos.updateUI();
         }
 
         if (cb_Complementos.isSelected() && !cb_Zapatos.isSelected() && !cb_Bolsos.isSelected()) {
             dlmArticulos.clear();
-            dlmArticulos.addAll(c);
+            dlmArticulos.addAll(co);
             lst_Articulos.updateUI();
         }
 
-        // Checkbox Primavera/Verano
-        if (cb_CampanaPrimaveraVerano.isSelected() && !cb_CampanaOtoñoInvierno.isSelected()) {
+        if (cb_CampaniaPrimaveraVerano.isSelected() && !cb_CampaniaOtonioInvierno.isSelected()) {
             dlmArticulos.clear();
-            mostrarPrimaveraVerano();
+            ArrayList<Object> opv = Campania.obtenerTemporada("Primavera / Verano");
+            dlmArticulos.addAll(opv);
             lst_Articulos.updateUI();
         }
-    }
 
-    private void mostrarPrimaveraVerano() {
-        Statement s = null;
-        ResultSet rs = null;
-
-        try {
-            s = c.createStatement();
-            rs = s.executeQuery("SELECT * from articulos inner join campanias on articulos.idcampania=campanias.idcampania where campanias.temporada='Primavera / Verano';");
-                                  
-            while (rs.next()) {
-                    //  ??????????????
-            }
-        } catch (SQLException ex) {
-            System.out.println("Error: " + ex.getMessage());
+        if (cb_CampaniaOtonioInvierno.isSelected() && !cb_CampaniaPrimaveraVerano.isSelected()) {
+            dlmArticulos.clear();
+            ArrayList<Object> ooi = Campania.obtenerTemporada("Otoño / Invierno");
+            dlmArticulos.addAll(ooi);
+            lst_Articulos.updateUI();
         }
-        
-        
+
+        if (cbb_anioTemporada.getSelectedIndex() == 1) {
+            dlmArticulos.clear();
+            ArrayList<Object> oa = Campania.obtenerAnio(2021);
+            dlmArticulos.addAll(oa);
+            lst_Articulos.updateUI();
+        }
+
+        if (cbb_anioTemporada.getSelectedIndex() == 2) {
+            dlmArticulos.clear();
+            ArrayList<Object> oa = Campania.obtenerAnio(2022);
+            dlmArticulos.addAll(oa);
+            lst_Articulos.updateUI();
+        }
+
+        if (cbb_anioTemporada.getSelectedIndex() == 3) {
+            dlmArticulos.clear();
+            ArrayList<Object> oa = Campania.obtenerAnio(2023);
+            dlmArticulos.addAll(oa);
+            lst_Articulos.updateUI();
+        }
     }
 
     /**
@@ -530,6 +535,7 @@ public class VentanaClientes extends javax.swing.JFrame {
     private VentanaClientes() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -564,15 +570,15 @@ public class VentanaClientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btt_añadirAlCarrito;
+    private javax.swing.JButton btt_aniadirAlCarrito;
     private javax.swing.JButton btt_borrarDelCarrito;
     private javax.swing.JButton btt_tramitarPedido;
     private javax.swing.JCheckBox cb_Bolsos;
-    private javax.swing.JCheckBox cb_CampanaOtoñoInvierno;
-    private javax.swing.JCheckBox cb_CampanaPrimaveraVerano;
+    private javax.swing.JCheckBox cb_CampaniaOtonioInvierno;
+    private javax.swing.JCheckBox cb_CampaniaPrimaveraVerano;
     private javax.swing.JCheckBox cb_Complementos;
     private javax.swing.JCheckBox cb_Zapatos;
-    private javax.swing.JComboBox<String> cbb_añoTemporada;
+    private javax.swing.JComboBox<String> cbb_anioTemporada;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -581,6 +587,7 @@ public class VentanaClientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar2;

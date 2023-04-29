@@ -11,15 +11,15 @@ import javax.swing.JOptionPane;
  * @author usutarde
  */
 public class VentanaInicioSesion extends javax.swing.JDialog {
-private VentanaPrincipal padre;
-private Socio socio;
+    private VentanaPrincipal padre;
+    private Socio socio;
 
     /**
      * Creates new form InicioRegistro
      */
     public VentanaInicioSesion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        padre=(VentanaPrincipal) parent;
+        padre = (VentanaPrincipal) parent;
         initComponents();
     }
 
@@ -204,14 +204,12 @@ private Socio socio;
         DatabaseConnection a = new DatabaseConnection();
        
         socio = a.iniciarSesion(tf_nombreUsuario.getText(), tf_contraseña.getText());
-        System.out.println(socio.getNombre());
-        if(socio.getCorreoe().equalsIgnoreCase(tf_nombreUsuario.getText())){
+        if (socio.getCorreoe().equalsIgnoreCase(tf_nombreUsuario.getText())) {
             VentanaClientes c = new VentanaClientes(socio);
             c.setVisible(true);
             this.dispose();
-            
-        }else{
-            JOptionPane.showMessageDialog(null, "El correo o la contraseña son incorrectos.");
+        } else {
+            JOptionPane.showMessageDialog(this, "El correo o la contraseña son incorrectos");
         }
     }//GEN-LAST:event_btt_iniciarSesionActionPerformed
 
@@ -239,9 +237,9 @@ private Socio socio;
     }//GEN-LAST:event_tf_contraseña1ActionPerformed
 
     private void cb_adminMozoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cb_adminMozoMouseClicked
-        if(cb_adminMozo.isSelected()){
+        if (cb_adminMozo.isSelected()) {
             tf_contraseña1.setEditable(true);
-        }else{
+        } else {
             tf_contraseña1.setEditable(false);
         }
     }//GEN-LAST:event_cb_adminMozoMouseClicked

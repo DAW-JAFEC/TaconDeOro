@@ -7,7 +7,7 @@ package tacondeoro;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 /**
@@ -43,15 +43,17 @@ public class Complemento extends Articulo {
     }
 
     public static ArrayList<Complemento> obtenerComplementos() {
-        Statement s = null;
+        PreparedStatement ps = null;
         ResultSet rs = null;
         DatabaseConnection db = new DatabaseConnection();
         Connection c = db.getConexion();
         ArrayList<Complemento> r = new ArrayList<>();
 
         try {
-            s = c.createStatement();
-            rs = s.executeQuery("select * from articulos where tipo = 'complemento';");
+            ps = c.prepareStatement("select * from articulos where tipo = ?;");
+            ps.setString(1, "complemento");
+            rs = ps.executeQuery();
+
             while (rs.next()) {
                 Complemento co = new Complemento();
                 co.setIdArticulo(rs.getInt(1));
@@ -75,5 +77,5 @@ public class Complemento extends Articulo {
     public String toString() {
         return "Complemento" + ", Nombre="+ super.getNombre()+", Descripcion="+ super.getDescripcion()+", Material="+ super.getMaterial()+", Precio="+ super.getPrecio()+", Stock="+ super.getStock()+", Fotografia="+ super.getFotografia()+", Talla=" + tallaComplemento;
     }
-    
+
 }
