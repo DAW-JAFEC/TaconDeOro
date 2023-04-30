@@ -464,96 +464,85 @@ public class VentanaClientes extends javax.swing.JFrame {
         ArrayList<Bolso> bo = Bolso.obtenerBolsos();
         ArrayList<Complemento> co = Complemento.obtenerComplementos();
 
-        if (!cb_Zapatos.isSelected() && !cb_Bolsos.isSelected() && !cb_Complementos.isSelected()) {
-            
-            dlmArticulos.clear();
+        boolean filtroZapatos = cb_Zapatos.isSelected();
+        boolean filtroBolsos = cb_Bolsos.isSelected();
+        boolean filtroComplementos = cb_Complementos.isSelected();
+        boolean filtroCampaniaPV = cb_CampaniaPrimaveraVerano.isSelected();
+        boolean filtroCampaniaOI = cb_CampaniaOtonioInvierno.isSelected();
+        int anioSeleccionado = cbb_anioTemporada.getSelectedIndex();
+        dlmArticulos.clear();
+
+        if (!filtroZapatos && !filtroBolsos && !filtroComplementos || filtroZapatos && filtroBolsos && filtroComplementos) {
             dlmArticulos.addAll(za);
             dlmArticulos.addAll(bo);
             dlmArticulos.addAll(co);
+            cb_CampaniaPrimaveraVerano.setEnabled(true);
+            cb_CampaniaOtonioInvierno.setEnabled(true);
+            cbb_anioTemporada.setEnabled(true);
+            lst_Articulos.updateUI();
+        } else if (filtroZapatos || filtroBolsos || filtroComplementos) {
+            ocultarTemporadaAnio();
+            if (filtroZapatos) {
+                dlmArticulos.addAll(za);
+            }
+            if (filtroBolsos) {
+                dlmArticulos.addAll(bo);
+            }
+            if (filtroComplementos) {
+                dlmArticulos.addAll(co);
+            }
             lst_Articulos.updateUI();
         }
 
-        if (cb_Zapatos.isSelected() && cb_Bolsos.isSelected() && cb_Complementos.isSelected()) {
-            dlmArticulos.clear();
-            dlmArticulos.addAll(za);
-            dlmArticulos.addAll(bo);
-            dlmArticulos.addAll(co);
+        if (!filtroCampaniaPV && !filtroCampaniaOI || filtroCampaniaPV && filtroCampaniaOI) {
+            cb_Zapatos.setEnabled(true);
+            cb_Bolsos.setEnabled(true);
+            cb_Complementos.setEnabled(true);
             lst_Articulos.updateUI();
-        }
-        
-        if (cb_Zapatos.isSelected() && cb_Bolsos.isSelected() && !cb_Complementos.isSelected()) {
-            dlmArticulos.clear();
-            dlmArticulos.addAll(za);
-            dlmArticulos.addAll(bo);
-            lst_Articulos.updateUI();
-        }
-        
-        if (cb_Zapatos.isSelected() && cb_Complementos.isSelected() && !cb_Bolsos.isSelected()) {
-            dlmArticulos.clear();
-            dlmArticulos.addAll(za);
-            dlmArticulos.addAll(co);
-            lst_Articulos.updateUI();
-        }
-        
-        if (cb_Bolsos.isSelected() && cb_Complementos.isSelected() && !cb_Zapatos.isSelected()) {
-            dlmArticulos.clear();
-            dlmArticulos.addAll(bo);
-            dlmArticulos.addAll(co);
+        } else if (filtroCampaniaPV || filtroCampaniaOI) {
+            ocultarArticulosAnio();
+            if (filtroCampaniaPV) {
+                dlmArticulos.clear();
+                ArrayList<Object> opv = Campania.obtenerTemporada("Primavera / Verano");
+                dlmArticulos.addAll(opv);
+            }
+            if (filtroCampaniaOI) {
+                dlmArticulos.clear();
+                ArrayList<Object> ooi = Campania.obtenerTemporada("Otoño / Invierno");
+                dlmArticulos.addAll(ooi);
+            }
             lst_Articulos.updateUI();
         }
 
-        if (cb_Zapatos.isSelected() && !cb_Bolsos.isSelected() && !cb_Complementos.isSelected()) {
+        if (anioSeleccionado != 0) {
+            ocultarTemporadaArticulos();
             dlmArticulos.clear();
-            dlmArticulos.addAll(za);
-            lst_Articulos.updateUI();
-        }
-
-        if (cb_Bolsos.isSelected() && !cb_Zapatos.isSelected() && !cb_Complementos.isSelected()) {
-            dlmArticulos.clear();
-            dlmArticulos.addAll(bo);
-            lst_Articulos.updateUI();
-        }
-
-        if (cb_Complementos.isSelected() && !cb_Zapatos.isSelected() && !cb_Bolsos.isSelected()) {
-            dlmArticulos.clear();
-            dlmArticulos.addAll(co);
-            lst_Articulos.updateUI();
-        }
-
-        if (cb_CampaniaPrimaveraVerano.isSelected() && !cb_CampaniaOtonioInvierno.isSelected()) {
-            dlmArticulos.clear();
-            ArrayList<Object> opv = Campania.obtenerTemporada("Primavera / Verano");
-            dlmArticulos.addAll(opv);
-            lst_Articulos.updateUI();
-        }
-
-        if (cb_CampaniaOtonioInvierno.isSelected() && !cb_CampaniaPrimaveraVerano.isSelected()) {
-            dlmArticulos.clear();
-            ArrayList<Object> ooi = Campania.obtenerTemporada("Otoño / Invierno");
-            dlmArticulos.addAll(ooi);
-            lst_Articulos.updateUI();
-        }
-
-        if (cbb_anioTemporada.getSelectedIndex() == 1) {
-            dlmArticulos.clear();
-            ArrayList<Object> oa = Campania.obtenerAnio(2021);
+            ArrayList<Object> oa = Campania.obtenerAnio(2021 + anioSeleccionado - 1);
             dlmArticulos.addAll(oa);
             lst_Articulos.updateUI();
         }
+        
+    }
 
-        if (cbb_anioTemporada.getSelectedIndex() == 2) {
-            dlmArticulos.clear();
-            ArrayList<Object> oa = Campania.obtenerAnio(2022);
-            dlmArticulos.addAll(oa);
-            lst_Articulos.updateUI();
-        }
+    private void ocultarTemporadaAnio() {
+        cb_CampaniaPrimaveraVerano.setEnabled(false);
+        cb_CampaniaOtonioInvierno.setEnabled(false);
+        cbb_anioTemporada.setEnabled(false);
+    }
 
-        if (cbb_anioTemporada.getSelectedIndex() == 3) {
-            dlmArticulos.clear();
-            ArrayList<Object> oa = Campania.obtenerAnio(2023);
-            dlmArticulos.addAll(oa);
-            lst_Articulos.updateUI();
-        }
+    private void ocultarTemporadaArticulos() {
+        cb_Zapatos.setEnabled(false);
+        cb_Bolsos.setEnabled(false);
+        cb_Complementos.setEnabled(false);
+        cb_CampaniaPrimaveraVerano.setEnabled(false);
+        cb_CampaniaOtonioInvierno.setEnabled(false);
+    }
+
+    private void ocultarArticulosAnio() {
+        cb_Zapatos.setEnabled(false);
+        cb_Bolsos.setEnabled(false);
+        cb_Complementos.setEnabled(false);
+        cbb_anioTemporada.setEnabled(false);
     }
 
     /**
