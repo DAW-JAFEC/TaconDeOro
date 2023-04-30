@@ -17,9 +17,12 @@ CREATE TABLE `socios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `socios` (`nombre`, `correo`, `direccion`, `poblacion`, `contrasenia`, `tipo`) VALUES
-('Juan', 'juanito23@gmail.com', 'C/ Norte, 5', 'Alcazar De San Juan', '123garito', 'administrador'),
-('Juan', 'juanito23@gmail.com', 'C/ Norte, 5', 'Alcazar De San Juan', '123garito', 'administrador'),
-('Juan', 'juanito23@gmail.com', 'C/ Norte, 5', 'Alcazar De San Juan', '123garito', 'administrador');
+('Arturo', 'arturonb51236@gmail.com', 'C/ Pesetas, 64', 'Tomelloso', '123garito', 'administrador'),
+('Felix', 'felisucojunior@gmail.com', 'C/ Norte, 13', 'Alcázar de San Juan', '123garito', 'administrador'),
+('Javier', 'javive2004vehiculos@gmail.com', 'C/ Montesinos, 7', 'Arenales de San Gregorio', '123garito', 'administrador'),
+('Enrique', 'kryke10@gmail.com', 'C/ Cervantes, 33', 'Alcázar de San Juan', '123garito', 'administrador'),
+('Carlos', 'dawcarlospereira@gmail.com', 'Av. Los Enterradores, 108', 'Alcázar de San Juan', '123garito', 'administrador'),
+('Julián', 'julitoherrera443@gmail.com', 'C/ Mostoles, 22', 'Torrent', 'puñetapuñeta4', 'socio');
 
 # TARJETAS
 CREATE TABLE `tarjetas` (
@@ -30,9 +33,7 @@ CREATE TABLE `tarjetas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `tarjetas` (`numero`, `idsocio`) VALUES
-('4522122391669024', '1'),
-('4522122391669025', '2'),
-('4522122391669026', '3');
+('4522122391669024', '6');
 
 # EMPRESAS
 CREATE TABLE `empresas` (
@@ -51,7 +52,7 @@ INSERT INTO `empresas` (`nombre`, `cif`, `domiciliofiscal`) VALUES
 # RUTAS
 CREATE TABLE `rutas` (
   `idruta` int(15) NOT NULL AUTO_INCREMENT,
-  `areainfluencia` varchar(50) NOT NULL,
+  `areainfluencia` varchar(200) NOT NULL,
   `diasreparto` varchar(50) NOT NULL,
   `idempresa` int(15) NOT NULL,
   PRIMARY KEY (`idruta`),
@@ -59,9 +60,9 @@ CREATE TABLE `rutas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `rutas` (`areainfluencia`, `diasreparto`, `idempresa`) VALUES
-('cuenca', 'cinco', '1'),
-('cuenca', 'cinco', '2'),
-('cuenca', 'cinco', '3');
+('Los Barrios, Algeciras, El Pelayo, El Bujeo, Tarifa', '1-30', '1'),
+('Tomelloso, Alcázar de San Juan, Manzanares, La Solana, Villarrobledo, Villacañas', '1-15', '2'),
+('Cheste, Ribarroja de Turia, Torrent, Manises, Silla, Valencia', '15-30', '3');
 
 # PEDIDOS
 CREATE TABLE `pedidos` (
@@ -115,7 +116,8 @@ CREATE TABLE `articulos` (
 
 INSERT INTO `articulos` (`nombre`, `precio`, `descripcion`, `material`, `stock`, `fotografia`, `tipo`, `tipozapato`, `numerozapato`, `tipobolso`, `tallacomplemento`, `idcampania`) VALUES
 ('bota', '150', 'bota cr7', 'cuero', '200', 'foto', 'zapato', 'hight', '42', NULL, NULL, '1'),
-('collar', '400', 'collar oro', 'oro', '250', 'foto', 'complemento', NULL, NULL, NULL, '45', '2'),
+('collar', '400', 'collar oro', 'oro', '250', 'foto', 'complemento', NULL, NULL, NULL, '12', '2'),
+('cinturón', '3', 'morao', 'cuero', '250', 'foto', 'complemento', NULL, NULL, NULL, '45', '2'),
 ('Bolso Gucci', '200', 'Bolso pepo', 'piel piton', '300', 'foto', 'bolso', NULL, NULL, 'bolsamen', NULL, '3');
 
 # LINEASPEDIDO
