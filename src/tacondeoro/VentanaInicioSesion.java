@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  * @author usutarde
  */
 public class VentanaInicioSesion extends javax.swing.JDialog {
-    private VentanaPrincipal padre;
+    private VentanaPrincipal padre = null;
     private Socio socio;
 
     /**
@@ -21,6 +21,7 @@ public class VentanaInicioSesion extends javax.swing.JDialog {
         super(parent, modal);
         padre = (VentanaPrincipal) parent;
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -217,6 +218,7 @@ public class VentanaInicioSesion extends javax.swing.JDialog {
         tf_nombreUsuario.setText("");
         tf_contraseña.setText("");
     }
+
     private void tf_nombreUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nombreUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_nombreUsuarioActionPerformed
@@ -246,6 +248,8 @@ public class VentanaInicioSesion extends javax.swing.JDialog {
 
     private void btt_volverAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_volverAtrasActionPerformed
         this.dispose();
+        VentanaPrincipal vp = new VentanaPrincipal();
+        vp.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_btt_volverAtrasActionPerformed
 
     /**

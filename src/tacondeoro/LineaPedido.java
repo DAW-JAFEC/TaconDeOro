@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -19,6 +18,7 @@ public class LineaPedido {
     private Articulo articuloLinea;
     private int cantidad;
     private int idPedido;
+
     public LineaPedido() {
     }
 
@@ -54,13 +54,12 @@ public class LineaPedido {
     public void setIdPedido(int idPedido) {
         this.idPedido = idPedido;
     }
-    
-    
+
     @Override
     public String toString() {
         return "LineasPedido{" + "Nombre de articulo=" + articuloLinea.getNombre() + ", cantidad=" + cantidad + '}';
     }  
-    
+
     public static ArrayList<LineaPedido> obtenerLineasPedido() {
         ResultSet rs = null;
         ResultSet rsArt = null;
@@ -69,6 +68,7 @@ public class LineaPedido {
         DatabaseConnection db = new DatabaseConnection();
         Connection c = db.getConexion();
         ArrayList<LineaPedido> arrayLP = new ArrayList<>();
+
         try {
             ps = c.prepareStatement("SELECT * FROM lineaspedido");
             rs = ps.executeQuery();
@@ -128,13 +128,13 @@ public class LineaPedido {
                 ps.close();
                 c.close();
             } catch (SQLException ex) {
-                System.out.println(""+ex.getMessage());
+                System.out.println("" + ex.getMessage());
             }
         }
         return arrayLP;
     }
-    
-    public static void añadirLineasDelPedido(Pedido pedido) {
+
+    public static void aniadirLineasDelPedido(Pedido pedido) {
         PreparedStatement ps =null;
         DatabaseConnection db = new DatabaseConnection();
         ArrayList<LineaPedido> lineas = new ArrayList<>();
@@ -150,7 +150,6 @@ public class LineaPedido {
                 ps.setInt(3, linea.getCantidad());
                 ps.executeUpdate();
             }
-            
         } catch (SQLException ex) {
             System.err.println("" + ex.getMessage());
         }finally{
@@ -158,9 +157,9 @@ public class LineaPedido {
                 ps.close();
                 c.close();
             } catch (SQLException ex) {
-                System.out.println("maricon"+ex.getMessage());
+                System.out.println("" + ex.getMessage());
             }
         }
     }
-     
+
 }

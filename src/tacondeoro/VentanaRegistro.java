@@ -12,13 +12,15 @@ import javax.swing.JOptionPane;
  */
 public class VentanaRegistro extends javax.swing.JDialog {
     private VentanaPrincipal padre = null;
+
     /**
      * Creates new form RegistroUsuario
      */
     public VentanaRegistro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        padre = (VentanaPrincipal) parent;
         initComponents();
-        padre=(VentanaPrincipal) parent;
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -209,21 +211,23 @@ public class VentanaRegistro extends javax.swing.JDialog {
 
     private void btt_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_registrarActionPerformed
         String tipo="";
-        if(rbtn_admin.isSelected()){
+
+        if (rbtn_admin.isSelected()) {
             tipo="Administrador";
-        }else if(rbtn_cliente.isSelected()){
+        } else if (rbtn_cliente.isSelected()) {
             tipo="Cliente";
-        }else{
+        } else {
             tipo="Mozo";
         }
+
         Socio a = new Socio(tf_nombre.getText(), tf_correo.getText(), tf_direccion.getText(), tf_poblacion.getText(), tf_contraseña.getText(), tipo);
         DatabaseConnection b = new DatabaseConnection();
-        if(b.comprobarCorreoExistente(a.getCorreoe())){
+        if (b.comprobarCorreoExistente(a.getCorreoe())) {
             b.registrarUsuario(a);
             VentanaInicioSesion x = new VentanaInicioSesion(padre, rootPaneCheckingEnabled);
             this.dispose();
             x.setVisible(rootPaneCheckingEnabled);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "El correo ya esta registrado, porfavor inicie sesion o registrese con otro correo");
             tf_correo.setText("");
         }

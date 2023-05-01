@@ -6,7 +6,6 @@ package tacondeoro;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -16,20 +15,18 @@ import javax.swing.JOptionPane;
  */
 public class VentanaClientes extends javax.swing.JFrame {
     Connection c = null;
-
     DefaultListModel dlmArticulos;
     DefaultListModel dlmLineasPedido;
-    private Socio usuario; 
+    private static Socio usuario;
     private Ruta ruta;
-    
-    
+
     /**
      * Creates new form VentanaClientes
      * @param 
      */
     public VentanaClientes(Socio socio) {
         initComponents();
-
+        this.setLocationRelativeTo(null);
         dlmArticulos = new DefaultListModel();
         dlmLineasPedido = new DefaultListModel();
         lst_Articulos.setModel(dlmArticulos);
@@ -40,6 +37,17 @@ public class VentanaClientes extends javax.swing.JFrame {
         c = db.getConexion();
         ArrayList<Articulo> ar = Articulo.obtenerArticulos();
         dlmArticulos.addAll(ar);
+
+//        // Si el dlm de lineaspedido no está vacío porque se ha retrocedido desde la ventana hijo a esta recorrerlo para volver a establecer el total en el campo tf_total
+//        // No funciona porque el constructor no se vuelve a ejecutar al retroceder, buscar alternativa con Listener
+//        if (!dlmLineasPedido.isEmpty()) {
+//            float total = 0;
+//            for (int i = 0; i < dlmLineasPedido.size(); i++) {
+//                LineaPedido lp = (LineaPedido) dlmLineasPedido.getElementAt(i);
+//                total = total + (lp.getArticuloLinea().getPrecio() * lp.getCantidad());
+//            }
+//            tf_total.setText(String.valueOf(total));
+//        }
         tf_total.setEditable(false);
     }
 
@@ -180,6 +188,9 @@ public class VentanaClientes extends javax.swing.JFrame {
         jLabel7.setText("Temporadas:");
 
         jLabel8.setText("Tipo de artículo:");
+
+        tf_socioCliente.setDisabledTextColor(new java.awt.Color(200, 20, 20));
+        tf_socioCliente.setEnabled(false);
 
         jLabel9.setText("Usuario:");
 
@@ -376,53 +387,15 @@ public class VentanaClientes extends javax.swing.JFrame {
 
     private void btt_tramitarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_tramitarPedidoActionPerformed
         // TODO add your handling code here:
-        Date fecha = new Date();
-        VentanaClientes ventana = new VentanaClientes();
-        int numRuta = 0;
-        if(lst_lineasPedido.getLastVisibleIndex()==-1){
-            JOptionPane.showMessageDialog(null, "Para tramitar pedido tiene que añadir artículos en la cesta");
-        }else if(lst_lineasPedido.getLastVisibleIndex()>-1){
-            ArrayList <LineaPedido> lineasDePedido = new ArrayList<>();
-            for (int i = 0; i < dlmLineasPedido.getSize(); i++) {
-                lineasDePedido.add(i,(LineaPedido) dlmLineasPedido.getElementAt(i));
-            }
-            
-            ArrayList<Ruta> rutas = Ruta.obtenerRutas();
-            numRuta = ventana.obtenerIdRutaSocio(rutas, usuario);
-            DatabaseConnection db = new DatabaseConnection();
-            Pedido pedido = new Pedido(fecha, Float.parseFloat(tf_total.getText()), lineasDePedido, usuario.getIdSocio(), numRuta);
-            Pedido m = new Pedido();
-            
-            if(!(pedido.getIdRuta()==0)){
-                db.añadirPedidoBBDD(pedido);
-                System.out.println(Pedido.obtenerUltimoPedido());
-                pedido.setIdPedido(Pedido.obtenerUltimoPedido());
-                LineaPedido.añadirLineasDelPedido(pedido);
-            }else{
-                JOptionPane.showMessageDialog(null, "No podemos tramitar su pedido por cuestiones de transporte.");
-            }
-            
+        if (dlmLineasPedido.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Para tramitar pedido tiene que añadir artículos en la cesta");
+        } else {
+            this.dispose();
+            VentanaPagoPedido vcc = new VentanaPagoPedido(this,rootPaneCheckingEnabled, this.usuario);
+            vcc.setVisible(rootPaneCheckingEnabled);
         }
     }//GEN-LAST:event_btt_tramitarPedidoActionPerformed
-    
-    private int obtenerIdRutaSocio(ArrayList<Ruta> rutas, Socio usuario){
-        int r=0;
-        Ruta ru = new Ruta();
-        String area = "";
-        for (int i = 0; i < rutas.size(); i++) {
-            ru=rutas.get(i);
-            for (int j = 0; j < ru.getAreaInfluencia().size(); j++) {
-                area = ru.getAreaInfluencia().get(j);
-                if(area.equalsIgnoreCase(usuario.getPoblacion())){  
-                    r = ru.getIdRuta();
-                }
-            }
-        }
-        if(r==0)
-            JOptionPane.showMessageDialog(this, "Lo sentimos, nuestra empresa no podrá repartir tu pedido por temas de transporte");
-        return r;
-    }
-    
+
     private void btt_borrarDelCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_borrarDelCarritoActionPerformed
         // TODO add your handling code here:
         int indice = lst_lineasPedido.getSelectedIndex();

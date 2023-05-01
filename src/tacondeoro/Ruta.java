@@ -7,9 +7,9 @@ package tacondeoro;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
-
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,8 +21,6 @@ public class Ruta {
     private ArrayList<String> diasReparto;
     private ArrayList<Pedido> pedidosDeRuta;
     private int idEmpresa;
-    
-    
 
     public Ruta() {
     }
@@ -41,8 +39,6 @@ public class Ruta {
         this.idEmpresa = idEmpresa;
     }
 
-    
-    
     public ArrayList<String> getAreaInfluencia() {
         return areaInfluencia;
     }
@@ -82,26 +78,39 @@ public class Ruta {
     public void setIdRuta(int idRuta) {
         this.idRuta = idRuta;
     }
-    
-    
+
+    public static int obtenerIdRutaSocio(ArrayList<Ruta> rutas, Socio usuario){
+        int r = 0;
+        Ruta ru = new Ruta();
+        String area = "";
+        for (int i = 0; i < rutas.size(); i++) {
+            ru = rutas.get(i);
+            for (int j = 0; j < ru.getAreaInfluencia().size(); j++) {
+                area = ru.getAreaInfluencia().get(j);
+                if(area.equalsIgnoreCase(usuario.getPoblacion())) {
+                    r = ru.getIdRuta();
+                }
+            }
+        }
+        return r;
+    }
+
     public static ArrayList<Ruta> obtenerRutas() {
-        Statement s = null;
+        PreparedStatement ps = null;
         ResultSet rs = null;
         DatabaseConnection db = new DatabaseConnection();
         Connection c = db.getConexion();
         ArrayList<Ruta> r = new ArrayList<>();
-        
+
         try {
-            s = c.createStatement();
-            rs = s.executeQuery("select * from rutas;");
+            ps = c.prepareStatement("select * from rutas;");
+            rs = ps.executeQuery();
             while (rs.next()) {
                 Ruta bo = new Ruta();
                 bo.setIdRuta(rs.getInt(1));
                 bo.setAreaInfluencia(Ruta.formato(rs.getString(2)));
                 bo.setDiasReparto(Ruta.formato(rs.getString(3)));
                 bo.setIdEmpresa(rs.getInt(4));
-                
-                
                 r.add(bo);
             }
         } catch (SQLException ex) {
@@ -110,7 +119,8 @@ public class Ruta {
 
         return r;
     }
-    private static ArrayList<String> formato(String string){
+
+    private static ArrayList<String> formato(String string) {
         ArrayList<String> r = new ArrayList<>();
         String[] trozos = string.split(", ");
         for (int i = 0; i < trozos.length; i++) {

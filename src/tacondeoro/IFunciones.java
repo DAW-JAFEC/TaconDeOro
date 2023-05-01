@@ -4,8 +4,6 @@
  */
 package tacondeoro;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author felis
@@ -15,5 +13,5 @@ public interface IFunciones {
     public Socio iniciarSesion(String correo, String contrasenia);
     public void modificarUsuario(Socio socio);
     public boolean comprobarCorreoExistente(String correo);
-    public void añadirPedidoBBDD(Pedido pedido);
+    public void aniadirPedidoBBDD(Pedido pedido);
 }

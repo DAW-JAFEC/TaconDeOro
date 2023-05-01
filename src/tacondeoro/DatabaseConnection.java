@@ -6,13 +6,9 @@ package tacondeoro;
 
 import java.sql.PreparedStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -108,7 +104,7 @@ public class DatabaseConnection implements IFunciones {
     }
 
     @Override
-    public void añadirPedidoBBDD(Pedido pedido) {
+    public void aniadirPedidoBBDD(Pedido pedido) {
         try {
             DatabaseConnection db = new DatabaseConnection();
             Connection c = db.getConexion();
@@ -118,7 +114,7 @@ public class DatabaseConnection implements IFunciones {
             ps.setInt(3, pedido.getIdSocio());
             ps.setInt(4, pedido.getIdRuta());
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Tu pedido se ha añadido correctamente a la cesta");
+            JOptionPane.showMessageDialog(null, "Tu pedido se ha realizado correctamente");
         } catch (SQLException ex) {
             System.err.println("" + ex.getMessage());
         }
