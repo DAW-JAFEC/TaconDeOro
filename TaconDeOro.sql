@@ -33,7 +33,7 @@ CREATE TABLE `tarjetas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `tarjetas` (`numero`, `idsocio`) VALUES
-('4522122391669024', '6');
+('6252411494821632-12/26-432', '2');
 
 # EMPRESAS
 CREATE TABLE `empresas` (
@@ -71,15 +71,16 @@ CREATE TABLE `pedidos` (
   `total` float(50) NOT NULL,
   `idsocio` int(15) NOT NULL,
   `idruta` int(15) NOT NULL,
+  `estado` varchar(50) NOT NULL,
   PRIMARY KEY (`idpedido`),
   CONSTRAINT FK_IDSOCIO_PEDIDOS FOREIGN KEY (`idsocio`) REFERENCES socios(`idsocio`),
   CONSTRAINT FK_IDRUTA_PEDIDOS FOREIGN KEY (`idruta`) REFERENCES rutas(`idruta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
   
-INSERT INTO `pedidos` (`fecha`, `total`, `idsocio`, `idruta`) VALUES
-('2004-09-04', '40000', '1', '1'),
-('2004-09-04', '40000', '2', '2'),
-('2004-09-04', '40000', '3', '3');
+INSERT INTO `pedidos` (`fecha`, `total`, `idsocio`, `idruta`, `estado`) VALUES
+('2004-09-04', '40000', '1', '1', 'pendiente'),
+('2004-09-04', '40000', '2', '2', 'pendiente'),
+('2004-09-04', '40000', '3', '3', 'pendiente');
 
 # CAMPANIAS
 CREATE TABLE `campanias` (
