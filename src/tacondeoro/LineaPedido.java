@@ -140,7 +140,7 @@ public class LineaPedido {
         DatabaseConnection db = new DatabaseConnection();
         Connection c = db.getConexion();
         ArrayList<LineaPedido> r = new ArrayList<>();
-
+        int i = 0;
         try {
             ps = c.prepareStatement("SELECT * FROM lineaspedido inner join pedidos on lineaspedido.idpedido=pedidos.idpedido where pedidos.estado='pendiente' and lineaspedido.idpedido=?;");
             ps.setInt(1, idpedido);
@@ -149,8 +149,9 @@ public class LineaPedido {
                 LineaPedido lp = new LineaPedido();
                 lp.setIdPedido(rs.getInt(1));
                 lp.setCantidad(rs.getInt(3));
-                lp.setArticuloLinea(Articulo.obtenerArticuloDeLineaPedidoConcreta(lp.getIdPedido()));
+                lp.setArticuloLinea(Articulo.obtenerArticuloDeLineaPedidoConcreta(lp.getIdPedido()).get(i));
                 r.add(lp);
+                i++;
             }
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());

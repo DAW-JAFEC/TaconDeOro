@@ -8,19 +8,20 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author usutarde
+ * @author felis
  */
-public class VentanaRegistro extends javax.swing.JDialog {
-    private VentanaPrincipal padre = null;
-
+public class VentanaNuevosAdmins extends javax.swing.JDialog {
+    private static Socio admin;
+    private VentanaAdministradores padre=null;
     /**
-     * Creates new form RegistroUsuario
+     * Creates new form VentanaNuevosAdmins
      */
-    public VentanaRegistro(java.awt.Frame parent, boolean modal) {
+    public VentanaNuevosAdmins(java.awt.Frame parent, boolean modal, Socio admin) {
         super(parent, modal);
-        padre = (VentanaPrincipal) parent;
         initComponents();
         this.setLocationRelativeTo(null);
+        this.admin=admin;
+        padre = (VentanaAdministradores) parent;
     }
 
     /**
@@ -32,27 +33,28 @@ public class VentanaRegistro extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        Tipo = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
+        tf_contraseña = new javax.swing.JTextField();
+        tf_direccion = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        tf_poblacion = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btt_registrar = new javax.swing.JButton();
         tf_nombre = new javax.swing.JTextField();
         tf_correo = new javax.swing.JTextField();
-        tf_contraseña = new javax.swing.JTextField();
-        tf_direccion = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        tf_poblacion = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        mn_volverInicio = new javax.swing.JMenuItem();
-        mn_MenuPrincipal = new javax.swing.JMenuItem();
+        mn_volver = new javax.swing.JMenu();
+        itm_volver = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jLabel5.setText("REGISTRO");
+
+        jLabel6.setText("Poblacion");
 
         jLabel1.setText("Nombre Completo");
 
@@ -62,16 +64,12 @@ public class VentanaRegistro extends javax.swing.JDialog {
 
         jLabel4.setText("Direccion");
 
-        btt_registrar.setText("Registrarse");
+        btt_registrar.setText("DAR ALTA ADMIN");
         btt_registrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btt_registrarActionPerformed(evt);
             }
         });
-
-        jLabel5.setText("REGISTRO");
-
-        jLabel6.setText("Poblacion");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -125,31 +123,22 @@ public class VentanaRegistro extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_poblacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(btt_registrar)
-                .addGap(108, 108, 108))
+                .addGap(117, 117, 117))
         );
 
-        jMenu1.setBackground(new java.awt.Color(205, 205, 205));
-        jMenu1.setText("Funciones");
+        mn_volver.setText("Volver");
 
-        mn_volverInicio.setText("Volver Inicio Sesion");
-        mn_volverInicio.addActionListener(new java.awt.event.ActionListener() {
+        itm_volver.setText("Volver atrás");
+        itm_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_volverInicioActionPerformed(evt);
+                itm_volverActionPerformed(evt);
             }
         });
-        jMenu1.add(mn_volverInicio);
+        mn_volver.add(itm_volver);
 
-        mn_MenuPrincipal.setText("Menú Principal");
-        mn_MenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_MenuPrincipalActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mn_MenuPrincipal);
-
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(mn_volver);
 
         setJMenuBar(jMenuBar1);
 
@@ -157,51 +146,34 @@ public class VentanaRegistro extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mn_MenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_MenuPrincipalActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_mn_MenuPrincipalActionPerformed
-
-    private void mn_volverInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_volverInicioActionPerformed
-        VentanaInicioSesion a = new VentanaInicioSesion(padre, rootPaneCheckingEnabled);
-        this.dispose();
-        a.setVisible(rootPaneCheckingEnabled);
-    }//GEN-LAST:event_mn_volverInicioActionPerformed
-
     private void btt_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_registrarActionPerformed
-        Socio a = new Socio(tf_nombre.getText(), tf_correo.getText(), tf_direccion.getText(), tf_poblacion.getText(), tf_contraseña.getText(), "socio");
-        DatabaseConnection b = new DatabaseConnection();
         if(tf_nombre.getText()==null || tf_correo.getText()==null || tf_direccion.getText()==null || tf_poblacion.getText()==null || tf_contraseña.getText()==null){
             JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos para registrarte");
         }else{
-            if (b.comprobarCorreoExistente(a.getCorreoe())){
-                b.registrarUsuario(a);
-                VentanaInicioSesion x = new VentanaInicioSesion(padre, rootPaneCheckingEnabled);
-                this.dispose();
-                x.setVisible(rootPaneCheckingEnabled);
-            } else {
-                JOptionPane.showMessageDialog(null, "El correo ya esta registrado, porfavor inicie sesion o registrese con otro correo");
-                tf_correo.setText("");
-            } 
-         }
+            Socio nuevoAdmin = new Socio(tf_nombre.getText(), tf_correo.getText(), tf_direccion.getText(), tf_poblacion.getText(), tf_contraseña.getText(), "administrador");
+            DatabaseConnection db = new DatabaseConnection();
+            db.registrarUsuario(nuevoAdmin);
+        }
     }//GEN-LAST:event_btt_registrarActionPerformed
 
-    public void limpiar(){
-        tf_contraseña.setText("");
-        tf_nombre.setText("");
-        tf_correo.setText("");
-        tf_direccion.setText("");
-        tf_poblacion.setText("");
-    }
+    private void itm_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itm_volverActionPerformed
+        this.dispose();
+        VentanaAdministradores a = new VentanaAdministradores(admin);
+        a.setVisible(true);
+    }//GEN-LAST:event_itm_volverActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -219,21 +191,20 @@ public class VentanaRegistro extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaNuevosAdmins.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaNuevosAdmins.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaNuevosAdmins.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaNuevosAdmins.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VentanaRegistro dialog = new VentanaRegistro(new javax.swing.JFrame(), true);
+                VentanaNuevosAdmins dialog = new VentanaNuevosAdmins(new javax.swing.JFrame(), true, admin);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -246,20 +217,17 @@ public class VentanaRegistro extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup Tipo;
     private javax.swing.JButton btt_registrar;
+    private javax.swing.JMenuItem itm_volver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JMenuItem mn_MenuPrincipal;
-    private javax.swing.JMenuItem mn_volverInicio;
+    private javax.swing.JMenu mn_volver;
     private javax.swing.JTextField tf_contraseña;
     private javax.swing.JTextField tf_correo;
     private javax.swing.JTextField tf_direccion;

@@ -55,7 +55,7 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jLabel4" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="tf_total" min="-2" pref="140" max="-2" attributes="0"/>
+                                  <Component id="tf_totalPago" min="-2" pref="140" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
@@ -102,7 +102,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="bt_volverAtras" max="32767" attributes="0"/>
-                      <Component id="tf_total" max="32767" attributes="0"/>
+                      <Component id="tf_totalPago" max="32767" attributes="0"/>
                       <Component id="jLabel4" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
@@ -213,7 +213,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_volverAtrasActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="tf_total">
+        <Component class="javax.swing.JTextField" name="tf_totalPago">
           <Properties>
             <Property name="text" type="java.lang.String" value="jTextField1"/>
           </Properties>

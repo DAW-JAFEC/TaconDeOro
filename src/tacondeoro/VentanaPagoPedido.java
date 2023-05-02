@@ -44,12 +44,13 @@ public class VentanaPagoPedido extends javax.swing.JDialog {
             LineaPedido lp = (LineaPedido) dlmCestaDefinitiva.getElementAt(i);
             total = total + (lp.getArticuloLinea().getPrecio() * lp.getCantidad());
         }
-        tf_total.setText(String.valueOf(total));
-        tf_total.setEditable(false);
-
+        tf_totalPago.setText(String.valueOf(total));
+        tf_totalPago.setEditable(false);
         ArrayList<TarjetaBancaria> atb = TarjetaBancaria.consultarTarjetasUsuario(usuario);
         if (!atb.isEmpty()) {
             dlmTarjetas.addAll(atb);
+            lst_CestaDefinitiva.updateUI();
+            lst_TarjetasDisponibles.updateUI();
         } else {
             JOptionPane.showMessageDialog(this, "Aún no dispone de ninguna tarjeta bancaria asociada a su cuenta");
         }
@@ -80,7 +81,7 @@ public class VentanaPagoPedido extends javax.swing.JDialog {
         jLabel9 = new javax.swing.JLabel();
         tf_socioCliente = new javax.swing.JTextField();
         bt_volverAtras = new javax.swing.JButton();
-        tf_total = new javax.swing.JTextField();
+        tf_totalPago = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -131,7 +132,7 @@ public class VentanaPagoPedido extends javax.swing.JDialog {
             }
         });
 
-        tf_total.setText("jTextField1");
+        tf_totalPago.setText("jTextField1");
 
         jLabel4.setText("TOTAL:");
 
@@ -155,7 +156,7 @@ public class VentanaPagoPedido extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tf_total, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(tf_totalPago, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(64, 64, 64)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2)
@@ -190,7 +191,7 @@ public class VentanaPagoPedido extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(bt_volverAtras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tf_total)
+                    .addComponent(tf_totalPago)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(83, 83, 83))
         );
@@ -215,6 +216,7 @@ public class VentanaPagoPedido extends javax.swing.JDialog {
         for (int i = 0; i < dlmCestaDefinitiva.size(); i++) {
             vc.dlmLineasPedido.add(i, dlmCestaDefinitiva.getElementAt(i));
         }
+        vc.getTf_total().setText(tf_totalPago.getText());
         this.dispose();
         vc.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_bt_volverAtrasActionPerformed
@@ -230,7 +232,7 @@ public class VentanaPagoPedido extends javax.swing.JDialog {
         ArrayList<Ruta> rutas = Ruta.obtenerRutas();
         int numRuta = Ruta.obtenerIdRutaSocio(rutas, usuario);
         DatabaseConnection db = new DatabaseConnection();
-        Pedido pedido = new Pedido(fecha, Float.parseFloat(tf_total.getText()), lineasDePedido, usuario.getIdSocio(), numRuta);
+        Pedido pedido = new Pedido(fecha, Float.parseFloat(tf_totalPago.getText()), lineasDePedido, usuario.getIdSocio(), numRuta);
 
         if (dlmTarjetas.size() == 0) {
             JOptionPane.showMessageDialog(this, "No puedes realizar el pedido si no tienes una tarjeta con la que realizar el pago");
@@ -253,6 +255,11 @@ public class VentanaPagoPedido extends javax.swing.JDialog {
         // TODO add your handling code here:
         VentanaNuevaTarjeta vnt = new VentanaNuevaTarjeta(this, rootPaneCheckingEnabled, this.usuario);
         vnt.setVisible(rootPaneCheckingEnabled);
+        
+        dlmTarjetas.clear();
+        dlmTarjetas.addAll(TarjetaBancaria.consultarTarjetasUsuario(usuario));
+        
+        lst_TarjetasDisponibles.updateUI();
     }//GEN-LAST:event_bt_aniadirNuevaTarjetaActionPerformed
 
     /**
@@ -315,6 +322,6 @@ public class VentanaPagoPedido extends javax.swing.JDialog {
     private javax.swing.JList<String> lst_CestaDefinitiva;
     private javax.swing.JList<String> lst_TarjetasDisponibles;
     private javax.swing.JTextField tf_socioCliente;
-    private javax.swing.JTextField tf_total;
+    private javax.swing.JTextField tf_totalPago;
     // End of variables declaration//GEN-END:variables
 }

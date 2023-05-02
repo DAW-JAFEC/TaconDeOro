@@ -75,7 +75,11 @@ public class Campania {
 
     @Override
     public String toString() {
-        return "Campania{" + "Año= " + anio + ", Temporada= " + temporada + ", Articulos de la campaña= " + articulosCampania + '}';
+        if(articulosCampania==null){
+            return "Año= " + anio + ", Temporada= " + temporada + ", Numero de Articulos= "+0;
+        }else{
+            return "Año= " + anio + ", Temporada= " + temporada + ", Numero de Articulos= "+articulosCampania.size();
+        }
     }
 
     public static ArrayList<Campania> obtenerCampanias() {

@@ -60,12 +60,15 @@ public class VentanaAdministradores extends javax.swing.JFrame {
         lst_campanias = new javax.swing.JList<>();
         btt_borrarCampania = new javax.swing.JButton();
         tf_anioCampania = new javax.swing.JFormattedTextField();
-        tf_tempCampania = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
+        cb_temp = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("ADMINISTRADOR:");
+
+        tf_admin.setEditable(false);
+        tf_admin.setDisabledTextColor(new java.awt.Color(200, 20, 20));
 
         lst_pedidosPendientes.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -90,6 +93,11 @@ public class VentanaAdministradores extends javax.swing.JFrame {
         });
 
         btt_agregarAdmins.setText("AGREGAR ADMINISTRADOR");
+        btt_agregarAdmins.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btt_agregarAdminsActionPerformed(evt);
+            }
+        });
 
         lst_campanias.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -109,6 +117,13 @@ public class VentanaAdministradores extends javax.swing.JFrame {
 
         jLabel5.setText("CAMPAÑAS:");
 
+        cb_temp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Primavera/Verano", "Otoño/Invierno" }));
+        cb_temp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_tempActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -125,18 +140,19 @@ public class VentanaAdministradores extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(53, 53, 53)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tf_anioCampania, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btt_crearCampania, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(tf_anioCampania, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                                .addComponent(btt_crearCampania, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btt_borrarCampania, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tf_tempCampania, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btt_borrarCampania, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(12, 12, 12)
+                                .addComponent(cb_temp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btt_agregarAdmins, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -160,7 +176,7 @@ public class VentanaAdministradores extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_tempCampania, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cb_temp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(btt_crearCampania)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -204,21 +220,15 @@ public class VentanaAdministradores extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btt_crearCampaniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_crearCampaniaActionPerformed
-        String formatoAnio = "^[0-9]{4,4}$";
-        String formatoTemp = "^(Primavera/Verano|Otoño/Invierno)$";
-
+        String formatoAnio = "^(20([0-2][0-3]|[0-1][0-9])|2000)$";
         Pattern forAnio = Pattern.compile(formatoAnio);
-        Pattern forTemp = Pattern.compile(formatoTemp);
-        
         Matcher matAnio = forAnio.matcher(tf_anioCampania.getText());
-        Matcher matTemp = forTemp.matcher(tf_tempCampania.getText());
-        
-        if (matAnio.matches() && matTemp.matches()) {
-            Campania.crearNuevaCampania(tf_tempCampania.getText(), Integer.parseInt(tf_anioCampania.getText()));
-            Campania campania = new Campania(Integer.parseInt(tf_anioCampania.getText()), tf_tempCampania.getText());
+        if (matAnio.matches() && cb_temp.getSelectedIndex()>=1 ) {
+            Campania.crearNuevaCampania(cb_temp.getItemAt(cb_temp.getSelectedIndex()), Integer.parseInt(tf_anioCampania.getText()));
+            Campania campania = new Campania(Integer.parseInt(tf_anioCampania.getText()), cb_temp.getItemAt(cb_temp.getSelectedIndex()));
             dlmCampanias.addElement(campania);
         } else {
-            JOptionPane.showMessageDialog(null, "Inserte el año y la temporada de la campaña");
+            JOptionPane.showMessageDialog(null, "Inserte un año correcto y la temporada de la campaña");
         }
         lst_campanias.updateUI();
     }//GEN-LAST:event_btt_crearCampaniaActionPerformed
@@ -234,6 +244,16 @@ public class VentanaAdministradores extends javax.swing.JFrame {
             lst_campanias.updateUI();
         }
     }//GEN-LAST:event_btt_borrarCampaniaActionPerformed
+
+    private void btt_agregarAdminsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_agregarAdminsActionPerformed
+        this.dispose();
+        VentanaNuevosAdmins a = new VentanaNuevosAdmins(this, true, admin);
+        a.setVisible(true);
+    }//GEN-LAST:event_btt_agregarAdminsActionPerformed
+
+    private void cb_tempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_tempActionPerformed
+        
+    }//GEN-LAST:event_cb_tempActionPerformed
 
     /**
      * @param args the command line arguments
@@ -274,6 +294,7 @@ public class VentanaAdministradores extends javax.swing.JFrame {
     private javax.swing.JButton btt_agregarAdmins;
     private javax.swing.JButton btt_borrarCampania;
     private javax.swing.JButton btt_crearCampania;
+    private javax.swing.JComboBox<String> cb_temp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -287,6 +308,5 @@ public class VentanaAdministradores extends javax.swing.JFrame {
     private javax.swing.JList<String> lst_pedidosPendientes;
     private javax.swing.JTextField tf_admin;
     private javax.swing.JFormattedTextField tf_anioCampania;
-    private javax.swing.JFormattedTextField tf_tempCampania;
     // End of variables declaration//GEN-END:variables
 }

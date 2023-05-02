@@ -189,15 +189,15 @@ public class Articulo {
         return r;
     }
     
-    public static Articulo obtenerArticuloDeLineaPedidoConcreta(int iddelarticulo) {
+    public static ArrayList<Articulo> obtenerArticuloDeLineaPedidoConcreta(int iddelarticulo) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         DatabaseConnection db = new DatabaseConnection();
         Connection c = db.getConexion();
-        Articulo r = new Articulo();
+        ArrayList<Articulo> r = new ArrayList<>();
         
         try {
-            ps = c.prepareStatement("SELECT * FROM articulos inner join lineaspedido on articulos.idarticulo=lineaspedido.idarticulo where lineaspedido.idarticulo=? limit 1;");
+            ps = c.prepareStatement("SELECT * FROM articulos inner join lineaspedido on articulos.idarticulo=lineaspedido.idarticulo where lineaspedido.idpedido=?;");
             ps.setInt(1, iddelarticulo);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -211,7 +211,7 @@ public class Articulo {
                     bo.setStock(rs.getInt(6));
                     bo.setFotografia(rs.getString(7));
                     bo.setTipo(rs.getString(11));
-                    r=bo;
+                    r.add(bo);
                 } else if (rs.getString(9) != null) {
                     Zapato za = new Zapato();
                     za.setIdArticulo(rs.getInt(1));
@@ -223,7 +223,7 @@ public class Articulo {
                     za.setFotografia(rs.getString(7));
                     za.setNumero(rs.getFloat(10));
                     za.setTipo(rs.getString(9));
-                    r=za;
+                    r.add(za);
                 } else {
                     Complemento co = new Complemento();
                     co.setIdArticulo(rs.getInt(1));
@@ -234,7 +234,7 @@ public class Articulo {
                     co.setStock(rs.getInt(6));
                     co.setFotografia(rs.getString(7));
                     co.setTallaComplemento(rs.getInt(12));
-                    r=co;
+                    r.add(co);
                 }
             }
         } catch (SQLException ex) {

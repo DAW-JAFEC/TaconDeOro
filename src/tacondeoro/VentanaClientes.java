@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -36,19 +37,13 @@ public class VentanaClientes extends javax.swing.JFrame {
         c = db.getConexion();
         ArrayList<Articulo> ar = Articulo.obtenerArticulos();
         dlmArticulos.addAll(ar);
-
-//        // Si el dlm de lineaspedido no está vacío porque se ha retrocedido desde la ventana hijo a esta recorrerlo para volver a establecer el total en el campo tf_total
-//        // No funciona porque el constructor no se vuelve a ejecutar al retroceder, buscar alternativa con Listener
-//        if (!dlmLineasPedido.isEmpty()) {
-//            float total = 0;
-//            for (int i = 0; i < dlmLineasPedido.size(); i++) {
-//                LineaPedido lp = (LineaPedido) dlmLineasPedido.getElementAt(i);
-//                total = total + (lp.getArticuloLinea().getPrecio() * lp.getCantidad());
-//            }
-//            tf_total.setText(String.valueOf(total));
-//        }
         tf_total.setEditable(false);
     }
+
+    public JTextField getTf_total() {
+        return tf_total;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
