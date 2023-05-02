@@ -4,6 +4,10 @@
  */
 package tacondeoro;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**
@@ -122,11 +126,120 @@ public class Articulo {
         return "nombre= " + nombre + ", descripcion= " + descripcion + ", material= " + material + ", precio= " + precio + ", stock= " + stock + ", fotografia= " + fotografia;
     }
     
-    public static ArrayList<Articulo> obtenerArticulos(){
+    public static ArrayList<Articulo> obtenerArticulos() {
         ArrayList<Articulo> r = new ArrayList<>();
         r.addAll(Bolso.obtenerBolsos());
         r.addAll(Complemento.obtenerComplementos());
         r.addAll(Zapato.obtenerZapatos());
+        return r;
+    }
+
+    public static ArrayList<Articulo> obtenerArticulosDeCampaniaConcreta(int iddecampania) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        DatabaseConnection db = new DatabaseConnection();
+        Connection c = db.getConexion();
+        ArrayList<Articulo> r = new ArrayList<>();
+
+        try {
+            ps = c.prepareStatement("select * from articulos inner join campanias on articulos.idcampania = campanias.idcampania where articulos.idcampania=?;");
+            ps.setInt(1, iddecampania);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                if (rs.getString(11) != null) {
+                    Bolso bo = new Bolso();
+                    bo.setIdArticulo(rs.getInt(1));
+                    bo.setNombre(rs.getString(2));
+                    bo.setDescripcion(rs.getString(4));
+                    bo.setMaterial(rs.getString(5));
+                    bo.setPrecio(rs.getFloat(3));
+                    bo.setStock(rs.getInt(6));
+                    bo.setFotografia(rs.getString(7));
+                    bo.setTipo(rs.getString(11));
+                    r.add(bo);
+                } else if (rs.getString(9) != null) {
+                    Zapato za = new Zapato();
+                    za.setIdArticulo(rs.getInt(1));
+                    za.setNombre(rs.getString(2));
+                    za.setDescripcion(rs.getString(4));
+                    za.setMaterial(rs.getString(5));
+                    za.setPrecio(rs.getFloat(3));
+                    za.setStock(rs.getInt(6));
+                    za.setFotografia(rs.getString(7));
+                    za.setNumero(rs.getFloat(10));
+                    za.setTipo(rs.getString(9));
+                    r.add(za);
+                } else {
+                    Complemento co = new Complemento();
+                    co.setIdArticulo(rs.getInt(1));
+                    co.setNombre(rs.getString(2));
+                    co.setDescripcion(rs.getString(4));
+                    co.setMaterial(rs.getString(5));
+                    co.setPrecio(rs.getFloat(3));
+                    co.setStock(rs.getInt(6));
+                    co.setFotografia(rs.getString(7));
+                    co.setTallaComplemento(rs.getInt(12));
+                    r.add(co);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+
+        return r;
+    }
+    
+    public static Articulo obtenerArticuloDeLineaPedidoConcreta(int iddelarticulo) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        DatabaseConnection db = new DatabaseConnection();
+        Connection c = db.getConexion();
+        Articulo r = new Articulo();
+        
+        try {
+            ps = c.prepareStatement("SELECT * FROM articulos inner join lineaspedido on articulos.idarticulo=lineaspedido.idarticulo where lineaspedido.idarticulo=? limit 1;");
+            ps.setInt(1, iddelarticulo);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                if (rs.getString(11) != null) {
+                    Bolso bo = new Bolso();
+                    bo.setIdArticulo(rs.getInt(1));
+                    bo.setNombre(rs.getString(2));
+                    bo.setDescripcion(rs.getString(4));
+                    bo.setMaterial(rs.getString(5));
+                    bo.setPrecio(rs.getFloat(3));
+                    bo.setStock(rs.getInt(6));
+                    bo.setFotografia(rs.getString(7));
+                    bo.setTipo(rs.getString(11));
+                    r=bo;
+                } else if (rs.getString(9) != null) {
+                    Zapato za = new Zapato();
+                    za.setIdArticulo(rs.getInt(1));
+                    za.setNombre(rs.getString(2));
+                    za.setDescripcion(rs.getString(4));
+                    za.setMaterial(rs.getString(5));
+                    za.setPrecio(rs.getFloat(3));
+                    za.setStock(rs.getInt(6));
+                    za.setFotografia(rs.getString(7));
+                    za.setNumero(rs.getFloat(10));
+                    za.setTipo(rs.getString(9));
+                    r=za;
+                } else {
+                    Complemento co = new Complemento();
+                    co.setIdArticulo(rs.getInt(1));
+                    co.setNombre(rs.getString(2));
+                    co.setDescripcion(rs.getString(4));
+                    co.setMaterial(rs.getString(5));
+                    co.setPrecio(rs.getFloat(3));
+                    co.setStock(rs.getInt(6));
+                    co.setFotografia(rs.getString(7));
+                    co.setTallaComplemento(rs.getInt(12));
+                    r=co;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
         return r;
     }
 }

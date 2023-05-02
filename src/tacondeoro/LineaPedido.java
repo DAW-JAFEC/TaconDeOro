@@ -57,8 +57,8 @@ public class LineaPedido {
 
     @Override
     public String toString() {
-        return "LineasPedido{" + "Nombre de articulo=" + articuloLinea.getNombre() + ", cantidad=" + cantidad + '}';
-    }  
+        return "LineaPedido{" + "articuloLinea=" + articuloLinea + ", cantidad=" + cantidad + ", idPedido=" + idPedido + '}';
+    }
 
     public static ArrayList<LineaPedido> obtenerLineasPedido() {
         ResultSet rs = null;
@@ -134,72 +134,28 @@ public class LineaPedido {
         return arrayLP;
     }
     
-    public static ArrayList<LineaPedido> obtenerLineasPedidoPendiente() {
+    public static ArrayList<LineaPedido> obtenerLineasPedidoPendiente(int idpedido) {
         ResultSet rs = null;
-        ResultSet rsArt = null;
         PreparedStatement ps = null;
-        PreparedStatement psArt = null;
         DatabaseConnection db = new DatabaseConnection();
         Connection c = db.getConexion();
-        ArrayList<LineaPedido> arrayLP = new ArrayList<>();
+        ArrayList<LineaPedido> r = new ArrayList<>();
+
         try {
-            //Falla Aqui
-            //Falla Aqui
-            //Falla Aqui
-            ps = c.prepareStatement("SELECT * FROM lineaspedido inner join pedidos on lineaspedido.idpedido=pedidos.idpedido where pedidos.estado='pendiente';");
+            ps = c.prepareStatement("SELECT * FROM lineaspedido inner join pedidos on lineaspedido.idpedido=pedidos.idpedido where pedidos.estado='pendiente' and lineaspedido.idpedido=?;");
+            ps.setInt(1, idpedido);
             rs = ps.executeQuery();
             while (rs.next()) {
                 LineaPedido lp = new LineaPedido();
                 lp.setIdPedido(rs.getInt(1));
                 lp.setCantidad(rs.getInt(3));
-                psArt = c.prepareStatement("SELECT * FROM articulos inner join lineaspedido on articulos.idarticulo=lineaspedido.idarticulo where lineaspedido.idarticulo=? LIMIT 1;");
-                psArt.setInt(1, rs.getInt(2));
-                rsArt = psArt.executeQuery();
-                while (rsArt.next()) {
-                    if (rsArt.getString(11) != null) {
-                        Bolso bo = new Bolso();
-                        bo.setIdArticulo(rsArt.getInt(1));
-                        bo.setNombre(rsArt.getString(2));
-                        bo.setDescripcion(rsArt.getString(4));
-                        bo.setMaterial(rsArt.getString(5));
-                        bo.setPrecio(rsArt.getFloat(3));
-                        bo.setStock(rsArt.getInt(6));
-                        bo.setFotografia(rsArt.getString(7));
-                        bo.setTipo(rsArt.getString(11));
-                        lp.setArticuloLinea(bo);
-                    } else if (rsArt.getString(9) != null) {
-                        Zapato za = new Zapato();
-                        za.setIdArticulo(rsArt.getInt(1));
-                        za.setNombre(rsArt.getString(2));
-                        za.setDescripcion(rsArt.getString(4));
-                        za.setMaterial(rsArt.getString(5));
-                        za.setPrecio(rsArt.getFloat(3));
-                        za.setStock(rsArt.getInt(6));
-                        za.setFotografia(rsArt.getString(7));
-                        za.setNumero(rsArt.getFloat(10));
-                        za.setTipo(rsArt.getString(9));
-                        lp.setArticuloLinea(za);
-                    } else {
-                        Complemento co = new Complemento();
-                        co.setIdArticulo(rsArt.getInt(1));
-                        co.setNombre(rsArt.getString(2));
-                        co.setDescripcion(rsArt.getString(4));
-                        co.setMaterial(rsArt.getString(5));
-                        co.setPrecio(rsArt.getFloat(3));
-                        co.setStock(rsArt.getInt(6));
-                        co.setFotografia(rsArt.getString(7));
-                        co.setTallaComplemento(rsArt.getInt(12));
-                        lp.setArticuloLinea(co);
-                    }
-                }
-                arrayLP.add(lp);
+                lp.setArticuloLinea(Articulo.obtenerArticuloDeLineaPedidoConcreta(lp.getIdPedido()));
+                r.add(lp);
             }
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
-        }finally{
+        } finally {
             try {
-                rsArt.close();
-                psArt.close();
                 rs.close();
                 ps.close();
                 c.close();
@@ -207,7 +163,7 @@ public class LineaPedido {
                 System.out.println("" + ex.getMessage());
             }
         }
-        return arrayLP;
+        return r;
     }
 
     public static void aniadirLineasDelPedido(Pedido pedido) {
@@ -228,7 +184,7 @@ public class LineaPedido {
             }
         } catch (SQLException ex) {
             System.err.println("" + ex.getMessage());
-        }finally{
+        } finally {
             try {
                 ps.close();
                 c.close();

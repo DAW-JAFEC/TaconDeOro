@@ -10,8 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -117,7 +115,6 @@ public class Pedido {
         this.estado = estado;
     }
 
-    
     @Override
     public String toString() {
         return "Pedido{" + "idPedido=" + idPedido + ", fecha=" + fecha + ", totalPedido=" + totalPedido + ", nLineas=" + nLineas.toString() + '}';
@@ -139,7 +136,7 @@ public class Pedido {
         }
         return r;
     }
-    
+
     public static ArrayList<Pedido> obtenerPedidosPendientes(){
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -157,7 +154,7 @@ public class Pedido {
                 pedios.setIdSocio(rs.getInt(4));
                 pedios.setIdRuta(rs.getInt(5));
                 pedios.setEstado(rs.getString(6));
-                pedios.setnLineas(LineaPedido.obtenerLineasPedidoPendiente());
+                pedios.setnLineas(LineaPedido.obtenerLineasPedidoPendiente(rs.getInt(1)));
                 r.add(pedios);
             }
         } catch (SQLException ex) {

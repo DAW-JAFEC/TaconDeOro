@@ -18,7 +18,6 @@ public class VentanaClientes extends javax.swing.JFrame {
     DefaultListModel dlmArticulos;
     DefaultListModel dlmLineasPedido;
     private static Socio usuario;
-    private Ruta ruta;
 
     /**
      * Creates new form VentanaClientes
@@ -38,16 +37,16 @@ public class VentanaClientes extends javax.swing.JFrame {
         ArrayList<Articulo> ar = Articulo.obtenerArticulos();
         dlmArticulos.addAll(ar);
 
-//         Si el dlm de lineaspedido no está vacío porque se ha retrocedido desde la ventana hijo a esta recorrerlo para volver a establecer el total en el campo tf_total
-//         No funciona porque el constructor no se vuelve a ejecutar al retroceder, buscar alternativa con Listener
-        if (!dlmLineasPedido.isEmpty()) {
-            float total = 0;
-            for (int i = 0; i < dlmLineasPedido.size(); i++) {
-                LineaPedido lp = (LineaPedido) dlmLineasPedido.getElementAt(i);
-                total = total + (lp.getArticuloLinea().getPrecio() * lp.getCantidad());
-            }
-            tf_total.setText(String.valueOf(total));
-        }
+//        // Si el dlm de lineaspedido no está vacío porque se ha retrocedido desde la ventana hijo a esta recorrerlo para volver a establecer el total en el campo tf_total
+//        // No funciona porque el constructor no se vuelve a ejecutar al retroceder, buscar alternativa con Listener
+//        if (!dlmLineasPedido.isEmpty()) {
+//            float total = 0;
+//            for (int i = 0; i < dlmLineasPedido.size(); i++) {
+//                LineaPedido lp = (LineaPedido) dlmLineasPedido.getElementAt(i);
+//                total = total + (lp.getArticuloLinea().getPrecio() * lp.getCantidad());
+//            }
+//            tf_total.setText(String.valueOf(total));
+//        }
         tf_total.setEditable(false);
     }
 

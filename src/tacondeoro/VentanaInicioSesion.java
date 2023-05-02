@@ -205,22 +205,22 @@ public class VentanaInicioSesion extends javax.swing.JDialog {
         DatabaseConnection a = new DatabaseConnection();
        
         socio = a.iniciarSesion(tf_nombreUsuario.getText(), tf_contraseña.getText());
-        if (socio.getCorreoe().equalsIgnoreCase(tf_nombreUsuario.getText()) && socio.getTipo().equalsIgnoreCase("cliente")) {
+        if (socio.getCorreoe().equalsIgnoreCase(tf_nombreUsuario.getText()) && socio.getTipo().equalsIgnoreCase("socio")) {
             VentanaClientes c = new VentanaClientes(socio);
             c.setVisible(true);
             this.dispose();
-        } else if(socio.getCorreoe().equalsIgnoreCase(tf_nombreUsuario.getText()) && socio.getTipo().equalsIgnoreCase("administrador")){
+        } else if (socio.getCorreoe().equalsIgnoreCase(tf_nombreUsuario.getText()) && socio.getTipo().equalsIgnoreCase("administrador")) {
             VentanaAdministradores admin = new VentanaAdministradores(socio);
             admin.setVisible(true);
             this.dispose();
-        } else if(socio.getCorreoe().equalsIgnoreCase(tf_nombreUsuario.getText()) && socio.getTipo().equalsIgnoreCase("mozo")){
+        } else if (socio.getCorreoe().equalsIgnoreCase(tf_nombreUsuario.getText()) && socio.getTipo().equalsIgnoreCase("mozo")) {
             //Aqui poner los mismo que admin pero con mozo
         } else {
             JOptionPane.showMessageDialog(this, "El correo o la contraseña son incorrectos");
         }
     }//GEN-LAST:event_btt_iniciarSesionActionPerformed
 
-    public void limpiar(){
+    public void limpiar() {
         tf_nombreUsuario.setText("");
         tf_contraseña.setText("");
     }
