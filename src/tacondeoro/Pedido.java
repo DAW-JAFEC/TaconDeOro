@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,6 +25,7 @@ public class Pedido {
     private ArrayList<LineaPedido> nLineas;
     private int idSocio;
     private int idRuta;
+    private String estado;
 
     public Pedido() {
     }
@@ -48,13 +51,14 @@ public class Pedido {
         this.idRuta = idRuta;
     }
 
-    public Pedido(int idPedido, Date fecha, float totalPedido, ArrayList<LineaPedido> nLineas, int idSocio, int idRuta) {
+    public Pedido(int idPedido, Date fecha, float totalPedido, ArrayList<LineaPedido> nLineas, int idSocio, int idRuta, String estado) {
         this.idPedido = idPedido;
         this.fecha = fecha;
         this.totalPedido = totalPedido;
         this.nLineas = nLineas;
         this.idSocio = idSocio;
         this.idRuta = idRuta;
+        this.estado = estado;
     }
 
     public int getIdPedido() {
@@ -105,6 +109,15 @@ public class Pedido {
         this.idPedido = idPedido;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    
     @Override
     public String toString() {
         return "Pedido{" + "idPedido=" + idPedido + ", fecha=" + fecha + ", totalPedido=" + totalPedido + ", nLineas=" + nLineas.toString() + '}';
@@ -125,5 +138,31 @@ public class Pedido {
             System.out.println("Error: " + ex.getMessage());
         }
         return r;
+    }
+    
+    public static ArrayList<Pedido> obtenerPedidosPendientes(){
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        DatabaseConnection db = new DatabaseConnection();
+        Connection c = db.getConexion();
+        ArrayList<Pedido> r = new ArrayList<>();
+        try {
+            ps = c.prepareStatement("select * from pedidos where estado='pendiente';");
+            rs = ps.executeQuery();
+            while(rs.next()){
+                Pedido pedios = new Pedido();
+                pedios.setIdPedido(rs.getInt(1));
+                pedios.setFecha(rs.getDate(2));
+                pedios.setTotalPedido(rs.getFloat(3));
+                pedios.setIdSocio(rs.getInt(4));
+                pedios.setIdRuta(rs.getInt(5));
+                pedios.setEstado(rs.getString(6));
+                pedios.setnLineas(LineaPedido.obtenerLineasPedidoPendiente());
+                r.add(pedios);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error: "+ex.getMessage());
+        }
+        return r; 
     }
 }

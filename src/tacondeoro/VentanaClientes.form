@@ -75,7 +75,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="cb_Complementos" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="cb_Bolsos" alignment="0" pref="105" max="32767" attributes="0"/>
+                                  <Component id="cb_Bolsos" alignment="0" max="32767" attributes="0"/>
                                   <Component id="cb_Zapatos" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Component id="cb_CampaniaOtonioInvierno" alignment="0" min="-2" max="-2" attributes="0"/>

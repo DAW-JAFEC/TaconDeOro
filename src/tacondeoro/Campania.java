@@ -5,10 +5,12 @@
 package tacondeoro;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,6 +31,18 @@ public class Campania {
         this.anio = anio;
         this.temporada = temporada;
     }
+
+    public Campania(int anio, String temporada, ArrayList<Articulo> articulosCampania) {
+        this.anio = anio;
+        this.temporada = temporada;
+        this.articulosCampania = articulosCampania;
+    }
+
+    public Campania(int anio, String temporada) {
+        this.anio = anio;
+        this.temporada = temporada;
+    }
+    
 
     public int getIdCampania() {
         return idCampania;
@@ -62,7 +76,10 @@ public class Campania {
         this.articulosCampania = articulosCampania;
     }
 
-    public static ArrayList<Campania> obtenerCampanias(String temporada) {
+    public static ArrayList<Campania> obtenerCampanias() {
+        //Falla aqui
+        //Falla aqui
+        //Falla aqui
         PreparedStatement ps = null;
         ResultSet rs = null;
         PreparedStatement psArticulos = null;
@@ -78,7 +95,7 @@ public class Campania {
                 cam.setIdCampania(rs.getInt(1));
                 cam.setAnio(rs.getInt(2));
                 cam.setTemporada(rs.getString(3));
-                psArticulos = c.prepareStatement("select * from articulos inner join campanias on articulos.idcampania = campanias.idcampania where idcampania=?;");
+                psArticulos = c.prepareStatement("select * from articulos inner join campanias on articulos.idcampania = campanias.idcampania where articulos.idcampania=?;");
                 psArticulos.setInt(1, cam.getIdCampania());
                 rsArticulos = psArticulos.executeQuery();
                 ArrayList<Articulo> articulos = new ArrayList<>();
@@ -124,7 +141,7 @@ public class Campania {
                 cam.setArticulosCampania(null);
             }
         } catch (SQLException ex) {
-            System.out.println(""+ex.getMessage());
+            System.out.println("as "+ex.getMessage());
         }finally{
             try {
                 rsArticulos.close();
@@ -133,7 +150,7 @@ public class Campania {
                 ps.close();
                 c.close();
             } catch (SQLException ex) {
-                System.out.println(""+ex.getMessage());
+                System.out.println("fdddfs"+ex.getMessage());
             }
         }
         return r;
@@ -249,5 +266,35 @@ public class Campania {
         }
 
         return r;
+    }
+    
+    public static void crearNuevaCampania(String temporada, int anio){
+        DatabaseConnection db = new DatabaseConnection();
+        Connection c = db.getConexion();
+        PreparedStatement ps = null;
+        try {
+            ps = c.prepareStatement("INSERT INTO campanias (anio, temporada) VALUES (?,?);");
+            ps.setInt(1, anio);
+            ps.setString(2, temporada);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Campaña añadida correctamente.");
+        } catch (SQLException ex) {
+            System.err.println("Error campaña: " + ex.getMessage());
+        }
+    }
+    
+    public static void borrarCampania(String temp, int anio){
+        DatabaseConnection db = new DatabaseConnection();
+        Connection c = db.getConexion();
+        PreparedStatement ps = null;
+        try {
+            ps = c.prepareStatement("DELETE FROM campanias where anio=? and temporada=?;");
+            ps.setInt(1, anio);
+            ps.setString(2, temp);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Campaña añadida correctamente.");
+        } catch (SQLException ex) {
+            System.err.println("Error campaña borrar: " + ex.getMessage());
+        }
     }
 }

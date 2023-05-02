@@ -108,8 +108,8 @@ public class Ruta {
             while (rs.next()) {
                 Ruta bo = new Ruta();
                 bo.setIdRuta(rs.getInt(1));
-                bo.setAreaInfluencia(Ruta.formato(rs.getString(2)));
-                bo.setDiasReparto(Ruta.formato(rs.getString(3)));
+                bo.setAreaInfluencia(Ruta.formatoArea(rs.getString(2)));
+                bo.setDiasReparto(Ruta.formatoDiasReparto(rs.getString(3)));
                 bo.setIdEmpresa(rs.getInt(4));
                 r.add(bo);
             }
@@ -120,9 +120,18 @@ public class Ruta {
         return r;
     }
 
-    private static ArrayList<String> formato(String string) {
+    private static ArrayList<String> formatoArea(String string) {
         ArrayList<String> r = new ArrayList<>();
         String[] trozos = string.split(", ");
+        for (int i = 0; i < trozos.length; i++) {
+            r.add(i, trozos[i]);
+        }
+        return r;
+    }
+    
+    private static ArrayList<String> formatoDiasReparto(String string) {
+        ArrayList<String> r = new ArrayList<>();
+        String[] trozos = string.split("-");
         for (int i = 0; i < trozos.length; i++) {
             r.add(i, trozos[i]);
         }

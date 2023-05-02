@@ -72,6 +72,7 @@ public class DatabaseConnection implements IFunciones {
                     r.setDireccion(rs.getString("direccion"));
                     r.setPoblacion(rs.getString("poblacion"));
                     r.setContrasenia(rs.getString("contrasenia"));
+                    r.setTipo(rs.getString("tipo"));
                     JOptionPane.showMessageDialog(null, "Has iniciado sesion");
                 }
         } catch (SQLException ex) {
@@ -108,11 +109,12 @@ public class DatabaseConnection implements IFunciones {
         try {
             DatabaseConnection db = new DatabaseConnection();
             Connection c = db.getConexion();
-            PreparedStatement ps = c.prepareStatement("INSERT INTO PEDIDOS (fecha, total, idsocio, idruta) VALUES (?,?,?,?);");
+            PreparedStatement ps = c.prepareStatement("INSERT INTO PEDIDOS (fecha, total, idsocio, idruta, estado) VALUES (?,?,?,?,?);");
             ps.setDate(1, new java.sql.Date(pedido.getFecha().getTime()));
             ps.setFloat(2, pedido.getTotalPedido());
             ps.setInt(3, pedido.getIdSocio());
             ps.setInt(4, pedido.getIdRuta());
+            ps.setString(5, "pendiente");
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Tu pedido se ha realizado correctamente");
         } catch (SQLException ex) {

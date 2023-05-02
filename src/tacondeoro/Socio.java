@@ -4,6 +4,10 @@
  */
 package tacondeoro;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -20,7 +24,7 @@ public class Socio {
     private String tipo;
     private ArrayList<TarjetaBancaria> tarjetasSocio;
     private ArrayList<Pedido> pedidosSocio;
-
+    
     public Socio() {
     }
 
