@@ -159,7 +159,7 @@ public class VentanaNuevosAdmins extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btt_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_registrarActionPerformed
-        if(tf_nombre.getText()==null || tf_correo.getText()==null || tf_direccion.getText()==null || tf_poblacion.getText()==null || tf_contraseña.getText()==null){
+        if(tf_nombre.getText().equals("") || tf_correo.getText().equals("") || tf_direccion.getText().equals("") || tf_poblacion.getText().equals("") || tf_contraseña.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos para registrarte");
         }else{
             Socio nuevoAdmin = new Socio(tf_nombre.getText(), tf_correo.getText(), tf_direccion.getText(), tf_poblacion.getText(), tf_contraseña.getText(), "administrador");
