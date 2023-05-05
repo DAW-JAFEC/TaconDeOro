@@ -14,8 +14,8 @@ public class TaconDeOro {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        VentanaPrincipal a = new VentanaPrincipal();
-        a.setVisible(true);
+        VentanaInicio vis = new VentanaInicio();
+        vis.setVisible(true);
     }
     
 }

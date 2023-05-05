@@ -11,14 +11,14 @@ import javax.swing.JOptionPane;
  * @author usutarde
  */
 public class VentanaRegistro extends javax.swing.JDialog {
-    private VentanaPrincipal padre = null;
+    private VentanaInicio padre = null;
 
     /**
      * Creates new form RegistroUsuario
      */
     public VentanaRegistro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        padre = (VentanaPrincipal) parent;
+        padre = (VentanaInicio) parent;
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -42,11 +42,11 @@ public class VentanaRegistro extends javax.swing.JDialog {
         btt_registrar = new javax.swing.JButton();
         tf_nombre = new javax.swing.JTextField();
         tf_correo = new javax.swing.JTextField();
-        tf_contraseña = new javax.swing.JTextField();
         tf_direccion = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         tf_poblacion = new javax.swing.JTextField();
+        tf_contraseña = new javax.swing.JPasswordField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mn_volverInicio = new javax.swing.JMenuItem();
@@ -69,6 +69,7 @@ public class VentanaRegistro extends javax.swing.JDialog {
             }
         });
 
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("REGISTRO");
 
         jLabel6.setText("Poblacion");
@@ -78,11 +79,7 @@ public class VentanaRegistro extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(90, 90, 90))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
@@ -90,21 +87,23 @@ public class VentanaRegistro extends javax.swing.JDialog {
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btt_registrar)
-                    .addComponent(tf_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                    .addComponent(tf_correo)
-                    .addComponent(tf_contraseña)
-                    .addComponent(tf_direccion)
-                    .addComponent(tf_poblacion))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(tf_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                        .addComponent(tf_correo)
+                        .addComponent(tf_direccion)
+                        .addComponent(tf_poblacion)
+                        .addComponent(tf_contraseña)
+                        .addComponent(btt_registrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(25, 25, 25))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
-                .addComponent(jLabel5)
+                .addGap(40, 40, 40)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -115,8 +114,8 @@ public class VentanaRegistro extends javax.swing.JDialog {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(tf_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -127,7 +126,7 @@ public class VentanaRegistro extends javax.swing.JDialog {
                     .addComponent(jLabel6))
                 .addGap(27, 27, 27)
                 .addComponent(btt_registrar)
-                .addGap(108, 108, 108))
+                .addGap(40, 40, 40))
         );
 
         jMenu1.setBackground(new java.awt.Color(205, 205, 205));
@@ -172,7 +171,7 @@ public class VentanaRegistro extends javax.swing.JDialog {
     }//GEN-LAST:event_mn_MenuPrincipalActionPerformed
 
     private void mn_volverInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_volverInicioActionPerformed
-        VentanaInicioSesion a = new VentanaInicioSesion(padre, rootPaneCheckingEnabled);
+        VentanaInicio a = new VentanaInicio();
         this.dispose();
         a.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_mn_volverInicioActionPerformed
@@ -185,7 +184,7 @@ public class VentanaRegistro extends javax.swing.JDialog {
         }else{
             if (b.comprobarCorreoExistente(a.getCorreoe())){
                 b.registrarUsuario(a);
-                VentanaInicioSesion x = new VentanaInicioSesion(padre, rootPaneCheckingEnabled);
+                VentanaInicio x = new VentanaInicio();
                 this.dispose();
                 x.setVisible(rootPaneCheckingEnabled);
             } else {
@@ -260,7 +259,7 @@ public class VentanaRegistro extends javax.swing.JDialog {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuItem mn_MenuPrincipal;
     private javax.swing.JMenuItem mn_volverInicio;
-    private javax.swing.JTextField tf_contraseña;
+    private javax.swing.JPasswordField tf_contraseña;
     private javax.swing.JTextField tf_correo;
     private javax.swing.JTextField tf_direccion;
     private javax.swing.JTextField tf_nombre;
