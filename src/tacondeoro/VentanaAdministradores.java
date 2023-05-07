@@ -247,7 +247,7 @@ public class VentanaAdministradores extends javax.swing.JFrame {
 
     private void btt_agregarAdminsActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         this.dispose();
-        VentanaNuevosAdmins a = new VentanaNuevosAdmins(this, true, admin);
+        VentanaRegistro a = new VentanaRegistro(this, true);
         a.setVisible(true);
     }                                                 
 

@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -161,5 +162,19 @@ public class Pedido {
             System.out.println("Error: "+ex.getMessage());
         }
         return r; 
+    }
+    
+    public static void completarPedido(int idPedido){
+        DatabaseConnection db = new DatabaseConnection();
+        Connection c = db.getConexion();
+        PreparedStatement ps = null;
+        try {
+            ps = c.prepareStatement("UPDATE pedidos SET estado = 'completado' WHERE idpedido = ?;");
+            ps.setInt(1, idPedido);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Pedido cumplimentado correctamente");
+        } catch (SQLException ex) {
+            System.err.println("" + ex.getMessage());
+        }
     }
 }

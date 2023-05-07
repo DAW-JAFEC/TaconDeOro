@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 /**
  *
@@ -81,7 +82,14 @@ public class Complemento extends Articulo {
 
     @Override
     public String toString() {
-        return "Complemento" + ", Nombre="+ super.getNombre()+", Descripcion="+ super.getDescripcion()+", Material="+ super.getMaterial()+", Precio="+ super.getPrecio()+", Stock="+ super.getStock()+", Fotografia="+ super.getFotografia()+", Talla=" + tallaComplemento;
+        String r = "";
+        if(super.getStock()<=5){
+            r = "Complemento,  nombre= " + super.getNombre() + ", stock= " + super.getStock();
+        }else{
+            r = "Complemento,  nombre= " + super.getNombre()+ ", descripcion= " + super.getDescripcion()+ ", material= " + super.getMaterial()+ ", precio= " + super.getPrecio()+ ", stock= " + super.getStock() + ", fotografia= " + super.getFotografia() + ", tallaComplemento= " + tallaComplemento;
+        }
+        return r;
     }
+ 
 
 }

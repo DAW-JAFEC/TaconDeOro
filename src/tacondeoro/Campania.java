@@ -75,11 +75,13 @@ public class Campania {
 
     @Override
     public String toString() {
+        String r = "";
         if(articulosCampania==null){
-            return "Año= " + anio + ", Temporada= " + temporada + ", Numero de Articulos= "+0;
+            r = "Año= " + anio + ", Temporada= " + temporada + ", Numero de Articulos= "+0;
         }else{
-            return "Año= " + anio + ", Temporada= " + temporada + ", Numero de Articulos= "+articulosCampania.size();
+            r = "Año= " + anio + ", Temporada= " + temporada + ", Numero de Articulos= "+articulosCampania.size();
         }
+        return r;
     }
 
     public static ArrayList<Campania> obtenerCampanias() {

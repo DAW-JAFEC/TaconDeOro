@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -120,7 +122,7 @@ public class Articulo {
         this.idCampania = idCampania;
     }
     
-
+    
     @Override
     public String toString() {
         return "nombre= " + nombre + ", descripcion= " + descripcion + ", material= " + material + ", precio= " + precio + ", stock= " + stock + ", fotografia= " + fotografia;
@@ -239,6 +241,29 @@ public class Articulo {
             }
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
+        }
+        return r;
+    }
+    
+    public static void nuevaCantidad(int nuevaStock, int idarticulo){
+        DatabaseConnection db = new DatabaseConnection();
+        Connection c = db.getConexion();
+        PreparedStatement ps = null;
+        try {
+            ps = c.prepareStatement("UPDATE articulos SET stock = ? WHERE idarticulo = ?;");
+            ps.setInt(1, nuevaStock);
+            ps.setInt(2, idarticulo);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(""+ex.getMessage());
+        }
+    }
+    public static ArrayList<Integer> allStocks(DefaultListModel dlm){
+        ArrayList<Integer> r = new ArrayList<>();
+        Articulo articulo = new Articulo();
+        for (int i = 0; i < dlm.size(); i++) {
+            articulo = (Articulo) dlm.get(i);
+            r.add(articulo.getStock());
         }
         return r;
     }

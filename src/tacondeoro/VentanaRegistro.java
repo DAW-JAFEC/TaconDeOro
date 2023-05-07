@@ -11,15 +11,21 @@ import javax.swing.JOptionPane;
  * @author usutarde
  */
 public class VentanaRegistro extends javax.swing.JDialog {
-    private VentanaInicio padre = null;
-
+    private VentanaAdministradores padre = null;
+    private boolean tonacho=false;
+    private Socio admin;
     /**
      * Creates new form RegistroUsuario
      */
     public VentanaRegistro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        padre = (VentanaInicio) parent;
         initComponents();
+        if(parent instanceof VentanaInicio){
+            tonacho=true;
+        }else{
+            padre = (VentanaAdministradores) parent;
+            admin = padre.admin;
+        }
         this.setLocationRelativeTo(null);
     }
 
@@ -50,7 +56,6 @@ public class VentanaRegistro extends javax.swing.JDialog {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mn_volverInicio = new javax.swing.JMenuItem();
-        mn_MenuPrincipal = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -90,13 +95,12 @@ public class VentanaRegistro extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(tf_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                        .addComponent(tf_correo)
-                        .addComponent(tf_direccion)
-                        .addComponent(tf_poblacion)
-                        .addComponent(tf_contraseña)
-                        .addComponent(btt_registrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(tf_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                    .addComponent(tf_correo)
+                    .addComponent(tf_direccion)
+                    .addComponent(tf_poblacion)
+                    .addComponent(tf_contraseña)
+                    .addComponent(btt_registrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(25, 25, 25))
         );
         jPanel1Layout.setVerticalGroup(
@@ -140,14 +144,6 @@ public class VentanaRegistro extends javax.swing.JDialog {
         });
         jMenu1.add(mn_volverInicio);
 
-        mn_MenuPrincipal.setText("Menú Principal");
-        mn_MenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_MenuPrincipalActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mn_MenuPrincipal);
-
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -166,10 +162,6 @@ public class VentanaRegistro extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mn_MenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_MenuPrincipalActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_mn_MenuPrincipalActionPerformed
-
     private void mn_volverInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_volverInicioActionPerformed
         VentanaInicio a = new VentanaInicio();
         this.dispose();
@@ -177,16 +169,28 @@ public class VentanaRegistro extends javax.swing.JDialog {
     }//GEN-LAST:event_mn_volverInicioActionPerformed
 
     private void btt_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_registrarActionPerformed
-        Socio a = new Socio(tf_nombre.getText(), tf_correo.getText(), tf_direccion.getText(), tf_poblacion.getText(), tf_contraseña.getText(), "socio");
+        Socio a = null;
+        //Esto no va a ir con el mozo incluido
+        if(tonacho){
+            a = new Socio(tf_nombre.getText(), tf_correo.getText(), tf_direccion.getText(), tf_poblacion.getText(), tf_contraseña.getText(), "socio");
+        }else{
+            a = new Socio(tf_nombre.getText(), tf_correo.getText(), tf_direccion.getText(), tf_poblacion.getText(), tf_contraseña.getText(), "administrador");
+        }
         DatabaseConnection b = new DatabaseConnection();
-        if(tf_nombre.getText()==null || tf_correo.getText()==null || tf_direccion.getText()==null || tf_poblacion.getText()==null || tf_contraseña.getText()==null){
+        if(tf_nombre.getText().equals("") || tf_correo.getText().equals("") || tf_direccion.getText().equals("") || tf_poblacion.getText().equals("") || tf_contraseña.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos para registrarte");
         }else{
             if (b.comprobarCorreoExistente(a.getCorreoe())){
                 b.registrarUsuario(a);
-                VentanaInicio x = new VentanaInicio();
+                //Esto no va a ir con el mozo incluido
+                if(tonacho){
+                    VentanaInicio x = new VentanaInicio();
+                    x.setVisible(rootPaneCheckingEnabled);
+                }else{
+                    VentanaAdministradores x = new VentanaAdministradores(admin);
+                    x.setVisible(rootPaneCheckingEnabled);
+                }
                 this.dispose();
-                x.setVisible(rootPaneCheckingEnabled);
             } else {
                 JOptionPane.showMessageDialog(null, "El correo ya esta registrado, porfavor inicie sesion o registrese con otro correo");
                 tf_correo.setText("");
@@ -194,13 +198,6 @@ public class VentanaRegistro extends javax.swing.JDialog {
          }
     }//GEN-LAST:event_btt_registrarActionPerformed
 
-    public void limpiar(){
-        tf_contraseña.setText("");
-        tf_nombre.setText("");
-        tf_correo.setText("");
-        tf_direccion.setText("");
-        tf_poblacion.setText("");
-    }
     /**
      * @param args the command line arguments
      */
@@ -257,7 +254,6 @@ public class VentanaRegistro extends javax.swing.JDialog {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JMenuItem mn_MenuPrincipal;
     private javax.swing.JMenuItem mn_volverInicio;
     private javax.swing.JPasswordField tf_contraseña;
     private javax.swing.JTextField tf_correo;

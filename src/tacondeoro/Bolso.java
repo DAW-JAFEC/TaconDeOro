@@ -81,7 +81,13 @@ public class Bolso extends Articulo {
 
     @Override
     public String toString() {
-        return "Bolso" + ", Nombre="+ super.getNombre()+", Descripcion="+ super.getDescripcion()+", Material="+ super.getMaterial()+", Precio="+ super.getPrecio()+", Stock="+ super.getStock()+", Fotografia="+ super.getFotografia()+", Tipo=" + tipo;
+        String r = "";
+        if(super.getStock()<=5){
+            r = "Bolso,  nombre= " + super.getNombre() + ", stock= " + super.getStock();
+        }else{
+            r = "Bolso,  nombre= " + super.getNombre()+ ", descripcion= " + super.getDescripcion()+ ", material= " + super.getMaterial()+ ", precio= " + super.getPrecio()+ ", stock= " + super.getStock() + ", fotografia= " + super.getFotografia() + ", tipo= " + tipo;
+        }
+        return r;
     }
     
 }

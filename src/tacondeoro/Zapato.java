@@ -95,7 +95,13 @@ public class Zapato extends Articulo {
 
     @Override
     public String toString() {
-        return "Zapato" + ", Nombre="+ super.getNombre()+", Descripcion="+ super.getDescripcion()+", Material="+ super.getMaterial()+", Precio="+ super.getPrecio()+", Stock="+ super.getStock()+", Fotografia="+ super.getFotografia()+", Numero=" + numero + ", Tipo=" + tipo;
+        String r = "";
+        if(super.getStock()<=5){
+            r = "Zapato,  nombre= " + super.getNombre() + ", stock= " + super.getStock();
+        }else{
+            r = "Zapato,  nombre= " + super.getNombre()+ ", descripcion= " + super.getDescripcion()+ ", material= " + super.getMaterial()+ ", precio= " + super.getPrecio()+ ", stock= " + super.getStock() + ", fotografia= " + super.getFotografia() + ", tipo= " + tipo + ", numero= " + numero;
+        }
+        return r;
     }
     
     

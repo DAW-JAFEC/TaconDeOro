@@ -190,7 +190,9 @@ public class VentanaInicio extends javax.swing.JFrame {
             admin.setVisible(true);
             this.dispose();
         } else if (socio.getCorreoe().equalsIgnoreCase(tf_nombreUsuario.getText()) && socio.getTipo().equalsIgnoreCase("mozo")) {
-            //Aqui poner los mismo que admin pero con mozo
+            VentanaMozos mozo = new VentanaMozos(socio);
+            mozo.setVisible(true);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "El correo o la contraseña son incorrectos");
         }
