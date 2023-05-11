@@ -12,7 +12,8 @@ import javax.swing.JOptionPane;
  */
 public class VentanaRegistro extends javax.swing.JDialog {
     private VentanaAdministradores padre = null;
-    private boolean tonacho=false;
+    private VentanaMozos padreMozo = null;
+    private String tonacho="";
     private Socio admin;
     /**
      * Creates new form RegistroUsuario
@@ -21,10 +22,15 @@ public class VentanaRegistro extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         if(parent instanceof VentanaInicio){
-            tonacho=true;
-        }else{
+            tonacho="inicio";
+        }else if(parent instanceof VentanaAdministradores){
+            tonacho="admin";
             padre = (VentanaAdministradores) parent;
             admin = padre.admin;
+        }else if(parent instanceof VentanaMozos){
+            tonacho="mozo";
+            padreMozo = (VentanaMozos) parent;
+            admin = padreMozo.getMozo();
         }
         this.setLocationRelativeTo(null);
     }
@@ -170,11 +176,12 @@ public class VentanaRegistro extends javax.swing.JDialog {
 
     private void btt_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_registrarActionPerformed
         Socio a = null;
-        //Esto no va a ir con el mozo incluido
-        if(tonacho){
+        if(tonacho.equalsIgnoreCase("inicio")){
             a = new Socio(tf_nombre.getText(), tf_correo.getText(), tf_direccion.getText(), tf_poblacion.getText(), tf_contraseña.getText(), "socio");
-        }else{
+        }else if(tonacho.equalsIgnoreCase("admin")){
             a = new Socio(tf_nombre.getText(), tf_correo.getText(), tf_direccion.getText(), tf_poblacion.getText(), tf_contraseña.getText(), "administrador");
+        }else if(tonacho.equalsIgnoreCase("mozo")){
+            a = new Socio(tf_nombre.getText(), tf_correo.getText(), tf_direccion.getText(), tf_poblacion.getText(), tf_contraseña.getText(), "mozo");
         }
         DatabaseConnection b = new DatabaseConnection();
         if(tf_nombre.getText().equals("") || tf_correo.getText().equals("") || tf_direccion.getText().equals("") || tf_poblacion.getText().equals("") || tf_contraseña.getText().equals("")){
@@ -182,12 +189,14 @@ public class VentanaRegistro extends javax.swing.JDialog {
         }else{
             if (b.comprobarCorreoExistente(a.getCorreoe())){
                 b.registrarUsuario(a);
-                //Esto no va a ir con el mozo incluido
-                if(tonacho){
+                if(tonacho.equalsIgnoreCase("inicio")){
                     VentanaInicio x = new VentanaInicio();
                     x.setVisible(rootPaneCheckingEnabled);
-                }else{
+                }else if(tonacho.equalsIgnoreCase("admin")){
                     VentanaAdministradores x = new VentanaAdministradores(admin);
+                    x.setVisible(rootPaneCheckingEnabled);
+                }else if(tonacho.equalsIgnoreCase("mozo")){
+                    VentanaMozos x = new VentanaMozos(admin);
                     x.setVisible(rootPaneCheckingEnabled);
                 }
                 this.dispose();
