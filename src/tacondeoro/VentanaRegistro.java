@@ -13,22 +13,23 @@ import javax.swing.JOptionPane;
 public class VentanaRegistro extends javax.swing.JDialog {
     private VentanaAdministradores padre = null;
     private VentanaMozos padreMozo = null;
-    private String tonacho="";
+    private String tonacho = "";
     private Socio admin;
+
     /**
-     * Creates new form RegistroUsuario
+     * Creates new form VentanaRegistro
      */
     public VentanaRegistro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        if(parent instanceof VentanaInicio){
-            tonacho="inicio";
-        }else if(parent instanceof VentanaAdministradores){
-            tonacho="admin";
+        if (parent instanceof VentanaInicio) {
+            tonacho = "inicio";
+        } else if (parent instanceof VentanaAdministradores) {
+            tonacho = "admin";
             padre = (VentanaAdministradores) parent;
             admin = padre.admin;
-        }else if(parent instanceof VentanaMozos){
-            tonacho="mozo";
+        } else if (parent instanceof VentanaMozos) {
+            tonacho = "mozo";
             padreMozo = (VentanaMozos) parent;
             admin = padreMozo.getMozo();
         }
@@ -61,7 +62,7 @@ public class VentanaRegistro extends javax.swing.JDialog {
         tf_contraseña = new javax.swing.JPasswordField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        mn_volverInicio = new javax.swing.JMenuItem();
+        mi_volverAtras = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -140,15 +141,15 @@ public class VentanaRegistro extends javax.swing.JDialog {
         );
 
         jMenu1.setBackground(new java.awt.Color(205, 205, 205));
-        jMenu1.setText("Funciones");
+        jMenu1.setText("Volver");
 
-        mn_volverInicio.setText("Volver Inicio Sesion");
-        mn_volverInicio.addActionListener(new java.awt.event.ActionListener() {
+        mi_volverAtras.setText("Volver Atrás");
+        mi_volverAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_volverInicioActionPerformed(evt);
+                mi_volverAtrasActionPerformed(evt);
             }
         });
-        jMenu1.add(mn_volverInicio);
+        jMenu1.add(mi_volverAtras);
 
         jMenuBar1.add(jMenu1);
 
@@ -168,34 +169,42 @@ public class VentanaRegistro extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mn_volverInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_volverInicioActionPerformed
-        VentanaInicio a = new VentanaInicio();
+    private void mi_volverAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_volverAtrasActionPerformed
         this.dispose();
-        a.setVisible(rootPaneCheckingEnabled);
-    }//GEN-LAST:event_mn_volverInicioActionPerformed
+        if (tonacho.equalsIgnoreCase("inicio")) {
+            VentanaInicio vi = new VentanaInicio();
+            vi.setVisible(true);
+        } else if (tonacho.equalsIgnoreCase("admin")) {
+            VentanaAdministradores va = new VentanaAdministradores(admin);
+            va.setVisible(true);
+        } else if (tonacho.equalsIgnoreCase("mozo")) {
+            VentanaMozos vm = new VentanaMozos(admin);
+            vm.setVisible(true);
+        }
+    }//GEN-LAST:event_mi_volverAtrasActionPerformed
 
     private void btt_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_registrarActionPerformed
         Socio a = null;
-        if(tonacho.equalsIgnoreCase("inicio")){
+        if (tonacho.equalsIgnoreCase("inicio")) {
             a = new Socio(tf_nombre.getText(), tf_correo.getText(), tf_direccion.getText(), tf_poblacion.getText(), tf_contraseña.getText(), "socio");
-        }else if(tonacho.equalsIgnoreCase("admin")){
-            a = new Socio(tf_nombre.getText(), tf_correo.getText(), tf_direccion.getText(), tf_poblacion.getText(), tf_contraseña.getText(), "administrador");
-        }else if(tonacho.equalsIgnoreCase("mozo")){
+        } else if (tonacho.equalsIgnoreCase("admin")) {
+            a = new Socio(tf_nombre.getText(), tf_correo.getText(), tf_direccion.getText(), tf_poblacion.getText(), tf_contraseña.getText(), "admin");
+        } else if (tonacho.equalsIgnoreCase("mozo")) {
             a = new Socio(tf_nombre.getText(), tf_correo.getText(), tf_direccion.getText(), tf_poblacion.getText(), tf_contraseña.getText(), "mozo");
         }
         DatabaseConnection b = new DatabaseConnection();
-        if(tf_nombre.getText().equals("") || tf_correo.getText().equals("") || tf_direccion.getText().equals("") || tf_poblacion.getText().equals("") || tf_contraseña.getText().equals("")){
+        if (tf_nombre.getText().equals("") || tf_correo.getText().equals("") || tf_direccion.getText().equals("") || tf_poblacion.getText().equals("") || tf_contraseña.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos para registrarte");
-        }else{
-            if (b.comprobarCorreoExistente(a.getCorreoe())){
+        } else {
+            if (b.comprobarCorreoExistente(a.getCorreoe())) {
                 b.registrarUsuario(a);
-                if(tonacho.equalsIgnoreCase("inicio")){
+                if (tonacho.equalsIgnoreCase("inicio")) {
                     VentanaInicio x = new VentanaInicio();
                     x.setVisible(rootPaneCheckingEnabled);
-                }else if(tonacho.equalsIgnoreCase("admin")){
+                } else if (tonacho.equalsIgnoreCase("admin")) {
                     VentanaAdministradores x = new VentanaAdministradores(admin);
                     x.setVisible(rootPaneCheckingEnabled);
-                }else if(tonacho.equalsIgnoreCase("mozo")){
+                } else if (tonacho.equalsIgnoreCase("mozo")) {
                     VentanaMozos x = new VentanaMozos(admin);
                     x.setVisible(rootPaneCheckingEnabled);
                 }
@@ -203,8 +212,8 @@ public class VentanaRegistro extends javax.swing.JDialog {
             } else {
                 JOptionPane.showMessageDialog(null, "El correo ya esta registrado, porfavor inicie sesion o registrese con otro correo");
                 tf_correo.setText("");
-            } 
-         }
+            }
+        }
     }//GEN-LAST:event_btt_registrarActionPerformed
 
     /**
@@ -263,7 +272,7 @@ public class VentanaRegistro extends javax.swing.JDialog {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JMenuItem mn_volverInicio;
+    private javax.swing.JMenuItem mi_volverAtras;
     private javax.swing.JPasswordField tf_contraseña;
     private javax.swing.JTextField tf_correo;
     private javax.swing.JTextField tf_direccion;

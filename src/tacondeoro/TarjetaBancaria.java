@@ -54,7 +54,7 @@ public class TarjetaBancaria {
         DatabaseConnection db = new DatabaseConnection();
         Connection c = db.getConexion();
         ArrayList<TarjetaBancaria> r = new ArrayList<>();
-        
+
         try {
             ps = c.prepareStatement("select * from tarjetas where idsocio = ?;");
             ps.setInt(1, socio.getIdSocio());
@@ -71,7 +71,7 @@ public class TarjetaBancaria {
 
         return r;
     }
-    
+
     public static void aniadirTarjetaUsuario(TarjetaBancaria tarjeta, Socio socio) {
         PreparedStatement ps = null;
         DatabaseConnection db = new DatabaseConnection();
@@ -79,7 +79,7 @@ public class TarjetaBancaria {
 
         try {
             ps = c.prepareStatement("insert into tarjetas (numero, idsocio) values (?,?);");
-            ps.setString(1,tarjeta.getNumero());
+            ps.setString(1, tarjeta.getNumero());
             ps.setInt(2, socio.getIdSocio());
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Tarjeta añadida correctamente");

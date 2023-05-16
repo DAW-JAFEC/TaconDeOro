@@ -17,5 +17,5 @@ public class TaconDeOro {
         VentanaInicio vis = new VentanaInicio();
         vis.setVisible(true);
     }
-    
+
 }

@@ -45,7 +45,7 @@ public class Ruta {
     public int getIdRuta() {
         return idRuta;
     }
-    
+
     public void setAreaInfluencia(ArrayList<String> areaInfluencia) {
         this.areaInfluencia = areaInfluencia;
     }
@@ -78,7 +78,7 @@ public class Ruta {
         this.idRuta = idRuta;
     }
 
-    public static int obtenerIdRutaSocio(ArrayList<Ruta> rutas, Socio usuario){
+    public static int obtenerIdRutaSocio(ArrayList<Ruta> rutas, Socio usuario) {
         int r = 0;
         Ruta ru = new Ruta();
         String area = "";
@@ -86,7 +86,7 @@ public class Ruta {
             ru = rutas.get(i);
             for (int j = 0; j < ru.getAreaInfluencia().size(); j++) {
                 area = ru.getAreaInfluencia().get(j);
-                if(area.equalsIgnoreCase(usuario.getPoblacion())) {
+                if (area.equalsIgnoreCase(usuario.getPoblacion())) {
                     r = ru.getIdRuta();
                 }
             }
@@ -127,7 +127,7 @@ public class Ruta {
         }
         return r;
     }
-    
+
     private static ArrayList<String> formatoDiasReparto(String string) {
         ArrayList<String> r = new ArrayList<>();
         String[] trozos = string.split("-");

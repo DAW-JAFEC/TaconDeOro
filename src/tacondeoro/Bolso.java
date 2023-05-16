@@ -33,7 +33,7 @@ public class Bolso extends Articulo {
         super(idArticulo, nombre, descripcion, material, stock, fotografia, idCampania);
         this.tipo = tipo;
     }
-    
+
     public Bolso(String tipo, String nombre, String descripcion, String material, float precio, int stock, String fotografia) {
         super(nombre, descripcion, material, precio, stock, fotografia);
         this.tipo = tipo;
@@ -55,22 +55,21 @@ public class Bolso extends Articulo {
         ArrayList<Bolso> r = new ArrayList<>();
 
         try {
-            ps = c.prepareStatement("select * from articulos where tipo = ?;");
-            ps.setString(1, "bolso");
+            ps = c.prepareStatement("select * from articulos;");
             rs = ps.executeQuery();
-
             while (rs.next()) {
-                Bolso bo = new Bolso();
-                bo.setIdArticulo(rs.getInt(1));
-                bo.setNombre(rs.getString(2));
-                bo.setDescripcion(rs.getString(4));
-                bo.setMaterial(rs.getString(5));
-                bo.setPrecio(rs.getFloat(3));
-                bo.setStock(rs.getInt(6));
-                bo.setFotografia(rs.getString(7));
-                bo.setTipo(rs.getString(11));
-                bo.setIdCampania(rs.getInt(13));
-                r.add(bo);
+                if (rs.getString(10) != null) {
+                    Bolso bo = new Bolso();
+                    bo.setIdArticulo(rs.getInt(1));
+                    bo.setNombre(rs.getString(2));
+                    bo.setDescripcion(rs.getString(4));
+                    bo.setMaterial(rs.getString(5));
+                    bo.setPrecio(rs.getFloat(3));
+                    bo.setStock(rs.getInt(6));
+                    bo.setFotografia(rs.getString(7));
+                    bo.setTipo(rs.getString(10));
+                    r.add(bo);
+                }
             }
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
@@ -82,12 +81,12 @@ public class Bolso extends Articulo {
     @Override
     public String toString() {
         String r = "";
-        if(super.getStock()<=5){
+        if (super.getStock() <= 5) {
             r = "Bolso,  nombre= " + super.getNombre() + ", stock= " + super.getStock();
-        }else{
-            r = "Bolso,  nombre= " + super.getNombre()+ ", descripcion= " + super.getDescripcion()+ ", material= " + super.getMaterial()+ ", precio= " + super.getPrecio()+ ", stock= " + super.getStock() + ", fotografia= " + super.getFotografia() + ", tipo= " + tipo;
+        } else {
+            r = "Bolso,  nombre= " + super.getNombre() + ", descripcion= " + super.getDescripcion() + ", material= " + super.getMaterial() + ", precio= " + super.getPrecio() + ", stock= " + super.getStock() + ", fotografia= " + super.getFotografia() + ", tipo= " + tipo;
         }
         return r;
     }
-    
+
 }

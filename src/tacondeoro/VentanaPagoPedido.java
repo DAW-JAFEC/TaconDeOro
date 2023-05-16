@@ -21,7 +21,7 @@ public class VentanaPagoPedido extends javax.swing.JDialog {
     private static Socio usuario;
 
     /**
-     * Creates new form VentanaComprobarCuartos
+     * Creates new form VentanaPagoPedido
      */
     public VentanaPagoPedido(java.awt.Frame parent, boolean modal, Socio socio) {
         super(parent, modal);
@@ -81,9 +81,11 @@ public class VentanaPagoPedido extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         tf_socioCliente = new javax.swing.JTextField();
-        bt_volverAtras = new javax.swing.JButton();
         tf_totalPago = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        mi_volverAtras = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -126,13 +128,6 @@ public class VentanaPagoPedido extends javax.swing.JDialog {
         tf_socioCliente.setDisabledTextColor(new java.awt.Color(200, 20, 20));
         tf_socioCliente.setEnabled(false);
 
-        bt_volverAtras.setText("VOLVER ATRÁS");
-        bt_volverAtras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_volverAtrasActionPerformed(evt);
-            }
-        });
-
         tf_totalPago.setText("jTextField1");
 
         jLabel4.setText("TOTAL:");
@@ -163,8 +158,7 @@ public class VentanaPagoPedido extends javax.swing.JDialog {
                             .addComponent(jScrollPane2)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
                             .addComponent(bt_realizarPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(bt_aniadirNuevaTarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
-                            .addComponent(bt_volverAtras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(bt_aniadirNuevaTarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))))
                 .addGap(59, 59, 59))
         );
         jPanel1Layout.setVerticalGroup(
@@ -188,14 +182,27 @@ public class VentanaPagoPedido extends javax.swing.JDialog {
                         .addComponent(bt_aniadirNuevaTarjeta)
                         .addGap(18, 18, 18)
                         .addComponent(bt_realizarPedido))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(bt_volverAtras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tf_totalPago)
+                    .addComponent(tf_totalPago, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(83, 83, 83))
+                .addGap(40, 40, 40))
         );
+
+        jMenu1.setText("Volver");
+
+        mi_volverAtras.setText("Volver Atrás");
+        mi_volverAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mi_volverAtrasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mi_volverAtras);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -211,23 +218,12 @@ public class VentanaPagoPedido extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bt_volverAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_volverAtrasActionPerformed
-        // TODO add your handling code here:
-        VentanaClientes vc = new VentanaClientes(usuario);
-        for (int i = 0; i < dlmCestaDefinitiva.size(); i++) {
-            vc.dlmLineasPedido.add(i, dlmCestaDefinitiva.getElementAt(i));
-        }
-        vc.getTf_total().setText(tf_totalPago.getText());
-        this.dispose();
-        vc.setVisible(rootPaneCheckingEnabled);
-    }//GEN-LAST:event_bt_volverAtrasActionPerformed
-
     private void bt_realizarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_realizarPedidoActionPerformed
         // TODO add your handling code here:
         Date fecha = new Date();
         ArrayList<LineaPedido> lineasDePedido = new ArrayList<>();
         for (int i = 0; i < dlmCestaDefinitiva.getSize(); i++) {
-            lineasDePedido.add(i,(LineaPedido) dlmCestaDefinitiva.getElementAt(i));
+            lineasDePedido.add(i, (LineaPedido) dlmCestaDefinitiva.getElementAt(i));
         }
 
         ArrayList<Ruta> rutas = Ruta.obtenerRutas();
@@ -256,12 +252,23 @@ public class VentanaPagoPedido extends javax.swing.JDialog {
         // TODO add your handling code here:
         VentanaNuevaTarjeta vnt = new VentanaNuevaTarjeta(this, rootPaneCheckingEnabled, this.usuario);
         vnt.setVisible(rootPaneCheckingEnabled);
-        
+
         dlmTarjetas.clear();
         dlmTarjetas.addAll(TarjetaBancaria.consultarTarjetasUsuario(usuario));
-        
+
         lst_TarjetasDisponibles.updateUI();
     }//GEN-LAST:event_bt_aniadirNuevaTarjetaActionPerformed
+
+    private void mi_volverAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_volverAtrasActionPerformed
+        // TODO add your handling code here:
+        VentanaClientes vc = new VentanaClientes(usuario);
+        for (int i = 0; i < dlmCestaDefinitiva.size(); i++) {
+            vc.dlmLineasPedido.add(i, dlmCestaDefinitiva.getElementAt(i));
+        }
+        vc.getTf_total().setText(tf_totalPago.getText());
+        this.dispose();
+        vc.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_mi_volverAtrasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,17 +318,19 @@ public class VentanaPagoPedido extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_aniadirNuevaTarjeta;
     private javax.swing.JButton bt_realizarPedido;
-    private javax.swing.JButton bt_volverAtras;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> lst_CestaDefinitiva;
     private javax.swing.JList<String> lst_TarjetasDisponibles;
+    private javax.swing.JMenuItem mi_volverAtras;
     private javax.swing.JTextField tf_socioCliente;
     private javax.swing.JTextField tf_totalPago;
     // End of variables declaration//GEN-END:variables

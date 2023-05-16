@@ -80,7 +80,7 @@ public class LineaPedido {
                 psArt.setInt(1, rs.getInt(2));
                 rsArt = psArt.executeQuery();
                 while (rsArt.next()) {
-                    if (rsArt.getString(11) != null) {
+                    if (rsArt.getString(10) != null) {
                         Bolso bo = new Bolso();
                         bo.setIdArticulo(rsArt.getInt(1));
                         bo.setNombre(rsArt.getString(2));
@@ -89,9 +89,9 @@ public class LineaPedido {
                         bo.setPrecio(rsArt.getFloat(3));
                         bo.setStock(rsArt.getInt(6));
                         bo.setFotografia(rsArt.getString(7));
-                        bo.setTipo(rsArt.getString(11));
+                        bo.setTipo(rsArt.getString(10));
                         lp.setArticuloLinea(bo);
-                    } else if (rsArt.getString(9) != null) {
+                    } else if (rsArt.getString(8) != null) {
                         Zapato za = new Zapato();
                         za.setIdArticulo(rsArt.getInt(1));
                         za.setNombre(rsArt.getString(2));
@@ -100,8 +100,8 @@ public class LineaPedido {
                         za.setPrecio(rsArt.getFloat(3));
                         za.setStock(rsArt.getInt(6));
                         za.setFotografia(rsArt.getString(7));
-                        za.setNumero(rsArt.getFloat(10));
-                        za.setTipo(rsArt.getString(9));
+                        za.setNumero(rsArt.getFloat(9));
+                        za.setTipo(rsArt.getString(8));
                         lp.setArticuloLinea(za);
                     } else {
                         Complemento co = new Complemento();
@@ -112,7 +112,7 @@ public class LineaPedido {
                         co.setPrecio(rsArt.getFloat(3));
                         co.setStock(rsArt.getInt(6));
                         co.setFotografia(rsArt.getString(7));
-                        co.setTallaComplemento(rsArt.getInt(12));
+                        co.setTallaComplemento(rsArt.getInt(11));
                         lp.setArticuloLinea(co);
                     }
                 }
@@ -120,7 +120,7 @@ public class LineaPedido {
             }
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
-        }finally{
+        } finally {
             try {
                 rsArt.close();
                 psArt.close();
@@ -133,7 +133,7 @@ public class LineaPedido {
         }
         return arrayLP;
     }
-    
+
     public static ArrayList<LineaPedido> obtenerLineasPedidoPendiente(int idpedido) {
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -168,11 +168,12 @@ public class LineaPedido {
     }
 
     public static void aniadirLineasDelPedido(Pedido pedido) {
-        PreparedStatement ps =null;
+        PreparedStatement ps = null;
         DatabaseConnection db = new DatabaseConnection();
         ArrayList<LineaPedido> lineas = new ArrayList<>();
         Connection c = null;
-        try {c = db.getConexion();
+        try {
+            c = db.getConexion();
             lineas.addAll(pedido.getnLineas());
             for (int i = 0; i < lineas.size(); i++) {
                 LineaPedido linea = new LineaPedido();

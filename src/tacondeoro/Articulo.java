@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -48,7 +47,7 @@ public class Articulo {
         this.fotografia = fotografia;
         this.idCampania = idCampania;
     }
-    
+
     public Articulo(String nombre, String descripcion, String material, float precio, int stock, String fotografia) {
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -121,13 +120,12 @@ public class Articulo {
     public void setIdCampania(int idCampania) {
         this.idCampania = idCampania;
     }
-    
-    
+
     @Override
     public String toString() {
         return "nombre= " + nombre + ", descripcion= " + descripcion + ", material= " + material + ", precio= " + precio + ", stock= " + stock + ", fotografia= " + fotografia;
     }
-    
+
     public static ArrayList<Articulo> obtenerArticulos() {
         ArrayList<Articulo> r = new ArrayList<>();
         r.addAll(Bolso.obtenerBolsos());
@@ -148,7 +146,7 @@ public class Articulo {
             ps.setInt(1, iddecampania);
             rs = ps.executeQuery();
             while (rs.next()) {
-                if (rs.getString(11) != null) {
+                if (rs.getString(10) != null) {
                     Bolso bo = new Bolso();
                     bo.setIdArticulo(rs.getInt(1));
                     bo.setNombre(rs.getString(2));
@@ -157,9 +155,9 @@ public class Articulo {
                     bo.setPrecio(rs.getFloat(3));
                     bo.setStock(rs.getInt(6));
                     bo.setFotografia(rs.getString(7));
-                    bo.setTipo(rs.getString(11));
+                    bo.setTipo(rs.getString(10));
                     r.add(bo);
-                } else if (rs.getString(9) != null) {
+                } else if (rs.getString(8) != null) {
                     Zapato za = new Zapato();
                     za.setIdArticulo(rs.getInt(1));
                     za.setNombre(rs.getString(2));
@@ -168,8 +166,8 @@ public class Articulo {
                     za.setPrecio(rs.getFloat(3));
                     za.setStock(rs.getInt(6));
                     za.setFotografia(rs.getString(7));
-                    za.setNumero(rs.getFloat(10));
-                    za.setTipo(rs.getString(9));
+                    za.setNumero(rs.getFloat(9));
+                    za.setTipo(rs.getString(8));
                     r.add(za);
                 } else {
                     Complemento co = new Complemento();
@@ -180,7 +178,7 @@ public class Articulo {
                     co.setPrecio(rs.getFloat(3));
                     co.setStock(rs.getInt(6));
                     co.setFotografia(rs.getString(7));
-                    co.setTallaComplemento(rs.getInt(12));
+                    co.setTallaComplemento(rs.getInt(11));
                     r.add(co);
                 }
             }
@@ -190,20 +188,20 @@ public class Articulo {
 
         return r;
     }
-    
+
     public static ArrayList<Articulo> obtenerArticuloDeLineaPedidoConcreta(int iddelarticulo) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         DatabaseConnection db = new DatabaseConnection();
         Connection c = db.getConexion();
         ArrayList<Articulo> r = new ArrayList<>();
-        
+
         try {
             ps = c.prepareStatement("SELECT * FROM articulos inner join lineaspedido on articulos.idarticulo=lineaspedido.idarticulo where lineaspedido.idpedido=?;");
             ps.setInt(1, iddelarticulo);
             rs = ps.executeQuery();
             while (rs.next()) {
-                if (rs.getString(11) != null) {
+                if (rs.getString(10) != null) {
                     Bolso bo = new Bolso();
                     bo.setIdArticulo(rs.getInt(1));
                     bo.setNombre(rs.getString(2));
@@ -212,9 +210,9 @@ public class Articulo {
                     bo.setPrecio(rs.getFloat(3));
                     bo.setStock(rs.getInt(6));
                     bo.setFotografia(rs.getString(7));
-                    bo.setTipo(rs.getString(11));
+                    bo.setTipo(rs.getString(10));
                     r.add(bo);
-                } else if (rs.getString(9) != null) {
+                } else if (rs.getString(8) != null) {
                     Zapato za = new Zapato();
                     za.setIdArticulo(rs.getInt(1));
                     za.setNombre(rs.getString(2));
@@ -223,8 +221,8 @@ public class Articulo {
                     za.setPrecio(rs.getFloat(3));
                     za.setStock(rs.getInt(6));
                     za.setFotografia(rs.getString(7));
-                    za.setNumero(rs.getFloat(10));
-                    za.setTipo(rs.getString(9));
+                    za.setNumero(rs.getFloat(9));
+                    za.setTipo(rs.getString(8));
                     r.add(za);
                 } else {
                     Complemento co = new Complemento();
@@ -235,7 +233,7 @@ public class Articulo {
                     co.setPrecio(rs.getFloat(3));
                     co.setStock(rs.getInt(6));
                     co.setFotografia(rs.getString(7));
-                    co.setTallaComplemento(rs.getInt(12));
+                    co.setTallaComplemento(rs.getInt(11));
                     r.add(co);
                 }
             }
@@ -244,8 +242,8 @@ public class Articulo {
         }
         return r;
     }
-    
-    public static void nuevaCantidad(int nuevaStock, int idarticulo){
+
+    public static void nuevaCantidad(int nuevaStock, int idarticulo) {
         DatabaseConnection db = new DatabaseConnection();
         Connection c = db.getConexion();
         PreparedStatement ps = null;
@@ -255,10 +253,11 @@ public class Articulo {
             ps.setInt(2, idarticulo);
             ps.executeUpdate();
         } catch (SQLException ex) {
-            System.err.println(""+ex.getMessage());
+            System.err.println("" + ex.getMessage());
         }
     }
-    public static ArrayList<Integer> allStocks(DefaultListModel dlm){
+
+    public static ArrayList<Integer> allStocks(DefaultListModel dlm) {
         ArrayList<Integer> r = new ArrayList<>();
         Articulo articulo = new Articulo();
         for (int i = 0; i < dlm.size(); i++) {

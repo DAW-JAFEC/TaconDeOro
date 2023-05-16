@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
  * @author felis
  */
 public class Pedido {
-
     private int idPedido;
     private Date fecha;
     private float totalPedido;
@@ -131,14 +130,14 @@ public class Pedido {
             ps = c.prepareStatement("select * from pedidos order by idpedido desc limit 1;");
             rs = ps.executeQuery();
             rs.next();
-            r=rs.getInt(1);
+            r = rs.getInt(1);
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
         }
         return r;
     }
 
-    public static ArrayList<Pedido> obtenerPedidosPendientes(){
+    public static ArrayList<Pedido> obtenerPedidosPendientes() {
         ResultSet rs = null;
         PreparedStatement ps = null;
         DatabaseConnection db = new DatabaseConnection();
@@ -147,7 +146,7 @@ public class Pedido {
         try {
             ps = c.prepareStatement("select * from pedidos where estado='pendiente';");
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Pedido pedios = new Pedido();
                 pedios.setIdPedido(rs.getInt(1));
                 pedios.setFecha(rs.getDate(2));
@@ -159,12 +158,12 @@ public class Pedido {
                 r.add(pedios);
             }
         } catch (SQLException ex) {
-            System.out.println("Error: "+ex.getMessage());
+            System.out.println("Error: " + ex.getMessage());
         }
-        return r; 
+        return r;
     }
-    
-    public static void completarPedido(int idPedido){
+
+    public static void completarPedido(int idPedido) {
         DatabaseConnection db = new DatabaseConnection();
         Connection c = db.getConexion();
         PreparedStatement ps = null;

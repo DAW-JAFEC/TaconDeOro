@@ -4,16 +4,16 @@
  */
 package tacondeoro;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import java.awt.Color;
+
 /**
  *
- * @author felis
+ * @author Arturo
  */
 public class VentanaMozos extends javax.swing.JFrame {
-
     DefaultListModel dlmPendientes = null;
     DefaultListModel dlmSinStock = null;
     private Socio mozo;
@@ -32,27 +32,31 @@ public class VentanaMozos extends javax.swing.JFrame {
         lst_pedidosPendientes.setModel(dlmPendientes);
         dlmSinStock.addAll(Articulo.obtenerArticulos());
         lst_articulosSinStock.setModel(dlmSinStock);
-        
+
         for (int i = 0; i < Articulo.allStocks(dlmSinStock).size(); i++) {
-            if(Articulo.allStocks(dlmSinStock).get(i)<=5){
+            if (Articulo.allStocks(dlmSinStock).get(i) <= 5) {
                 noStock++;
                 break;
             }
         }
-        if(!(noStock==0)){
+
+        if (!(noStock == 0)) {
             btt_añadirStock.setEnabled(true);
             tf_stockAñadir.setEditable(true);
-        }else{
+        } else {
             btt_añadirStock.setEnabled(false);
             tf_stockAñadir.setEditable(false);
         }
         this.setLocationRelativeTo(null);
     }
 
+    private VentanaMozos() {
+    }
+
     public Socio getMozo() {
         return mozo;
     }
-    
+
     public DefaultListModel getDlmPendientes() {
         return dlmPendientes;
     }
@@ -68,7 +72,6 @@ public class VentanaMozos extends javax.swing.JFrame {
     public void setDlmSinStock(DefaultListModel dlmSinStock) {
         this.dlmSinStock = dlmSinStock;
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,7 +82,7 @@ public class VentanaMozos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new FondoGradiente(Color.decode("#115ad3"), Color.decode("#11d0d3"));
         jLabel1 = new javax.swing.JLabel();
         tf_mozo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -92,12 +95,14 @@ public class VentanaMozos extends javax.swing.JFrame {
         tf_stockAñadir = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         btt_agregarMozos = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        mi_volverAtras = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Mozo:");
 
-        tf_mozo.setText("jTextField1");
         tf_mozo.setDisabledTextColor(new java.awt.Color(200, 20, 20));
         tf_mozo.setEnabled(false);
 
@@ -154,28 +159,30 @@ public class VentanaMozos extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(77, 77, 77)
+                .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(tf_mozo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(81, 81, 81)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btt_agregarMozos, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btt_cumplimentar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                        .addComponent(btt_añadirStock, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tf_stockAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(54, 54, 54)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(277, 277, 277))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(50, 50, 50)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btt_agregarMozos, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                            .addComponent(btt_cumplimentar, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                            .addComponent(btt_añadirStock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tf_stockAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(50, 50, 50)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tf_mozo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(50, 50, 50))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,42 +190,53 @@ public class VentanaMozos extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tf_stockAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(tf_mozo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tf_stockAñadir)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(btt_añadirStock)
                         .addGap(18, 18, 18)
-                        .addComponent(btt_cumplimentar))
+                        .addComponent(btt_cumplimentar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btt_agregarMozos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(tf_mozo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabel2)
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addComponent(btt_agregarMozos)
-                .addGap(109, 109, 109))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(50, 50, 50))
         );
+
+        jMenu1.setText("Volver");
+
+        mi_volverAtras.setText("Volver Atrás");
+        mi_volverAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mi_volverAtrasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mi_volverAtras);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -241,15 +259,15 @@ public class VentanaMozos extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "No hay stock suficiente del articulo " + b.getNombre() + ", se necesitan añadir " + stockAñadir + " existencias");
                     btt_añadirStock.setEnabled(true);
                     tf_stockAñadir.setEditable(true);
-                }else{
+                } else {
                     b.setStock(b.getStock() - a.getnLineas().get(i).getCantidad());
-                    Articulo.nuevaCantidad(b.getStock(), b.getIdArticulo());    
+                    Articulo.nuevaCantidad(b.getStock(), b.getIdArticulo());
                 }
             }
-            if(noStock==0){
+            if (noStock == 0) {
                 Pedido.completarPedido(a.getIdPedido());
             }
-            noStock=0;
+            noStock = 0;
             dlmPendientes.clear();
             dlmSinStock.clear();
             dlmPendientes.addAll(Pedido.obtenerPedidosPendientes());
@@ -259,29 +277,24 @@ public class VentanaMozos extends javax.swing.JFrame {
         }
         todoStock.addAll(Articulo.allStocks(dlmSinStock));
         for (int i = 0; i < todoStock.size(); i++) {
-            if(todoStock.get(i)<=5){
+            if (todoStock.get(i) <= 5) {
                 noStock++;
                 break;
             }
         }
-        if(!(noStock==0)){
+        if (!(noStock == 0)) {
             btt_añadirStock.setEnabled(true);
             tf_stockAñadir.setEditable(true);
         }
     }//GEN-LAST:event_btt_cumplimentarActionPerformed
 
-    
-    private void tf_stockAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_stockAñadirActionPerformed
-        
-    }//GEN-LAST:event_tf_stockAñadirActionPerformed
-
     private void btt_añadirStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_añadirStockActionPerformed
         int index = lst_articulosSinStock.getSelectedIndex();
         Articulo articulo = (Articulo) dlmSinStock.get(index);
-        if(index == -1 || tf_stockAñadir.getText().equals("")){
+        if (index == -1 || tf_stockAñadir.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Seleccione un articulo y especifique una cantidad para añadir stock");
-        }else{
-            articulo.setStock(articulo.getStock()+Integer.parseInt(tf_stockAñadir.getText()));
+        } else {
+            articulo.setStock(articulo.getStock() + Integer.parseInt(tf_stockAñadir.getText()));
             Articulo.nuevaCantidad(articulo.getStock(), articulo.getIdArticulo());
             dlmSinStock.clear();
             dlmSinStock.addAll(Articulo.obtenerArticulos());
@@ -289,11 +302,22 @@ public class VentanaMozos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btt_añadirStockActionPerformed
 
+    private void tf_stockAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_stockAñadirActionPerformed
+
+    }//GEN-LAST:event_tf_stockAñadirActionPerformed
+
     private void btt_agregarMozosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_agregarMozosActionPerformed
         this.dispose();
         VentanaRegistro a = new VentanaRegistro(this, true);
         a.setVisible(true);
     }//GEN-LAST:event_btt_agregarMozosActionPerformed
+
+    private void mi_volverAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_volverAtrasActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        VentanaInicio vi = new VentanaInicio();
+        vi.setVisible(true);
+    }//GEN-LAST:event_mi_volverAtrasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,6 +345,7 @@ public class VentanaMozos extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(VentanaMozos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -329,9 +354,6 @@ public class VentanaMozos extends javax.swing.JFrame {
             }
         });
     }
-private VentanaMozos() {
-}
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btt_agregarMozos;
@@ -340,11 +362,14 @@ private VentanaMozos() {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> lst_articulosSinStock;
     private javax.swing.JList<String> lst_pedidosPendientes;
+    private javax.swing.JMenuItem mi_volverAtras;
     private javax.swing.JTextField tf_mozo;
     private javax.swing.JTextField tf_stockAñadir;
     // End of variables declaration//GEN-END:variables

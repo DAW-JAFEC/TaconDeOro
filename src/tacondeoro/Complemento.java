@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 /**
  *
@@ -34,7 +33,7 @@ public class Complemento extends Articulo {
         super(idArticulo, nombre, descripcion, material, stock, fotografia, idCampania);
         this.tallaComplemento = tallaComplemento;
     }
-    
+
     public Complemento(int tallaComplemento, String nombre, String descripcion, String material, float precio, int stock, String fotografia) {
         super(nombre, descripcion, material, precio, stock, fotografia);
         this.tallaComplemento = tallaComplemento;
@@ -56,22 +55,21 @@ public class Complemento extends Articulo {
         ArrayList<Complemento> r = new ArrayList<>();
 
         try {
-            ps = c.prepareStatement("select * from articulos where tipo = ?;");
-            ps.setString(1, "complemento");
+            ps = c.prepareStatement("select * from articulos;");
             rs = ps.executeQuery();
-
             while (rs.next()) {
-                Complemento co = new Complemento();
-                co.setIdArticulo(rs.getInt(1));
-                co.setNombre(rs.getString(2));
-                co.setDescripcion(rs.getString(4));
-                co.setMaterial(rs.getString(5));
-                co.setPrecio(rs.getFloat(3));
-                co.setStock(rs.getInt(6));
-                co.setFotografia(rs.getString(7));
-                co.setTallaComplemento(rs.getInt(12));
-                co.setIdCampania(rs.getInt(13));
-                r.add(co);
+                if (rs.getString(11) != null) {
+                    Complemento co = new Complemento();
+                    co.setIdArticulo(rs.getInt(1));
+                    co.setNombre(rs.getString(2));
+                    co.setDescripcion(rs.getString(4));
+                    co.setMaterial(rs.getString(5));
+                    co.setPrecio(rs.getFloat(3));
+                    co.setStock(rs.getInt(6));
+                    co.setFotografia(rs.getString(7));
+                    co.setTallaComplemento(rs.getInt(11));
+                    r.add(co);
+                }
             }
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
@@ -83,13 +81,12 @@ public class Complemento extends Articulo {
     @Override
     public String toString() {
         String r = "";
-        if(super.getStock()<=5){
+        if (super.getStock() <= 5) {
             r = "Complemento,  nombre= " + super.getNombre() + ", stock= " + super.getStock();
-        }else{
-            r = "Complemento,  nombre= " + super.getNombre()+ ", descripcion= " + super.getDescripcion()+ ", material= " + super.getMaterial()+ ", precio= " + super.getPrecio()+ ", stock= " + super.getStock() + ", fotografia= " + super.getFotografia() + ", tallaComplemento= " + tallaComplemento;
+        } else {
+            r = "Complemento,  nombre= " + super.getNombre() + ", descripcion= " + super.getDescripcion() + ", material= " + super.getMaterial() + ", precio= " + super.getPrecio() + ", stock= " + super.getStock() + ", fotografia= " + super.getFotografia() + ", tallaComplemento= " + tallaComplemento;
         }
         return r;
     }
- 
 
 }

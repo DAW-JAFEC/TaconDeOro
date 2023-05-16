@@ -76,10 +76,10 @@ public class Campania {
     @Override
     public String toString() {
         String r = "";
-        if(articulosCampania==null){
-            r = "Año= " + anio + ", Temporada= " + temporada + ", Numero de Articulos= "+0;
-        }else{
-            r = "Año= " + anio + ", Temporada= " + temporada + ", Numero de Articulos= "+articulosCampania.size();
+        if (articulosCampania == null) {
+            r = "Año= " + anio + ", Temporada= " + temporada + ", Numero de Articulos= " + 0;
+        } else {
+            r = "Año= " + anio + ", Temporada= " + temporada + ", Numero de Articulos= " + articulosCampania.size();
         }
         return r;
     }
@@ -129,7 +129,7 @@ public class Campania {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                if (rs.getString(11) != null) {
+                if (rs.getString(10) != null) {
                     Bolso bo = new Bolso();
                     bo.setIdArticulo(rs.getInt(1));
                     bo.setNombre(rs.getString(2));
@@ -138,9 +138,9 @@ public class Campania {
                     bo.setPrecio(rs.getFloat(3));
                     bo.setStock(rs.getInt(6));
                     bo.setFotografia(rs.getString(7));
-                    bo.setTipo(rs.getString(11));
+                    bo.setTipo(rs.getString(10));
                     r.add(bo);
-                } else if (rs.getString(9) != null) {
+                } else if (rs.getString(8) != null) {
                     Zapato za = new Zapato();
                     za.setIdArticulo(rs.getInt(1));
                     za.setNombre(rs.getString(2));
@@ -149,8 +149,8 @@ public class Campania {
                     za.setPrecio(rs.getFloat(3));
                     za.setStock(rs.getInt(6));
                     za.setFotografia(rs.getString(7));
-                    za.setNumero(rs.getFloat(10));
-                    za.setTipo(rs.getString(9));
+                    za.setNumero(rs.getFloat(9));
+                    za.setTipo(rs.getString(8));
                     r.add(za);
                 } else {
                     Complemento co = new Complemento();
@@ -161,7 +161,7 @@ public class Campania {
                     co.setPrecio(rs.getFloat(3));
                     co.setStock(rs.getInt(6));
                     co.setFotografia(rs.getString(7));
-                    co.setTallaComplemento(rs.getInt(12));
+                    co.setTallaComplemento(rs.getInt(11));
                     r.add(co);
                 }
             }
@@ -185,7 +185,7 @@ public class Campania {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                if (rs.getString(11) != null) {
+                if (rs.getString(10) != null) {
                     Bolso bo = new Bolso();
                     bo.setIdArticulo(rs.getInt(1));
                     bo.setNombre(rs.getString(2));
@@ -194,9 +194,9 @@ public class Campania {
                     bo.setPrecio(rs.getFloat(3));
                     bo.setStock(rs.getInt(6));
                     bo.setFotografia(rs.getString(7));
-                    bo.setTipo(rs.getString(11));
+                    bo.setTipo(rs.getString(10));
                     r.add(bo);
-                } else if (rs.getString(9) != null) {
+                } else if (rs.getString(8) != null) {
                     Zapato za = new Zapato();
                     za.setIdArticulo(rs.getInt(1));
                     za.setNombre(rs.getString(2));
@@ -205,8 +205,8 @@ public class Campania {
                     za.setPrecio(rs.getFloat(3));
                     za.setStock(rs.getInt(6));
                     za.setFotografia(rs.getString(7));
-                    za.setNumero(rs.getFloat(10));
-                    za.setTipo(rs.getString(9));
+                    za.setNumero(rs.getFloat(9));
+                    za.setTipo(rs.getString(8));
                     r.add(za);
                 } else {
                     Complemento co = new Complemento();
@@ -217,7 +217,7 @@ public class Campania {
                     co.setPrecio(rs.getFloat(3));
                     co.setStock(rs.getInt(6));
                     co.setFotografia(rs.getString(7));
-                    co.setTallaComplemento(rs.getInt(12));
+                    co.setTallaComplemento(rs.getInt(11));
                     r.add(co);
                 }
             }
@@ -228,7 +228,7 @@ public class Campania {
         return r;
     }
 
-    public static void crearNuevaCampania(String temporada, int anio){
+    public static void crearNuevaCampania(String temporada, int anio) {
         DatabaseConnection db = new DatabaseConnection();
         Connection c = db.getConexion();
         PreparedStatement ps = null;
@@ -242,8 +242,8 @@ public class Campania {
             System.err.println("Error al crear campaña: " + ex.getMessage());
         }
     }
-    
-    public static void borrarCampania(String temp, int anio){
+
+    public static void borrarCampania(String temp, int anio) {
         DatabaseConnection db = new DatabaseConnection();
         Connection c = db.getConexion();
         PreparedStatement ps = null;

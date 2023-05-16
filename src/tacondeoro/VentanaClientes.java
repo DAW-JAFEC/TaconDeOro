@@ -23,7 +23,8 @@ public class VentanaClientes extends javax.swing.JFrame {
 
     /**
      * Creates new form VentanaClientes
-     * @param 
+     *
+     * @param
      */
     public VentanaClientes(Socio socio) {
         initComponents();
@@ -84,7 +85,7 @@ public class VentanaClientes extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        mi_volverAtras = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -314,11 +315,17 @@ public class VentanaClientes extends javax.swing.JFrame {
                         .addGap(37, 37, 37))))
         );
 
-        jMenu1.setText("File");
-        jMenuBar2.add(jMenu1);
+        jMenu1.setText("Volver");
 
-        jMenu2.setText("Edit");
-        jMenuBar2.add(jMenu2);
+        mi_volverAtras.setText("Volver Atrás");
+        mi_volverAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mi_volverAtrasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mi_volverAtras);
+
+        jMenuBar2.add(jMenu1);
 
         setJMenuBar(jMenuBar2);
 
@@ -373,7 +380,7 @@ public class VentanaClientes extends javax.swing.JFrame {
                     for (int j = 0; j < dlmLineasPedido.size(); j++) {
                         LineaPedido c = (LineaPedido) dlmLineasPedido.getElementAt(j);
                         if (!(i == j) && x.getArticuloLinea().getNombre().equals(c.getArticuloLinea().getNombre())) {
-                            c.setCantidad(c.getCantidad()+x.getCantidad());
+                            c.setCantidad(c.getCantidad() + x.getCantidad());
                             dlmLineasPedido.removeElement(x);
                             lst_lineasPedido.updateUI();
                         }
@@ -393,7 +400,7 @@ public class VentanaClientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Para tramitar pedido tiene que añadir artículos en la cesta");
         } else {
             this.dispose();
-            VentanaPagoPedido vcc = new VentanaPagoPedido(this,rootPaneCheckingEnabled, this.usuario);
+            VentanaPagoPedido vcc = new VentanaPagoPedido(this, rootPaneCheckingEnabled, this.usuario);
             vcc.setVisible(rootPaneCheckingEnabled);
         }
     }//GEN-LAST:event_btt_tramitarPedidoActionPerformed
@@ -401,9 +408,8 @@ public class VentanaClientes extends javax.swing.JFrame {
     private void btt_borrarDelCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btt_borrarDelCarritoActionPerformed
         // TODO add your handling code here:
         int indice = lst_lineasPedido.getSelectedIndex();
-        float total = 0;
 
-        if (indice == -1 ) {
+        if (indice == -1) {
             JOptionPane.showMessageDialog(this, "Debes seleccionar un artículo a eliminar");
         } else {
             LineaPedido li = (LineaPedido) dlmLineasPedido.getElementAt(indice);
@@ -433,6 +439,13 @@ public class VentanaClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
         comprobarFiltros();
     }//GEN-LAST:event_cbb_anioTemporadaActionPerformed
+
+    private void mi_volverAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_volverAtrasActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        VentanaInicio vi = new VentanaInicio();
+        vi.setVisible(true);
+    }//GEN-LAST:event_mi_volverAtrasActionPerformed
 
     private void comprobarFiltros() {
         ArrayList<Zapato> za = Zapato.obtenerZapatos();
@@ -478,12 +491,12 @@ public class VentanaClientes extends javax.swing.JFrame {
             ocultarArticulosAnio();
             if (filtroCampaniaPV) {
                 dlmArticulos.clear();
-                ArrayList<Object> opv = Campania.obtenerTemporada("Primavera / Verano");
+                ArrayList<Object> opv = Campania.obtenerTemporada("Primavera/Verano");
                 dlmArticulos.addAll(opv);
             }
             if (filtroCampaniaOI) {
                 dlmArticulos.clear();
-                ArrayList<Object> ooi = Campania.obtenerTemporada("Otoño / Invierno");
+                ArrayList<Object> ooi = Campania.obtenerTemporada("Otoño/Invierno");
                 dlmArticulos.addAll(ooi);
             }
             lst_Articulos.updateUI();
@@ -496,7 +509,7 @@ public class VentanaClientes extends javax.swing.JFrame {
             dlmArticulos.addAll(oa);
             lst_Articulos.updateUI();
         }
-        
+
     }
 
     private void ocultarTemporadaAnio() {
@@ -524,7 +537,7 @@ public class VentanaClientes extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     private VentanaClientes() {
-        
+
     }
 
     public static void main(String args[]) {
@@ -581,13 +594,13 @@ public class VentanaClientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JList<String> lst_Articulos;
     private javax.swing.JList<String> lst_lineasPedido;
+    private javax.swing.JMenuItem mi_volverAtras;
     private javax.swing.JTextField tf_Cantidad;
     private javax.swing.JTextField tf_Talla;
     private javax.swing.JTextField tf_socioCliente;

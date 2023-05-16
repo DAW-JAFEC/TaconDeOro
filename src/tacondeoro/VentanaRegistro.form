@@ -15,15 +15,15 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cd" green="cd" red="cd" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Funciones"/>
+            <Property name="text" type="java.lang.String" value="Volver"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mn_volverInicio">
+            <MenuItem class="javax.swing.JMenuItem" name="mi_volverAtras">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Volver Inicio Sesion"/>
+                <Property name="text" type="java.lang.String" value="Volver Atr&#xe1;s"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mn_volverInicioActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mi_volverAtrasActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

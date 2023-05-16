@@ -31,7 +31,7 @@ public class Zapato extends Articulo {
         this.numero = numero;
         this.tipo = tipo;
     }
-    
+
     public Zapato(float numero, String tipo, int idArticulo, String nombre, String descripcion, String material, float precio, int stock, String fotografia) {
         super(idArticulo, nombre, descripcion, material, precio, stock, fotografia);
         this.numero = numero;
@@ -68,23 +68,22 @@ public class Zapato extends Articulo {
         ArrayList<Zapato> r = new ArrayList<>();
 
         try {
-            ps = c.prepareStatement("select * from articulos where tipo = ?;");
-            ps.setString(1, "zapato");
+            ps = c.prepareStatement("select * from articulos;");
             rs = ps.executeQuery();
-
             while (rs.next()) {
-                Zapato za = new Zapato();
-                za.setIdArticulo(rs.getInt(1));
-                za.setNombre(rs.getString(2));
-                za.setDescripcion(rs.getString(4));
-                za.setMaterial(rs.getString(5));
-                za.setPrecio(rs.getFloat(3));
-                za.setStock(rs.getInt(6));
-                za.setFotografia(rs.getString(7));
-                za.setNumero(rs.getFloat(10));
-                za.setTipo(rs.getString(9));
-                za.setIdCampania(rs.getInt(13));
-                r.add(za);
+                if (rs.getString(8) != null) {
+                    Zapato za = new Zapato();
+                    za.setIdArticulo(rs.getInt(1));
+                    za.setNombre(rs.getString(2));
+                    za.setDescripcion(rs.getString(4));
+                    za.setMaterial(rs.getString(5));
+                    za.setPrecio(rs.getFloat(3));
+                    za.setStock(rs.getInt(6));
+                    za.setFotografia(rs.getString(7));
+                    za.setNumero(rs.getFloat(9));
+                    za.setTipo(rs.getString(8));
+                    r.add(za);
+                }
             }
         } catch (SQLException ex) {
             System.out.println("Error: " + ex.getMessage());
@@ -96,13 +95,12 @@ public class Zapato extends Articulo {
     @Override
     public String toString() {
         String r = "";
-        if(super.getStock()<=5){
+        if (super.getStock() <= 5) {
             r = "Zapato,  nombre= " + super.getNombre() + ", stock= " + super.getStock();
-        }else{
-            r = "Zapato,  nombre= " + super.getNombre()+ ", descripcion= " + super.getDescripcion()+ ", material= " + super.getMaterial()+ ", precio= " + super.getPrecio()+ ", stock= " + super.getStock() + ", fotografia= " + super.getFotografia() + ", tipo= " + tipo + ", numero= " + numero;
+        } else {
+            r = "Zapato,  nombre= " + super.getNombre() + ", descripcion= " + super.getDescripcion() + ", material= " + super.getMaterial() + ", precio= " + super.getPrecio() + ", stock= " + super.getStock() + ", fotografia= " + super.getFotografia() + ", tipo= " + tipo + ", numero= " + numero;
         }
         return r;
     }
-    
-    
+
 }

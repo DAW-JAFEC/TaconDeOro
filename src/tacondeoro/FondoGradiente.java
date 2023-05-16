@@ -37,10 +37,8 @@ public class FondoGradiente extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        int w = getWidth();
-        int h = getHeight();
-        GradientPaint gp = new GradientPaint(20, 0, c1, 20, h, c2);
+        GradientPaint gp = new GradientPaint(20, 0, c1, 20, getHeight(), c2);
         g2d.setPaint(gp);
-        g2d.fillRect(0, 0, w, h);
+        g2d.fillRect(0, 0, getWidth(), getHeight());
     }
 }

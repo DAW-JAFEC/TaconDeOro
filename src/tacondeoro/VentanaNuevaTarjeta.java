@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 public class VentanaNuevaTarjeta extends javax.swing.JDialog {
     private VentanaPagoPedido padre = null;
     private static Socio usuario;
-    
+
     /**
      * Creates new form VentanaNuevaTarjeta
      */
@@ -45,6 +45,9 @@ public class VentanaNuevaTarjeta extends javax.swing.JDialog {
         tff_numeroTarjeta = new javax.swing.JFormattedTextField();
         tff_fechaCaducidad = new javax.swing.JFormattedTextField();
         tff_cvv = new javax.swing.JFormattedTextField();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        mi_volverAtras = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -119,8 +122,22 @@ public class VentanaNuevaTarjeta extends javax.swing.JDialog {
                     .addComponent(tff_cvv))
                 .addGap(18, 18, 18)
                 .addComponent(bt_confirmarvolver, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jMenu1.setText("Volver");
+
+        mi_volverAtras.setText("Volver Atrás");
+        mi_volverAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mi_volverAtrasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mi_volverAtras);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,7 +164,7 @@ public class VentanaNuevaTarjeta extends javax.swing.JDialog {
         Pattern fornum = Pattern.compile(formatonumero);
         Pattern forcad = Pattern.compile(formatocaducidad);
         Pattern forcvv = Pattern.compile(formatocvv);
-        
+
         Matcher matnum = fornum.matcher(tff_numeroTarjeta.getText());
         Matcher matcad = forcad.matcher(tff_fechaCaducidad.getText());
         Matcher matcvv = forcvv.matcher(tff_cvv.getText());
@@ -156,11 +173,16 @@ public class VentanaNuevaTarjeta extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Debes rellenar todos los campos correctamente para añadir una tarjeta");
         } else {
             String numtarjeta = tff_numeroTarjeta.getText() + "-" + tff_fechaCaducidad.getText() + "-" + tff_cvv.getText();
-            TarjetaBancaria tb = new TarjetaBancaria(numtarjeta,usuario.getIdSocio());
+            TarjetaBancaria tb = new TarjetaBancaria(numtarjeta, usuario.getIdSocio());
             TarjetaBancaria.aniadirTarjetaUsuario(tb, usuario);
             this.dispose();
         }
     }//GEN-LAST:event_bt_confirmarvolverActionPerformed
+
+    private void mi_volverAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_volverAtrasActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_mi_volverAtrasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,7 +233,10 @@ public class VentanaNuevaTarjeta extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem mi_volverAtras;
     private javax.swing.JFormattedTextField tff_cvv;
     private javax.swing.JFormattedTextField tff_fechaCaducidad;
     private javax.swing.JFormattedTextField tff_numeroTarjeta;

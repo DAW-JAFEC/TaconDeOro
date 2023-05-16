@@ -24,7 +24,7 @@ public class VentanaInicio extends javax.swing.JFrame {
     BufferedImage tacon;
 
     /**
-     * Creates new form VentanaInicioSesion
+     * Creates new form VentanaInicio
      */
     public VentanaInicio() {
         try {
@@ -185,7 +185,7 @@ public class VentanaInicio extends javax.swing.JFrame {
             VentanaClientes c = new VentanaClientes(socio);
             c.setVisible(true);
             this.dispose();
-        } else if (socio.getCorreoe().equalsIgnoreCase(tf_nombreUsuario.getText()) && socio.getTipo().equalsIgnoreCase("administrador")) {
+        } else if (socio.getCorreoe().equalsIgnoreCase(tf_nombreUsuario.getText()) && socio.getTipo().equalsIgnoreCase("admin")) {
             VentanaAdministradores admin = new VentanaAdministradores(socio);
             admin.setVisible(true);
             this.dispose();

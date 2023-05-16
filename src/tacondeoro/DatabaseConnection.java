@@ -16,9 +16,9 @@ import javax.swing.JOptionPane;
  * @author Arturo
  */
 public class DatabaseConnection implements IFunciones {
-    private static final String URL="jdbc:mysql://localhost:3306/TaconDeOro";
-    private static final String USERNAME="root";
-    private static final String PASSWORD="toor";
+    private static final String URL = "jdbc:mysql://localhost:3306/TaconDeOro";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "toor";
     private Connection conexion = null;
 
     public DatabaseConnection() {
@@ -36,7 +36,7 @@ public class DatabaseConnection implements IFunciones {
             System.out.println("Error: " + ex.getMessage());
         }
         return conexion;
-    }    
+    }
 
     @Override
     public void registrarUsuario(Socio socio) {
@@ -65,25 +65,20 @@ public class DatabaseConnection implements IFunciones {
             pstmt.setString(1, correo);
             pstmt.setString(2, contrasenia);
             ResultSet rs = pstmt.executeQuery();
-                while (rs.next()) {
-                    r.setIdSocio(rs.getInt("idsocio"));
-                    r.setNombre(rs.getString("nombre"));
-                    r.setCorreoe(rs.getString("correo"));
-                    r.setDireccion(rs.getString("direccion"));
-                    r.setPoblacion(rs.getString("poblacion"));
-                    r.setContrasenia(rs.getString("contrasenia"));
-                    r.setTipo(rs.getString("tipo"));
-                    JOptionPane.showMessageDialog(null, "Has iniciado sesion");
-                }
+            while (rs.next()) {
+                r.setIdSocio(rs.getInt("idsocio"));
+                r.setNombre(rs.getString("nombre"));
+                r.setCorreoe(rs.getString("correo"));
+                r.setDireccion(rs.getString("direccion"));
+                r.setPoblacion(rs.getString("poblacion"));
+                r.setContrasenia(rs.getString("contrasenia"));
+                r.setTipo(rs.getString("tipo"));
+                JOptionPane.showMessageDialog(null, "Has iniciado sesion");
+            }
         } catch (SQLException ex) {
             System.err.println("" + ex.getMessage());
         }
         return r;
-    }
-
-    @Override
-    public void modificarUsuario(Socio socio) {
-       
     }
 
     @Override
@@ -121,6 +116,5 @@ public class DatabaseConnection implements IFunciones {
             System.err.println("" + ex.getMessage());
         }
     }
-    
-    
+
 }

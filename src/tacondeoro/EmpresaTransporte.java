@@ -13,10 +13,10 @@ import java.util.ArrayList;
 public class EmpresaTransporte {
     private int idEmpresa;
     private String nombre;
-    private String  CIF;
+    private String CIF;
     private String domicilioFiscal;
     private ArrayList<Ruta> rutas;
-   
+
     public EmpresaTransporte() {
     }
 
@@ -34,8 +34,6 @@ public class EmpresaTransporte {
         this.domicilioFiscal = domicilioFiscal;
         this.rutas = rutas;
     }
-    
-    
 
     public String getNombre() {
         return nombre;
@@ -68,7 +66,6 @@ public class EmpresaTransporte {
     public void setRuta(ArrayList<Ruta> ruta) {
         this.rutas = ruta;
     }
-   
 
     @Override
     public String toString() {

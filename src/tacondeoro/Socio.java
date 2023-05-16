@@ -125,6 +125,5 @@ public class Socio {
     public void setIdSocio(int idSocio) {
         this.idSocio = idSocio;
     }
-    
-    
+
 }

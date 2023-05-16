@@ -64,5 +64,5 @@ public class Incidencia {
     public String toString() {
         return "Incidencia{" + "pedidoIncidente=" + pedidoIncidente.getIdPedido() + ", rutaIncidente=" + rutaIncidente.getIdRuta() + ", descripcion=" + descripcion + ", fecha=" + fecha + '}';
     }
-    
+
 }
