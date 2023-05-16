@@ -17,12 +17,13 @@ CREATE TABLE `socios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `socios` (`nombre`, `correo`, `direccion`, `poblacion`, `contrasenia`, `tipo`) VALUES
-('Arturo', 'arturonb51236@gmail.com', 'C/ Pesetas, 64', 'Tomelloso', '123garito', 'administrador'),
-('Felix', 'felisucojunior@gmail.com', 'C/ Norte, 13', 'Alcázar de San Juan', '123garito', 'administrador'),
-('Javier', 'javive2004vehiculos@gmail.com', 'C/ Montesinos, 7', 'Arenales de San Gregorio', '123garito', 'administrador'),
-('Enrique', 'kryke10@gmail.com', 'C/ Cervantes, 33', 'Alcázar de San Juan', '123garito', 'administrador'),
-('Carlos', 'dawcarlospereira@gmail.com', 'Av. Los Enterradores, 108', 'Alcázar de San Juan', '123garito', 'administrador'),
-('Julián', 'julitoherrera443@gmail.com', 'C/ Mostoles, 22', 'Torrent', 'puñetapuñeta4', 'socio');
+('Arturo', 'arturonb51236@gmail.com', 'C/ Pesetas, 64', 'Tomelloso', '123garito', 'admin'),
+('Felix', 'felisucojunior@gmail.com', 'C/ Norte, 13', 'Alcázar de San Juan', '123garito', 'admin'),
+('Javier', 'javive2004vehiculos@gmail.com', 'C/ Montesinos, 7', 'Arenales de San Gregorio', '123garito', 'admin'),
+('Enrique', 'kryke10@gmail.com', 'C/ Cervantes, 33', 'Alcázar de San Juan', '123garito', 'admin'),
+('Carlos', 'dawcarlospereira@gmail.com', 'Av. Los Enterradores, 108', 'Alcázar de San Juan', '123garito', 'admin'),
+('Julián', 'julitoherrera443@gmail.com', 'C/ Mostoles, 22', 'Torrent', 'puñetapuñeta4', 'socio'),
+('Pedro', 'pedrosalinas5@gmail.com', 'C/ Torreznos, 40', 'Barcelona', 'porlaraza##', 'mozo');
 
 # TARJETAS
 CREATE TABLE `tarjetas` (
@@ -45,9 +46,9 @@ CREATE TABLE `empresas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `empresas` (`nombre`, `cif`, `domiciliofiscal`) VALUES
-('alforja', '02999816A', 'suiza'),
-('alforja', '02999816A', 'suiza'),
-('alforja', '02999816A', 'suiza');
+('CONTOM', '02999816A', 'España'),
+('Gastrom Ltd.', '05952174J', 'Suiza'),
+('Hi-Shoes', '02645723H', 'Estonia');
 
 # RUTAS
 CREATE TABLE `rutas` (
@@ -78,9 +79,9 @@ CREATE TABLE `pedidos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
   
 INSERT INTO `pedidos` (`fecha`, `total`, `idsocio`, `idruta`, `estado`) VALUES
-('2004-09-04', '40000', '1', '1', 'pendiente'),
-('2004-09-04', '40000', '2', '2', 'pendiente'),
-('2004-09-04', '40000', '3', '3', 'pendiente');
+('2023-04-23', '1300', '1', '1', 'pendiente'),
+('2022-09-12', '7000', '2', '2', 'pendiente'),
+('2022-12-01', '13000', '3', '3', 'pendiente');
 
 # CAMPANIAS
 CREATE TABLE `campanias` (
@@ -91,10 +92,10 @@ CREATE TABLE `campanias` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `campanias` (`anio`, `temporada`) VALUES
-('2021', 'Primavera / Verano'),
-('2021', 'Otoño / Invierno'),
-('2022', 'Primavera / Verano'),
-('2022', 'Otoño / Invierno');
+('2021', 'Primavera/Verano'),
+('2021', 'Otoño/Invierno'),
+('2022', 'Primavera/Verano'),
+('2022', 'Otoño/Invierno');
 
 # ARTICULOS
 CREATE TABLE `articulos` (
@@ -105,7 +106,6 @@ CREATE TABLE `articulos` (
  `material` varchar(50) NOT NULL,
  `stock` int(15) NOT NULL,
  `fotografia` varchar(50) NOT NULL,
- `tipo` varchar(50) NOT NULL,
  `tipozapato` varchar(50),
  `numerozapato` float,
  `tipobolso` varchar(50),
@@ -115,11 +115,11 @@ CREATE TABLE `articulos` (
   CONSTRAINT FK_IDCAMPANIA_ARTICULOS FOREIGN KEY (`idcampania`) REFERENCES campanias(`idcampania`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-INSERT INTO `articulos` (`nombre`, `precio`, `descripcion`, `material`, `stock`, `fotografia`, `tipo`, `tipozapato`, `numerozapato`, `tipobolso`, `tallacomplemento`, `idcampania`) VALUES
-('bota', '150', 'bota cr7', 'cuero', '200', 'foto', 'zapato', 'hight', '42', NULL, NULL, '1'),
-('collar', '400', 'collar oro', 'oro', '250', 'foto', 'complemento', NULL, NULL, NULL, '12', '2'),
-('cinturón', '3', 'morao', 'cuero', '250', 'foto', 'complemento', NULL, NULL, NULL, '45', '2'),
-('Bolso Gucci', '200', 'Bolso pepo', 'piel piton', '300', 'foto', 'bolso', NULL, NULL, 'bolsamen', NULL, '3');
+INSERT INTO `articulos` (`nombre`, `precio`, `descripcion`, `material`, `stock`, `fotografia`, `tipozapato`, `numerozapato`, `tipobolso`, `tallacomplemento`, `idcampania`) VALUES
+('Nike Performance Mercurial Vapor 15', '60', 'Botas de fútbol con tacos blancas', 'Fibra', '100', 'nikeperfomancemv15.png', 'Fútbol', '42', NULL, NULL, '1'),
+('Vivienne Westwood Colette Pendant', '125', 'Collar color platino de latón', 'Latón', '10', 'viviennewestwoodcp.png', NULL, NULL, NULL, '40', '2'),
+('Guess Nell Reversible Adjust Belt', '40', 'Cinturón estampado con cierre de hebilla de placa', 'Cuero Sintético', '500', 'guessnellrab.png', NULL, NULL, NULL, '80', '2'),
+('Gucci Tote Ophidia', '1390', 'Bolso universo de Ophidia con lana GG', 'Piel y Lana GG', '30', 'toteophidiag.png', NULL, NULL, 'Aplique doble asa', NULL, '3');
 
 # LINEASPEDIDO
 CREATE TABLE `lineaspedido` (
@@ -148,6 +148,4 @@ CREATE TABLE `incidencias` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `incidencias` (`idruta`, `idpedido`, `fecha`, `descripcion`) VALUES
-('1', '1', '2004-09-04', 'lorem ipsum'),
-('2', '2', '2004-09-04', 'lorem ipsum'),
-('3', '3', '2004-09-04', 'lorem ipsum');
+('1', '1', '2023-04-25', 'El camión encargado del transporte ha tenido una avería en la A4');
